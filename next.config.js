@@ -1,12 +1,14 @@
 /** @type {import('next').NextConfig} */
-const { PHASE_EXPORT } = require('next/constants')
+const { PHASE_PRODUCTION_BUILD } = require('next/constants')
 
-const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    loader: "imgix",
-    path: "https://mogyuchi.imgix.net/",
-  },
+module.exports = (phase, { defaultConfig }) => {
+  if (phase === PHASE_PRODUCTION_BUILD) {
+    return {
+      reactStrictMode: true,
+      images: {
+        loader: "imgix",
+        path: "https://mogyuchi.imgix.net/",
+      },
+    };
+  } else return { reactStrictMode: true };
 };
-
-module.exports = nextConfig
