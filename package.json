@@ -16,5 +16,6 @@
   "devDependencies": {
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.6"
-  }
+  },
+  "packageManager": "pnpm@7.0.0"
 }
