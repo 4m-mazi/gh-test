@@ -1,0 +1,57 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees:
+  - Mogyuchi
+body:
+  - type: markdown
+    attributes:
+      value: |
+        バグ報告ご協力ありがとうございます
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 何が起きましたか。
+      description: また、生じると期待されていたことは何でしょうか。
+      placeholder: Tell us what you see!
+      value: "バグが生じました!"
+    validations:
+      required: true
+  - type: dropdown
+    id: OS
+    attributes:
+      label: OS
+      description: 問題が発生した環境を教えてください。
+      options:
+        - Windows
+        - Linux
+        - macOS
+        - iOS
+        - iPadOS
+        - Android
+        - その他
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: 関連するログの出力をコピーしてペーストしてください。 これは自動的にコードにフォーマットされるので、バックティックは不要です。
+      render: Shell
+  - type: markdown
+    attributes:
+      value: "Thanks for completing our form!"
