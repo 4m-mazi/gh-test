@@ -1,0 +1,45 @@
+name: kazu-testform
+description: Just testing for github beta feature
+title: "[WHAT]: これはテストです。"
+labels: [""]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        とりあえずなんか書いていけ
+  - type: dropdown
+    id: you-have-a-element
+    attributes:
+      label: お前誰？
+      description: お前誰?見たことも聞いたこともないんだけど、てか、Elementやってる？
+      options:
+        - うん
+        - なにそれ？美味しいの？
+        - そういうのいらないから
+        - 帰れ
+    validations:
+      required: false
+  - type: textarea
+    id: test
+    attributes:
+      label: ここに、なにか書いてください。(投げやり)
+      description: なにこれ、美味しそう。
+      placeholder: ここの文字読んでるやつおるん？
+    validations:
+      required: false
+  - type: input
+    id: gender
+    attributes:
+      label: 性別は？
+      description: よ、よよよ、よよ、よ、よよよよよ、よかったら、僕に教えて！！！！
+      placeholder: か、書かなくても、いいんですよ・・・(震え声)
+    validations:
+      required: false
+  - type: checkboxes
+    id: end
+    attributes:
+      label: やった！全部埋めました！協力してくれてありがとう！！！！！最後にこれチェックして！一生のお願いだから！（？）
+      description: ちゅ・・・ちゅかれたかにゃ？ご・・・ごめんにぇ！
+      options:
+        - label: 私はこの謎のIssueを立てることに同意します
+          required: true
