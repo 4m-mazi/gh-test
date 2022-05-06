@@ -1,28 +1,49 @@
 name: Bug Report
-description: File a bug report
+description: バグ報告時にお使いください。
 title: "[Bug]: "
-labels: ["bug", "triage"]
+labels: ["bug", "Needs Triage"]
 assignees:
   - Mogyuchi
 body:
   - type: markdown
     attributes:
       value: |
-        バグ報告ご協力ありがとうございます
-  - type: textarea
-    id: what-happened
+        バグ報告にご協力ありがとうございます
+
+  - type: input
+    id: url
     attributes:
-      label: 何が起きましたか。
-      description: また、生じると期待されていたことは何でしょうか。
-      placeholder: Tell us what you see!
-      value: "バグが生じました!"
+      label: URL
+      description: 問題が生じたURL全体を入力してください。
+      placeholder: https://develop.github-test-15v.pages.dev/
+      value: https://test.mogyuchi.com/
     validations:
       required: true
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: 現在の状況
+      description: 発生中の問題を簡潔に記述してください。
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: スクリーンショット
+      description: 添付していただけると状況把握が容易くなりありがたいです。
+    validations:
+      required: false
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: 期待する挙動
+      description: 期待する挙動を簡潔に記述してください。
   - type: dropdown
-    id: OS
+    id: operating-systems
     attributes:
       label: OS
-      description: 問題が発生した環境を教えてください。
+      description: 問題が発生したオペレーティングシステムを教えてください。（複数選択可）
+      multiple: true
       options:
         - Windows
         - Linux
@@ -36,7 +57,8 @@ body:
   - type: dropdown
     id: browsers
     attributes:
-      label: What browsers are you seeing the problem on?
+      label: ブラウザ
+      description: 問題が発生したブラウザを教えてください。（複数選択可）
       multiple: true
       options:
         - Firefox
@@ -47,11 +69,33 @@ body:
     validations:
       required: true
   - type: textarea
+    id: combining-environments
+    attributes:
+      label: 環境の組み合わせ
+      description: OSを複数選択した場合はこちらに記載してください。
+      placeholder: |
+        - iPadOS
+          - Safari
+          - Brave
+        - Windows
+          - Microsoft Edge (Version 101.0.1210.39)
+    validations:
+      required: false
+  - type: textarea
     id: logs
     attributes:
-      label: Relevant log output
-      description: 関連するログの出力をコピーしてペーストしてください。 これは自動的にコードにフォーマットされるので、バックティックは不要です。
+      label: エラーログ等
+      description: 存在する場合は、関連するログの出力をコピーしてペーストしてください。 これは自動的にコードにフォーマットされるので、バックティックは不要です。
       render: Shell
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 補足情報
+      description: |
+        さらなる情報や詳しく説明したいことがありましたらこちらへどうぞ
+    validations:
+      required: false
+
   - type: markdown
     attributes:
-      value: "Thanks for completing our form!"
+      value: "ご記入ありがとうございました"
