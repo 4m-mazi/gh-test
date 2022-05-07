@@ -84,7 +84,7 @@ body:
       description: 存在する場合は、関連するログの出力をコピーしてペーストしてください。 これは自動的にコードにフォーマットされるので、バックティックは不要です。
       render: Shell
   - type: textarea
-    id: supplementary-information
+    id: what-happened
     attributes:
       label: 補足情報
       description: |
