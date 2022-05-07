@@ -1,0 +1,38 @@
+name: 改善提案
+description: より良くするための提案はこちらから。
+labels: ["improvement", "Needs Triage"]
+title: "[改善]: "
+assignees:
+  - Mogyuchi
+body:
+  - type: markdown
+    attributes:
+      value: |
+        改善提案ありがとうございます
+
+  - type: textarea
+    id: improvement_target
+    attributes:
+      label: 改善対象の事柄
+      description: 簡潔に記述してください。
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: 期待する挙動
+      description: 改善後に期待する挙動を簡潔に記述してください。
+    validations:
+      required: true
+  - type: textarea
+    id: supplementary-information
+    attributes:
+      label: 補足情報
+      description: |
+        さらなる情報や詳しく説明したいことがありましたらこちらへ。
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: "ご記入ありがとうございました"
