@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Aaaa aa a [Aaaa.aa](https://nextjs.org/) aaaaaaa aaaaaaaaaaaa aaaa [`aaaaaa-aaaa-aaa`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Aaaaaaa Aaaaaaa
 
-First, run the development server:
+Aaaaa, aaa aaa aaaaaaaaaaa aaaaaa:
 
 ```bash
-npm run dev
-# or
-yarn dev
+aaa aaa aaa
+# aa
+aaaa aaa
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aaaa [aaaa://aaaaaaaaa:3000](http://localhost:3000) aaaa aaaa aaaaaaa aa aaa aaa aaaaaa.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Aaa aaa aaaaa aaaaaaa aaa aaaa aa aaaaaaaaa `aaaaa/aaaaa.aa`. Aaa aaaa aaaa-aaaaaaa aa aaa aaaa aaa aaaa.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+[AAA aaaaaa](https://nextjs.org/docs/api-routes/introduction) aaa aa aaaaaaaa aa [aaaa://aaaaaaaaa:3000/aaa/aaaaa](http://localhost:3000/api/hello). Aaaa aaaaaaaa aaa aa aaaaaa aa `aaaaa/aaa/aaaaa.aa`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Aaa `aaaaa/aaa` aaaaaaaaa aa aaaaaa aa `/aaa/*`. Aaaaa aa aaaa aaaaaaaaa aaa aaaaaaa aa [AAA aaaaaa](https://nextjs.org/docs/api-routes/introduction) aaaaaaa aa Aaaaa aaaaa.
 
-## Learn More
+## Aaaaa Aaaa
 
-To learn more about Next.js, take a look at the following resources:
+Aa aaaaa aaaa aaaaa Aaaa.aa, aaaa a aaaa aa aaa aaaaaaaaa aaaaaaaaa:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Aaaa.aa Aaaaaaaaaaaaa](https://nextjs.org/docs) - aaaaa aaaaa Aaaa.aa aaaaaaaa aaa AAA.
+- [Aaaaa Aaaa.aa](https://nextjs.org/learn) - aa aaaaaaaaaaa Aaaa.aa aaaaaaaa.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Aaa aaa aaaaa aaa [aaa Aaaa.aa AaaAaa aaaaaaaaaa](https://github.com/vercel/next.js/) - aaaa aaaaaaaa aaa aaaaaaaaaaaaa aaa aaaaaaa!
 
-## Deploy on Vercel
+## Aaaaaa aa Aaaaaa
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Aaa aaaaaaa aaa aa aaaaaa aaaa Aaaa.aa aaa aa aa aaa aaa [Aaaaaa Aaaaaaaa](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) aaaa aaa aaaaaaaa aa Aaaa.aa.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Aaaaa aaa aaa [Aaaa.aa aaaaaaaaaa aaaaaaaaaaaaa](https://nextjs.org/docs/deployment) aaa aaaa aaaaaaa.
