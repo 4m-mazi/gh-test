@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+import yokohama from '../public/yokohama.jpeg'
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -12,6 +14,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+      <Image src={yokohama} alt="yokohama" width={500} height={500} placeholder="blur"/>
         <h1 className={styles.title}>
           Aaaaaaa aa <a href="https://nextjs.org">Aaaa.aa!</a>
         </h1>
