@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
-const { PHASE_EXPORT } = require("next/constants");
 
-module.exports = (phase, { defaultConfig }) => {
+module.exports = () => {
   if (process.env.CF_PAGES_BRANCH === "main") {
     return {
       reactStrictMode: true,
@@ -10,12 +9,14 @@ module.exports = (phase, { defaultConfig }) => {
         path: "https://mogyuchi.imgix.net/",
       },
     };
-  } else if (phase === PHASE_EXPORT) {
+  } else if (process.env.CF_PAGES == 1) {
     return {
       reactStrictMode: true,
       images: {
-        loader: "imgix",
-        path: "",
+        loader: "custom",
+      },
+      env: {
+        isPreview: true,
       },
     };
   } else return { reactStrictMode: true };
