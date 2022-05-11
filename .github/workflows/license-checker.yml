@@ -1,4 +1,4 @@
-name: License Checker
+name: NPM License Checker
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 16
           cache: pnpm
+      - run: pnpm install
       - name: check
         run: |
-          pnpm install
           ! pnpm dlx license-checker --csv | grep -i gpl
