@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  15-puzzle: ^6.2.3
   eslint: 8.14.0
   eslint-config-next: 12.1.6
   next: 12.1.6
@@ -9,6 +10,7 @@ specifiers:
   react-dom: 18.1.0
 
 dependencies:
+  15-puzzle: 6.2.3
   next: 12.1.6_ef5jwxihqo6n7gxfmzogljlgcm
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
@@ -19,6 +21,13 @@ devDependencies:
   prettier: 2.6.2
 
 packages:
+
+  /15-puzzle/6.2.3:
+    resolution: {integrity: sha512-/yPJFBaOLqx2ZFUtU+dUhxb3npJKyczvvAAdG3zX2f3MASfxprUJUsYIMW9b7ruBPQpjqC4P/8+dtrLYQV5Z0g==}
+    dependencies:
+      '@types/random-seed': 0.3.3
+      random-seed: 0.3.0
+    dev: false
 
   /@babel/runtime-corejs3/7.17.9:
     resolution: {integrity: sha512-WxYHHUWF2uZ7Hp1K+D1xQgbgkGUfA+5UPOegEXGt2Y5SMog/rYCVaifLZDbw8UkNXozEqqrZTy6bglL7xTaCOw==}
@@ -213,6 +222,10 @@ packages:
   /@types/json5/0.0.29:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
     dev: true
+
+  /@types/random-seed/0.3.3:
+    resolution: {integrity: sha512-kHsCbIRHNXJo6EN5W8EA5b4i1hdT6jaZke5crBPLUcLqaLdZ0QBq8QVMbafHzhjFF83Cl9qlee2dChD18d/kPg==}
+    dev: false
 
   /@typescript-eslint/parser/5.22.0_eslint@8.14.0:
     resolution: {integrity: sha512-piwC4krUpRDqPaPbFaycN70KCP87+PC5WZmrWs+DlVOxxmF+zI6b6hETv7Quy4s9wbkV16ikMeZgXsvzwI3icQ==}
@@ -1128,6 +1141,10 @@ packages:
     resolution: {integrity: sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=}
     dev: true
 
+  /json-stringify-safe/5.0.1:
+    resolution: {integrity: sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=}
+    dev: false
+
   /json5/1.0.1:
     resolution: {integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==}
     hasBin: true
@@ -1444,6 +1461,13 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
+
+  /random-seed/0.3.0:
+    resolution: {integrity: sha1-2UXy4fOPSejViRNDG4v2u5N1Vs0=}
+    engines: {node: '>= 0.6.0'}
+    dependencies:
+      json-stringify-safe: 5.0.1
+    dev: false
 
   /react-dom/18.1.0_react@18.1.0:
     resolution: {integrity: sha512-fU1Txz7Budmvamp7bshe4Zi32d0ll7ect+ccxNu9FlObT605GOEB8BfO4tmRJ39R5Zj831VCpvQ05QPBW5yb+w==}
