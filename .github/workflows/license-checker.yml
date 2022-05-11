@@ -5,8 +5,10 @@ on:
     paths:
       - 'package.json'
       - 'pnpm-lock.yaml'
+
   pull_request:
 
+jobs:
   license-check:
     name: License Check
     runs-on: ubuntu-latest
@@ -20,4 +22,4 @@ on:
       - name: check
         run: |
           pnpm install
-          pnpm dlx license-checker --csv | grep -i gpl
+          ! pnpm dlx license-checker --csv | grep -i gpl
