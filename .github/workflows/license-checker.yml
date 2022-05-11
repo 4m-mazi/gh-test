@@ -5,8 +5,10 @@ on:
     paths:
       - 'package.json'
       - 'pnpm-lock.yaml'
+
   pull_request:
 
+jobs:
   license-check:
     name: License Check
     runs-on: ubuntu-latest
