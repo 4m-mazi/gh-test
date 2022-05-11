@@ -1,0 +1,36 @@
+name: on push
+
+on: push
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "pnpm"
+      - run: pnpm install
+      - name: Lint
+        run: pnpm lint
+
+  license-check:
+    name: License Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: pnpm
+      - name: check
+        run: |
+          if ! git diff ${{github.event.before}}..${{github.event.after}} --name-only  --exit-code -- 'package.json' 'package-lock.json'
+          then
+            pnpm install
+            ! pnpm dlx license-checker --csv | grep -i gpl
+          fi
