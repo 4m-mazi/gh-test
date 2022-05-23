@@ -47,6 +47,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
       - run: gh pr create --base develop --assignee ${{ github.event.merged_by.login }}
       - run: gh pr merge --admin --auto
