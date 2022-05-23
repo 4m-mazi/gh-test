@@ -40,7 +40,7 @@ jobs:
           ref: ${{ github.head_ref }}
       - run: gh pr edit --base develop
   hotfix:
-    if: startsWith(github.head_ref, 'hotfix/') && github.base_ref == 'main' && github.event.action == 'closed' && github.pull_request.merged
+    if: startsWith(github.head_ref, 'hotfix/') && github.base_ref == 'main' && github.event.action == 'closed' && github.event.pull_request.merged
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,5 +48,5 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
-      - run: gh pr create --base develop --assignee ${{ github.event.auto_merge.login || github.event.merge.login }}
+      - run: gh pr create --base develop --assignee ${{ github.event.merged_by.login }}
       - run: gh pr merge --admin --auto
