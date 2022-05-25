@@ -48,5 +48,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - run: gh pr create -- --base develop --assignee ${{ github.event.pull_request.merged_by.login }} --title "into `develop` from `${{ github.head_ref }}`" --body "#${{ github.event.number }}"
+      - run: git switch -c ${{ github.head_ref }}
+      - run: gh pr create --base develop --assignee ${{ github.event.pull_request.merged_by.login }} --title "into `develop` from `${{ github.head_ref }}`" --body "#${{ github.event.number }}"
       - run: gh pr merge --auto
