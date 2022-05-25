@@ -1,0 +1,56 @@
+name: on pull_request
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - closed
+    branches:
+      - "main"
+      - "develop"
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - run: cat $GITHUB_EVENT_PATH
+      - run: gh --version
+      - run: docker --version
+      - run: docker-compose --version
+  into_main:
+    if: startsWith(github.head_ref, 'hotfix/') && github.base_ref == 'develop' && ( github.event.action == 'opened' || github.event.action == 'reopened' )
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - run: gh pr edit --base main
+  into_develop:
+    if: |
+      ! ( startsWith(github.head_ref, 'hotfix/') || github.head_ref == 'develop' ) && github.base_ref == 'main' && ( github.event.action == 'opened' || github.event.action == 'reopened' )
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - run: gh pr edit --base develop
+  hotfix:
+    if: startsWith(github.head_ref, 'hotfix/') && github.base_ref == 'main' && github.event.action == 'closed' && github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Create ${{ github.head_ref }} branch
+        run: git switch -c ${{ github.head_ref }}
+      - run: git push origin ${{ github.head_ref }}
+      - name: Create a pull request
+        run: gh pr create --base develop --assignee ${{ github.event.pull_request.merged_by.login }} --title 'into `develop` from `${{ github.head_ref }}`' --body '#${{ github.event.number }}'
+      - run: gh pr merge --auto --merge
