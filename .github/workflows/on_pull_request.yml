@@ -52,5 +52,5 @@ jobs:
         run: git switch -c ${{ github.head_ref }}
       - run: git push origin ${{ github.head_ref }}
       - name: Create a pull request
-        run: gh pr create --base develop --assignee ${{ github.event.pull_request.merged_by.login }} --title "into `develop` from `${{ github.head_ref }}`" --body "#${{ github.event.number }}"
-      - run: gh pr merge --auto
+        run: gh pr create --base develop --assignee ${{ github.event.pull_request.merged_by.login }} --title 'into `develop` from `${{ github.head_ref }}`' --body '#${{ github.event.number }}'
+      - run: gh pr merge --auto --merge
