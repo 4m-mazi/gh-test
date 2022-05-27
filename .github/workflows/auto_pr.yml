@@ -21,4 +21,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Create a pull request
-        run: gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title ${{ github.event.ref }} --body '#123'
+        run: |
+          gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title ${{ github.event.ref }} --body "close ${{ github.event.ref | grep -oE '#[0-9]+' }}"
