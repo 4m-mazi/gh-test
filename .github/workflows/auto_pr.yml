@@ -1,0 +1,14 @@
+name: Auto PR
+
+on:
+  create
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - run: cat $GITHUB_EVENT_PATH
+      - run: gh --version
+      - run: docker --version
+      - run: docker-compose --version
