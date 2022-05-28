@@ -26,4 +26,8 @@ jobs:
       - name: Create a pull request
         run: |
           ISSUE=`echo "${{ github.event.ref }}" | grep -oE '#[0-9]+'`
-          gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
+          if [ ${{ startsWith(github.event.ref, 'hotfix/') }} ]; then
+            gh pr create --draft --base main --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
+          else
+            gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
+          fi
