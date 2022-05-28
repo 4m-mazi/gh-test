@@ -25,5 +25,5 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create a pull request
         run: |
-          ISSUE=`echo ${{ github.event.ref }} | grep -oE '#[0-9]+'`
-          gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title ${{ github.event.ref }} --body "close $ISSUE"
+          ISSUE=`echo "${{ github.event.ref }}" | grep -oE '#[0-9]+'`
+          gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
