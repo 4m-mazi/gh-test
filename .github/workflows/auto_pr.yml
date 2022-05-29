@@ -29,12 +29,12 @@ jobs:
         run: |
           ISSUE=`echo "${{ github.event.ref }}" | grep -oE '#[0-9]+'`
           if ${{ startsWith(github.event.ref, 'hotfix/') }}; then
-            if git diff main ${{ github.event.ref }} --quiet; then
+            if git diff --quiet main; then
               git commit --allow-empty -m "empty commit"
             fi
             gh pr create --draft --base main --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
           else
-            if git diff develop ${{ github.event.ref }} --quiet; then
+            if git diff --quiet develop; then
               git commit --allow-empty -m "empty commit"
             fi
             gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
