@@ -32,8 +32,11 @@ jobs:
           git config push.default current
       - name: Create a pull request
         run: |
+          if ${{ startsWith(github.event.ref, 'release/') }}; then
+            exit 0
+          fi
           ISSUE=`echo "${{ github.event.ref }}" | grep -oE '#[0-9]+'`
-          if ${{ startsWith(github.event.ref, 'hotfix/') || startsWith(github.event.ref, 'release/') }}; then
+          if ${{ startsWith(github.event.ref, 'hotfix/') }}; then
             if git diff --quiet origin/main; then
               git commit --allow-empty -m "empty commit"
               git push
