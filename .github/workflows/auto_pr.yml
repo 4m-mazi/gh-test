@@ -33,7 +33,7 @@ jobs:
       - name: Create a pull request
         run: |
           ISSUE=`echo "${{ github.event.ref }}" | grep -oE '#[0-9]+'`
-          if ${{ startsWith(github.event.ref, 'hotfix/') }}; then
+          if ${{ startsWith(github.event.ref, 'hotfix/') || startsWith(github.event.ref, 'release/') }}; then
             if git diff --quiet origin/main; then
               git commit --allow-empty -m "empty commit"
               git push
