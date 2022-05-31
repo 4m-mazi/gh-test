@@ -1,0 +1,29 @@
+name: Fix branch
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+    branches:
+      - "main"
+      - "develop"
+jobs:
+  change-base_branch:
+    name: Change base branch
+    if: |
+      ( github.base_ref == 'develop' && ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') ) )
+      || ( github.base_ref == 'main' && ! ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') || github.head_ref == 'develop' ) )
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - run: |
+          if ${{ github.base_ref == 'develop' }}; then
+            gh pr edit --base main
+          else
+            gh pr edit --base develop
+          fi
