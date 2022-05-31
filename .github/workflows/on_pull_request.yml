@@ -19,7 +19,7 @@ jobs:
       - run: docker --version
       - run: docker-compose --version
   into_main:
-    if: startsWith(github.head_ref, 'hotfix/') && github.base_ref == 'develop' && ( github.event.action == 'opened' || github.event.action == 'reopened' )
+    if: ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') ) && github.base_ref == 'develop' && ( github.event.action == 'opened' || github.event.action == 'reopened' )
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
