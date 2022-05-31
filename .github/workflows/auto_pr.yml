@@ -13,7 +13,7 @@ jobs:
       - run: docker --version
       - run: docker-compose --version
   pr:
-    if: github.event.ref_type == 'branch' && ! github.event.repository.fork
+    if: github.event.ref_type == 'branch' && ! github.event.repository.fork && ! startsWith(github.event.ref, 'release/')
     name: Create PR
     runs-on: ubuntu-latest
     defaults:
@@ -32,9 +32,6 @@ jobs:
           git config push.default current
       - name: Create a pull request
         run: |
-          if ${{ startsWith(github.event.ref, 'release/') }}; then
-            exit 0
-          fi
           ISSUE=`echo "${{ github.event.ref }}" | grep -oE '#[0-9]+'`
           if ${{ startsWith(github.event.ref, 'hotfix/') }}; then
             if git diff --quiet origin/main; then
