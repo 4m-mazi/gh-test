@@ -17,13 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PR_NUMBER: ${{ github.event.number }}
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
       - run: |
           if ${{ github.base_ref == 'develop' }}; then
-            gh pr edit --base main
+            gh pr edit $PR_NUMBER --base main
           else
-            gh pr edit --base develop
+            gh pr edit $PR_NUMBER --base develop
           fi
