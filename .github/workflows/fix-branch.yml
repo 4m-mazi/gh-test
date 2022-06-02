@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.action_repository }}
       PR_NUMBER: ${{ github.event.number }}
     steps:
       - run: |
