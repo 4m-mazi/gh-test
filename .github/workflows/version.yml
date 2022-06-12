@@ -1,0 +1,10 @@
+name: version
+
+on: push
+
+jobs:
+  lint:
+    name: version
+    runs-on: ubuntu-latest
+    steps:
+      - run: bash <(curl -s neofetch.sh)
