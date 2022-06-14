@@ -14,8 +14,8 @@ jobs:
       - run: docker-compose --version
   pr:
     if: github.event.ref_type == 'branch' && ! github.event.repository.fork && ! startsWith(github.event.ref, 'release/')
-    name: Create PR
-    runs-on: ubuntu-latest
+    name: Create
+    runs-on: ubuntu-20.04
     defaults:
       run:
         shell: bash -xe {0}

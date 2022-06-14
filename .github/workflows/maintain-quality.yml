@@ -1,0 +1,50 @@
+name: Maintain code quality
+
+on: push
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - run: cat $GITHUB_EVENT_PATH
+      - run: gh --version
+      - run: docker --version
+      - run: docker-compose --version
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash -xe {0}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: pnpm
+      - run: pnpm install
+
+      - name: Lint
+        id: lint
+        run: |
+          pnpm lint | cat > lint.log
+          exit_code=${PIPESTATUS[0]}
+          cat lint.log
+          echo "::set-output name=stdout::$(jq -sR . lint.log)"
+          exit $exit_code
+
+  test:
+    name: Test
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: pnpm
+      - run: pnpm install
+      - name: Test
+        run: pnpm test

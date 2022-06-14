@@ -9,12 +9,20 @@ on:
       - "main"
       - "develop"
 jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - run: cat $GITHUB_EVENT_PATH
+      - run: gh --version
+      - run: docker --version
+      - run: docker-compose --version
   change-base_branch:
     name: Change base branch
     if: |
       ( github.base_ref == 'develop' && ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') ) )
       || ( github.base_ref == 'main' && ! ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') || github.head_ref == 'develop' ) )
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     defaults:
       run:
         shell: bash -xe {0}
