@@ -17,7 +17,7 @@ jobs:
           repository: hiraginoyuki/patch.aul
 
       - name: Setup MSVC Developer Command Prompt
-        uses: ilammy/msvc-dev-cmd@1
+        uses: ilammy/msvc-dev-cmd@v1
         with:
           toolkit: 19.31
 
