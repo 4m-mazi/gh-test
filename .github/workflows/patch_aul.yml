@@ -26,4 +26,4 @@ jobs:
         uses: Jimver/cuda-toolkit@v0.2.7
 
       - name: Echo cuda toolkit location
-        run: echo "Version: ${{ steps.cuda-toolkit.outputs.cuda }}\nCUDA_PATH: ${{ steps.cuda-toolkit.outputs.CUDA_PATH }}""
+        run: echo "Version: ${{ steps.cuda-toolkit.outputs.cuda }}\nCUDA_PATH: ${{ steps.cuda-toolkit.outputs.CUDA_PATH }}"
