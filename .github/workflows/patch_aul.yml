@@ -1,3 +1,5 @@
+name: Build patch.aul
+
 on:
   push:
     branches:
