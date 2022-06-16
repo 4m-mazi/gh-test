@@ -2,6 +2,9 @@ name: Maintain code quality
 
 on: push
 
+permissions:
+  contents: read
+
 jobs:
   debug:
     name: Debug

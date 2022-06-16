@@ -3,6 +3,10 @@ name: Auto PR
 on:
   create
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   debug:
     name: Debug
