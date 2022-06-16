@@ -8,6 +8,10 @@ on:
     branches:
       - "main"
       - "develop"
+
+permissions:
+  pull-requests: write
+
 jobs:
   debug:
     name: Debug

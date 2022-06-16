@@ -6,6 +6,11 @@ on:
       - closed
     branches:
       - "develop"
+
+permissions:
+  issues: write
+  pull-requests: read
+
 jobs:
   debug:
     name: Debug
