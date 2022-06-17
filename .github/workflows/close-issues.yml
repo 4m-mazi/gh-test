@@ -20,7 +20,7 @@ jobs:
       - run: gh --version
       - run: docker --version
       - run: docker-compose --version
-  hotfix:
+  close:
     if: github.event.pull_request.merged
     runs-on: ubuntu-20.04
     defaults:
