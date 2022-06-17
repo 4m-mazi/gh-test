@@ -1,16 +1,9 @@
-name: Fix branch
+name: Maintain code quality
 
-on:
-  pull_request_target:
-    types:
-      - opened
-      - reopened
-    branches:
-      - "main"
-      - "develop"
+on: push
 
 permissions:
-  pull-requests: write
+  contents: read
 
 jobs:
   debug:
@@ -46,23 +39,26 @@ jobs:
           ```json
           ${{ toJSON(github) }}
           ```' >> $GITHUB_STEP_SUMMARY
-  change-base_branch:
-    name: Change base branch
-    if: |
-      ( github.base_ref == 'develop' && ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') ) )
-      || ( github.base_ref == 'main' && ! ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') || github.head_ref == 'develop' ) )
+  lint:
+    name: Lint
     runs-on: ubuntu-20.04
     defaults:
       run:
         shell: bash -xe {0}
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GH_REPO: ${{ github.repository }}
-      PR_NUMBER: ${{ github.event.number }}
     steps:
-      - run: |
-          if ${{ github.base_ref == 'develop' }}; then
-            gh pr edit $PR_NUMBER --base main
-          else
-            gh pr edit $PR_NUMBER --base develop
-          fi
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: pnpm
+      - run: pnpm install
+
+      - name: Lint
+        id: lint
+        run: |
+          pnpm lint | cat > lint.log
+          exit_code=${PIPESTATUS[0]}
+          cat lint.log
+          echo "::set-output name=stdout::$(jq -sR . lint.log)"
+          exit $exit_code
