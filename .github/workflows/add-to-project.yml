@@ -1,0 +1,61 @@
+name: Add to project
+
+on:
+  pull_request_target:
+    types:
+      - opened
+  issues:
+    types:
+      - opened
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -xe {0}
+    steps:
+      - run: echo ${{ github.event.commits[0].url }} >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "GITHUB_EVENT_PATH
+          \`\`\`json
+          `cat $GITHUB_EVENT_PATH`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "gh
+          \`\`\`console
+          `gh --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker
+          \`\`\`console
+          `docker --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker-compose
+          \`\`\`console
+          `docker-compose --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo 'github context
+          ```json
+          ${{ toJSON(github) }}
+          ```' >> $GITHUB_STEP_SUMMARY
+  add-to-project:
+    name: Add to project
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash -xe {0}
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      NUMBER: ${{ github.event.number }}
+    steps:
+      - run: |
+          gh issue edit $NUMBER --add-project てすと
