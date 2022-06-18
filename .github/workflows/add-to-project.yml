@@ -9,8 +9,7 @@ on:
       - opened
 
 permissions:
-  issues: write
-  pull-requests: write
+  repository-projects: write
 
 jobs:
   debug:
