@@ -75,3 +75,5 @@ jobs:
             fi
             gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
           fi
+      - name: Run add-to-project
+        uses: ./.github/workflows/add-to-project.yml
