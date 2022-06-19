@@ -1,6 +1,7 @@
 name: Add to project
 
 on:
+  workflow_call:
   pull_request_target:
     types:
       - opened
@@ -49,6 +50,7 @@ jobs:
           ```' >> $GITHUB_STEP_SUMMARY
   add-to-project:
     name: Add to project
+    if: ! github.event.repository.fork
     runs-on: ubuntu-20.04
     defaults:
       run:
@@ -57,6 +59,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GH_REPO: ${{ github.repository }}
       NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+      PROJECT: "てすと"
     steps:
       - run: |
-          gh issue edit $NUMBER --add-project てすと
+          gh issue edit $NUMBER --add-project $PROJECT
