@@ -50,7 +50,8 @@ jobs:
           ```' >> $GITHUB_STEP_SUMMARY
   add-to-project:
     name: Add to project
-    if: ! github.event.repository.fork
+    if: |
+      ! github.event.repository.fork
     runs-on: ubuntu-20.04
     defaults:
       run:

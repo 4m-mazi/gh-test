@@ -6,6 +6,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  repository-projects: write
 
 jobs:
   debug:
@@ -50,6 +51,7 @@ jobs:
         shell: bash -xe {0}
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PROJECT: "てすと"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -67,13 +69,11 @@ jobs:
               git commit --allow-empty -m "empty commit"
               git push
             fi
-            gh pr create --draft --base main --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
+            gh pr create --draft --base main --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE" --project $PROJECT
           else
             if git diff --quiet origin/develop; then
               git commit --allow-empty -m "empty commit"
               git push
             fi
-            gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE"
+            gh pr create --draft --base develop --assignee ${{ github.event.sender.login }} --title "${{ github.event.ref }}" --body "close $ISSUE" --project $PROJECT
           fi
-  add-to-project:
-    uses: ./.github/workflows/add-to-project.yml
