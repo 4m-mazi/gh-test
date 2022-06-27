@@ -58,9 +58,18 @@ jobs:
         shell: bash -xe {0}
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GH_REPO: ${{ github.repository }}
-      NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
-      PROJECT: "てすと"
+      TARGET: ${{ github.event.issue.node_id || github.event.pull_request.node_id }}
+      PROJECT: "PRO_kwLOHRQYxM4A3d8I"
     steps:
       - run: |
-          gh issue edit $NUMBER --add-project $PROJECT
+          gh api graphql
+            -F "id=$TARGET"
+            -F "projectIds=$PROJECT"
+            -f query='
+              mutation {
+                updateIssue(input: {id: ID!, projectIds: ID!}) {
+                  issue {
+                    number
+                  }
+                }
+              }'
