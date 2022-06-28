@@ -12,7 +12,6 @@ on:
 permissions:
   issues: write
   pull-requests: write
-  repository-projects: write
 
 jobs:
   debug:
@@ -58,12 +57,12 @@ jobs:
         shell: bash -xe {0}
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      ISSUE: ${{ github.event.issue.node_id || false }}
-      PR: ${{ github.event.pull_request.node_id || false }}
+      ISSUE: ${{ github.event.issue.node_id }}
+      PR: ${{ github.event.pull_request.node_id }}
       PROJECT: "PRO_kwLOHRQYxM4A3d8I"
     steps:
       - run: |
-          if $ISSUE; then
+          if [ -n "$ISSUE" ]; then
             gh api graphql \
               -F "target=$ISSUE" \
               -F "projectId=$PROJECT" \
