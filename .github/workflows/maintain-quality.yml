@@ -1,14 +1,6 @@
-name: on pull_request
+name: Maintain code quality
 
-on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - closed
-    branches:
-      - "main"
-      - "develop"
+on: push
 
 permissions:
   contents: read
@@ -47,21 +39,26 @@ jobs:
           ```json
           ${{ toJSON(github) }}
           ```' >> $GITHUB_STEP_SUMMARY
-  hotfix:
-    if: startsWith(github.head_ref, 'hotfix/') && github.base_ref == 'main' && github.event.action == 'closed' && github.event.pull_request.merged
+  lint:
+    name: Lint
     runs-on: ubuntu-20.04
     defaults:
       run:
         shell: bash -xe {0}
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Create ${{ github.head_ref }} branch
-        run: git switch -c ${{ github.head_ref }}
-      - run: git push origin ${{ github.head_ref }}
-      - name: Create a pull request
-        run: gh pr create --base develop --assignee ${{ github.event.pull_request.merged_by.login }} --reviewer ${{ github.event.pull_request.merged_by.login }} --title 'into `develop` from `${{ github.head_ref }}`' --body '#${{ github.event.number }}'
-      - run: gh pr merge --auto --merge
+          node-version: 16
+          cache: pnpm
+      - run: pnpm install
+
+      - name: Lint
+        id: lint
+        run: |
+          pnpm lint | cat > lint.log
+          exit_code=${PIPESTATUS[0]}
+          cat lint.log
+          echo "::set-output name=stdout::$(jq -sR . lint.log)"
+          exit $exit_code
