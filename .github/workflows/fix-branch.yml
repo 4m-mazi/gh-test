@@ -1,17 +1,16 @@
-name: on pull_request
+name: Fix branch
 
 on:
-  pull_request:
+  pull_request_target:
     types:
       - opened
       - reopened
-      - closed
     branches:
       - "main"
       - "develop"
 
 permissions:
-  contents: read
+  pull-requests: write
 
 jobs:
   debug:
@@ -47,21 +46,23 @@ jobs:
           ```json
           ${{ toJSON(github) }}
           ```' >> $GITHUB_STEP_SUMMARY
-  hotfix:
-    if: startsWith(github.head_ref, 'hotfix/') && github.base_ref == 'main' && github.event.action == 'closed' && github.event.pull_request.merged
+  change-base_branch:
+    name: Change base branch
+    if: |
+      ( github.base_ref == 'develop' && ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') ) )
+      || ( github.base_ref == 'main' && ! ( startsWith(github.head_ref, 'hotfix/') || startsWith(github.head_ref, 'release/') || github.head_ref == 'develop' ) )
     runs-on: ubuntu-20.04
     defaults:
       run:
         shell: bash -xe {0}
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.number }}
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Create ${{ github.head_ref }} branch
-        run: git switch -c ${{ github.head_ref }}
-      - run: git push origin ${{ github.head_ref }}
-      - name: Create a pull request
-        run: gh pr create --base develop --assignee ${{ github.event.pull_request.merged_by.login }} --reviewer ${{ github.event.pull_request.merged_by.login }} --title 'into `develop` from `${{ github.head_ref }}`' --body '#${{ github.event.number }}'
-      - run: gh pr merge --auto --merge
+      - run: |
+          if ${{ github.base_ref == 'develop' }}; then
+            gh pr edit $PR_NUMBER --base main
+          else
+            gh pr edit $PR_NUMBER --base develop
+          fi

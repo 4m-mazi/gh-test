@@ -1,0 +1,90 @@
+name: Add to project
+
+on:
+  workflow_call:
+  pull_request_target:
+    types:
+      - opened
+  issues:
+    types:
+      - opened
+
+permissions:
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -xe {0}
+    steps:
+      - run: echo ${{ github.event.commits[0].url }} >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "GITHUB_EVENT_PATH
+          \`\`\`json
+          `cat $GITHUB_EVENT_PATH`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "gh
+          \`\`\`console
+          `gh --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker
+          \`\`\`console
+          `docker --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker-compose
+          \`\`\`console
+          `docker-compose --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo 'github context
+          ```json
+          ${{ toJSON(github) }}
+          ```' >> $GITHUB_STEP_SUMMARY
+  add-to-project:
+    name: Add to project
+    if: |
+      ! github.event.repository.fork
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash -xe {0}
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ISSUE: ${{ github.event.issue.node_id }}
+      PR: ${{ github.event.pull_request.node_id }}
+      PROJECT: "PRO_kwLOHRQYxM4A3d8I"
+    steps:
+      - run: |
+          if [ -n "$ISSUE" ]; then
+            gh api graphql \
+              -F "target=$ISSUE" \
+              -F "projectId=$PROJECT" \
+              -f query='
+                mutation($target: ID!, $projectId: ID!) {
+                  updateIssue(input: {id: $target, projectIds: [$projectId]}) {
+                    issue {
+                      number
+                    }
+                  }
+                }'
+          else
+            gh api graphql \
+              -F "target=$PR" \
+              -F "projectId=$PROJECT" \
+              -f query='
+                mutation($target: ID!, $projectId: ID!) {
+                updatePullRequest(input: {pullRequestId: $target, projectIds: [$projectId]}) {
+                  pullRequest{
+                    number
+                  }
+                }
+              }'
+          fi
