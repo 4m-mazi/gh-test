@@ -1,0 +1,13 @@
+{
+  "name": "github-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Mogyuchi/github-test.git",
+  "author": "Mogyuchi <git@mogyuchi.com>",
+  "license": "MIT",
+  "dependencies": {
+    "15-puzzle": "~5.2.5",
+    "hogehoge": "./hogehoge",
+    "kazukazu": "./kazukazu"
+  }
+}

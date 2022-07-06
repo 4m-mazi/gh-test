@@ -1,0 +1,9 @@
+{
+  "name": "kazukazu",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "15-puzzle": "<5.2.5"
+  }
+}
