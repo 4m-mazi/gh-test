@@ -1,0 +1,5 @@
+from_owner: []
+required_labels: []
+apply_labels: []
+blacklisted_labels:
+  - wontfix
