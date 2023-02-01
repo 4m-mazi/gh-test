@@ -5,6 +5,9 @@ on:
       - labeled
       - unlabeled
 
+permissions:
+  pull-requests: read
+
 jobs:
   debug:
     name: Debug
