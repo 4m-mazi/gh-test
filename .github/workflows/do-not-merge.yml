@@ -38,3 +38,14 @@ jobs:
           ```json
           ${{ toJSON(github) }}
           ```' >> $GITHUB_STEP_SUMMARY
+  do-not-merge:
+    name: DO NOT MERGE
+    if: github.event.label == 'do NOT merge!!!'
+    runs-on: ubuntu-22.04
+    steps:
+      - run: |
+          if ${{ contains(github.event.pull_request.labels.*.name, 'do NOT merge!!!') }}; then
+            false
+          else
+            true
+          fi
