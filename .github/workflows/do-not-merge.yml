@@ -1,0 +1,40 @@
+name: DO NOT MERGE
+on:
+  pull_request_target:
+    types:
+      - labeled
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -xe {0}
+    steps:
+      - run: echo ${{ github.event.commits[0].url }} >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "GITHUB_EVENT_PATH
+          \`\`\`json
+          `cat $GITHUB_EVENT_PATH`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "gh
+          \`\`\`console
+          `gh --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker
+          \`\`\`console
+          `docker --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker-compose
+          \`\`\`console
+          `docker-compose --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo 'github context
+          ```json
+          ${{ toJSON(github) }}
+          ```' >> $GITHUB_STEP_SUMMARY
