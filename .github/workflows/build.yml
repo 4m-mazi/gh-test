@@ -1,0 +1,43 @@
+name: build
+on: push
+
+concurrency:
+  group: kzkzkzkzkzkzkzkzkzkzkzkzkzkzkzkzkz
+  cancel-in-progress: true
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [aarch64-unknown-linux-gnu, aarch64-unknown-linux-musl, x86_64-unknown-freebsd, x86_64-unknown-netbsd]
+        use-cross: [false]
+        include:
+          - target: x86_64-unknown-linux-gnu
+            use-cross: false
+          - target: x86_64-unknown-linux-musl
+            use-cross: false
+          - os: macos-12
+            target: aarch64-apple-darwin
+          - os: macos-12
+            target: x86_64-apple-darwin
+          - os: windows-2022
+            target: x86_64-pc-windows-msvc
+          - os: windows-2022
+            target: x86_64-pc-windows-gnu
+    runs-on: ${{ matrix.os || 'ubuntu-22.04'}}
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - uses: actions-rs/toolchain@88dc2356392166efad76775c878094f4e83ff746
+        with:
+          toolchain: stable
+          target: ${{ matrix.target }}
+      - uses: actions-rs/cargo@9e120dd99b0fbad1c065f686657e914e76bd7b72
+        with:
+          use-cross: ${{ !matrix.os && matrix.use-cross }}
+          command: build
+          args: --release --target ${{ matrix.target }}
+      - uses: actions/upload-artifact@65d862660abb392b8c4a3d1195a2108db131dd05
+        with:
+          name: ${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/rust-ci-test*
