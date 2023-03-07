@@ -1,0 +1,54 @@
+name: Versioning
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  pull-requests: read
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -xe {0}
+    steps:
+      - run: echo ${{ github.event.commits[0].url }} >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "GITHUB_EVENT_PATH
+          \`\`\`json
+          `cat $GITHUB_EVENT_PATH`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "gh
+          \`\`\`console
+          `gh --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker
+          \`\`\`console
+          `docker --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker-compose
+          \`\`\`console
+          `docker-compose --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo 'github context
+          ```json
+          ${{ toJSON(github) }}
+          ```' >> $GITHUB_STEP_SUMMARY
+  versioning:
+    name: 'Versioning'
+    runs-on: ubuntu-22.04
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+        with:
+          fetch-depth: 0
+      - run: bash -e ./main.sh
