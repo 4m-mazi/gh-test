@@ -5,7 +5,6 @@ on:
       - opened
       - labeled
       - unlabeled
-  workflow_call:
 
 permissions:
   pull-requests: read
