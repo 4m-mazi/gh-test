@@ -58,3 +58,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config push.default current
       - run: bash -e ./.github/workflows/versioning/main.sh
+  call_do-not-merge:
+    needs: [versioning]
+    uses: ./.github/workflows/do-not-merge.yml
