@@ -23,4 +23,4 @@ VERSION=$new_version_string perl -i -pe 's/(version = ").+/\1$ENV{VERSION}"/ if 
 echo -e "Release v${new_version_string}\n\nPR:\n${pr}" | git commit --no-gpg-sign -a --file=-
 git push -f
 gh pr create --base main --fill --label release || echo -e "PR:\n${pr}" | gh pr edit --title "Release v${new_version_string}" --body-file - 
-gh pr merge --auto --delete-branch --rebase
+gh pr merge --auto --delete-branch --squash 
