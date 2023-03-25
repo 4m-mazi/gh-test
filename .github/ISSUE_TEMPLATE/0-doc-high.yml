@@ -3,5 +3,7 @@ labels: ["bug","dependencies"]
 body:
   - type: textarea
     id: content
+    attributes:
+      label: 内容
     validations:
       required: true
