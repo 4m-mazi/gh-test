@@ -1,0 +1,7 @@
+name: 最優先 文章
+labels: ["bug","dependencies"]
+body:
+  - type: textarea
+    id: content
+    validations:
+      required: true
