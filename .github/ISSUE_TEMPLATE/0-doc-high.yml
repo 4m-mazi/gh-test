@@ -1,10 +1,10 @@
-name: 文章修整 - 最優先
-description: 'あああ'
+name: 文章修整 - 優先度高
+description: '優先度が高い修整タスク'
 labels: ["bug","dependencies"]
 body:
   - type: textarea
     id: content
     attributes:
-      label: 内容
+      label: 文章修整タスク
     validations:
       required: true
