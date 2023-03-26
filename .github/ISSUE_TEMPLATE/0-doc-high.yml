@@ -1,7 +1,10 @@
-name: 最優先 文章
+name: 文章修整 - 最優先
+description: ' '
 labels: ["bug","dependencies"]
 body:
   - type: textarea
     id: content
+    attributes:
+      label: 内容
     validations:
       required: true
