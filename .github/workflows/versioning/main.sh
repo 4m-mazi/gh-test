@@ -20,6 +20,7 @@ new_version_string=$(printf ".%s" "${version[@]}")
 new_version_string=${new_version_string:1}
 git switch -C release
 VERSION=$new_version_string perl -i -pe 's/(version = ").+/\1$ENV{VERSION}"/ if !$done; $done ||= $&' Cargo.toml
+cargo update -p "$(awk -F'[ ="]+' '$1 ~ /^name/ { print $2; exit }' Cargo.toml)"
 echo -e "Release v${new_version_string}\n\nPR:\n${pr}" | git commit --no-gpg-sign -a --file=-
 git push -f
 gh pr create --base main --fill --label release || echo -e "PR:\n${pr}" | gh pr edit --title "Release v${new_version_string}" --body-file - 
