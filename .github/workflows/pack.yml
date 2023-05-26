@@ -1,0 +1,44 @@
+name: pack
+on:
+  push:
+    branches:
+      - test
+
+permissions:
+  contents: write
+
+jobs:
+  pack:
+    name: 'pack'
+    runs-on: ubuntu-22.04
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+    defaults:
+      run:
+        shell: bash -xe {0}
+    steps:
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+        with:
+          fetch-depth: 0
+      - name: setup git
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config push.default current
+      - name: switch branch
+        run: git switch npm-dev || ( git switch --orphan npm-dev && git commit --allow-empty -m 'test' )
+      - run: git show @{-1}
+      - name: merge start
+        run: git merge -Xtheirs @{-1} --no-ff --no-commit -m "Tarball Contents [ ${GITHUB_SHA} ]" --allow-unrelated-histories
+      - name: delete old files
+        run: find . -mindepth 1 -maxdepth 1 ! -name '.git' -delete
+      - name: commit and push
+        run: |
+          git add .
+          if ! git diff --cached --quiet; then
+            git commit --no-edit
+            git push
+          else
+            git merge --abort
+          fi
