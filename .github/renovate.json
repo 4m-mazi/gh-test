@@ -1,0 +1,29 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "dependencyDashboardAutoclose": true,
+  "extends": [
+    "config:js-app",
+    ":rebaseStalePrs",
+    ":disableRateLimiting",
+    ":maintainLockFilesWeekly",
+    ":labels(dependencies, semver:none)",
+    ":assignAndReview(kazukazu123123)",
+    ":semanticCommits",
+    ":disablePrControls",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "packageRules": [
+    {
+      "matchDepTypes": ["dependencies", "require"],
+      "labels": ["dependencies", "semver:patch"]
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["(^|/)\\.npmrc$"],
+      "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version"
+    }
+  ]
+}
