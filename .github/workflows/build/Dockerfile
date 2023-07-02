@@ -10,6 +10,8 @@ RUN --mount=type=bind,source=artifact,target=artifact \
       cp artifact/x86_64-unknown-linux-musl/rust-ci-test .\
     ;elif [ "$TARGETPLATFORM" = 'linux/arm64' ]; then\
       cp artifact/aarch64-unknown-linux-musl/rust-ci-test .\
+    ;elif [ "$TARGETPLATFORM" = 'windows/amd64' ]; then\
+      cp artifact/x86_64-pc-windows-msvc/rust-ci-test.exe rust-ci-test\
     ;else false \
     ;fi
 
