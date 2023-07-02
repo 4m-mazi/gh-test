@@ -16,5 +16,5 @@ RUN --mount=type=bind,source=artifact,target=artifact \
     ;fi
 
 FROM scratch
-COPY --from=env rust-ci-test .
+COPY --from=env --chmod=755 rust-ci-test .
 ENTRYPOINT ["./rust-ci-test"]
