@@ -13,8 +13,7 @@ env:
 
 jobs:
   build:
-    permissions:
-      contents: read
+    permissions: {}
     strategy:
       fail-fast: false
       matrix:
@@ -81,7 +80,7 @@ jobs:
   docker:
     needs: build
     permissions:
-      packages: read
+      packages: write
     runs-on: 'ubuntu-22.04'
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
