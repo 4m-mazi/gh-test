@@ -50,7 +50,7 @@ jobs:
         with:
           toolchain: stable
           target: ${{ matrix.target }}
-      - uses: Swatinem/rust-cache@988c164c3d0e93c4dbab36aaf5bbeb77425b2894
+      - uses: Swatinem/rust-cache@be7377e68e88e0998e53402e5414eca81c4ac820
         with:
           key: ${{ matrix.target }}
       - name: Install cross
