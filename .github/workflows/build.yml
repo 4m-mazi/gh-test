@@ -81,7 +81,7 @@ jobs:
   docker:
     needs: build
     permissions:
-      packages: read
+      packages: write
     runs-on: 'ubuntu-22.04'
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
