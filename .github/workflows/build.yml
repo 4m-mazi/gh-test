@@ -4,8 +4,11 @@ on:
     branches:
       - 'main'
   pull_request:
-  release:
-    types: [published]
+  workflow_call:
+    inputs:
+      tag-name:
+        required: true
+        type: string
 
 env:
   REGISTRY: ghcr.io
@@ -65,17 +68,17 @@ jobs:
             target/${{ matrix.target }}/release/rust-ci-test
             target/${{ matrix.target }}/release/rust-ci-test.exe
       - name: Upload to release
-        if: github.event_name == 'release'
+        if: github.event_name == 'workflow_call'
         working-directory: target/${{ matrix.target }}/release/
         run: |
           if [ -e rust-ci-test.exe ]; then
-            filename="rust-ci-test-${{ github.event.release.tag_name }}-${{ matrix.target }}.exe"
+            filename="rust-ci-test-${{ inputs.tag-name }}-${{ matrix.target }}.exe"
             mv rust-ci-test.exe "$filename"
-            gh release upload ${{ github.event.release.tag_name }} "$filename"#${{ matrix.target }} --clobber
+            gh release upload ${{ inputs.tag-name }} "$filename"#${{ matrix.target }} --clobber
           else
-            filename="rust-ci-test-${{ github.event.release.tag_name }}-${{ matrix.target }}"
+            filename="rust-ci-test-${{ inputs.tag-name }}-${{ matrix.target }}"
             mv rust-ci-test "$filename"
-            gh release upload ${{ github.event.release.tag_name }} "$filename"#${{ matrix.target }} --clobber
+            gh release upload ${{ inputs.tag-name }} "$filename"#${{ matrix.target }} --clobber
           fi
   docker:
     needs: build
@@ -110,6 +113,13 @@ jobs:
         uses: docker/metadata-action@818d4b7b91585d195f67373fd9cb0332e31a7175 # v4.6.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}},value=${{ inputs.tag-name }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag-name }}
+            type=semver,pattern={{major}},value=${{ inputs.tag-name }}
+            type=edge
+            type=ref,event=branch
+            type=sha
       - name: Build and push Docker image
         uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825 # v4.1.1
         with:
