@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          gh label create 'autorelease: published' --color #ededed || :
-          gh pr edit ${{ needs.release-please.outputs.pr.number }}\
-          --remove-label 'autorelease: tagged'
+          gh label create 'autorelease: published' --color ededed || :
+          gh pr edit ${{ needs.release-please.outputs.pr.number }} \
+          --remove-label 'autorelease: tagged' \
           --add-label 'autorelease: published'
