@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.2 (2023-07-13)
+
+## What's Changed
+* chore(action): fix release by @Mogyuchi in https://github.com/Mogyuchi/gh-test/pull/277
+* fix: Update test by @Mogyuchi in https://github.com/Mogyuchi/gh-test/pull/278
+
+
+**Full Changelog**: https://github.com/Mogyuchi/gh-test/compare/v1.1.1...v1.1.2
+
 ## [1.1.1](https://github.com/Mogyuchi/gh-test/compare/v1.1.0...v1.1.1) (2023-07-13)
 
 
