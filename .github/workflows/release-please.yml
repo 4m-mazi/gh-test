@@ -14,6 +14,7 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
+      pr: ${{ steps.release.outputs.pr }}
     steps:
       - uses: google-github-actions/release-please-action@8016a6649226f2ec88ed05441c11bb5410a22d29 # v3.7.10
         id: release
@@ -27,3 +28,13 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       tag-name: ${{ needs.release-please.outputs.tag_name }}
+
+  post-release:
+    needs: [release-please, build]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          gh label create 'autorelease: published' --color #ededed || :
+          gh pr edit ${{ needs.release-please.outputs.pr.number }}\
+          --remove-label 'autorelease: tagged'
+          --add-label 'autorelease: published'
