@@ -3,14 +3,13 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-  pull-requests: write
-
 name: release-please
 
 jobs:
   release-please:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
@@ -24,6 +23,8 @@ jobs:
   build:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      packages: write
     uses: ./.github/workflows/build.yml
     with:
       tag-name: ${{ needs.release-please.outputs.tag_name }}
