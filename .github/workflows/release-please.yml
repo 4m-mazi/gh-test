@@ -19,7 +19,6 @@ jobs:
         id: release
         with:
           release-type: rust
-          changelog-notes-type: github
   build:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
