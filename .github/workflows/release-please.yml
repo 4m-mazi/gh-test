@@ -20,6 +20,8 @@ jobs:
         id: release
         with:
           release-type: rust
+      - name: Enable auto merge
+        run: gh pr merge ${{ steps.release.outputs.pr.number }} --auto --delete-branch --squash
   build:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
