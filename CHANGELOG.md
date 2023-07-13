@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Mogyuchi/gh-test/compare/v1.0.1...v1.1.0) (2023-07-13)
+
+
+### Features
+
+* Update test ([#270](https://github.com/Mogyuchi/gh-test/issues/270)) ([e05c655](https://github.com/Mogyuchi/gh-test/commit/e05c655f4843999da7c7e6558d4ce4db9ed6c7d5))
+
 ## [1.0.1](https://github.com/Mogyuchi/gh-test/compare/v1.0.0...v1.0.1) (2023-07-13)
 
 
