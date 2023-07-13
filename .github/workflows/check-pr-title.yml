@@ -11,6 +11,6 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: aslafy-z/conventional-pr-title-action@430b563bdf469d2febb488bbf581a01a488259c2
+      - uses: aslafy-z/conventional-pr-title-action@84bb4431bd55932a19d5ff7f456208454d6534f9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
