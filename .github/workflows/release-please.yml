@@ -19,7 +19,7 @@ jobs:
         id: release
         with:
           release-type: rust
-          package-name: release-please-action
+          changelog-notes-type: github
   build:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
