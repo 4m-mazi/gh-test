@@ -10,6 +10,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - uses: aslafy-z/conventional-pr-title-action@b9d8aa366ba2ac0f10e02ce4236d2bd61a84fac3 # v3.0.1
         env:
