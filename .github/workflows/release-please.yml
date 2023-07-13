@@ -12,14 +12,18 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - uses: google-github-actions/release-please-action@8016a6649226f2ec88ed05441c11bb5410a22d29 # v3.7.10
         id: release
         with:
           release-type: rust
           package-name: release-please-action
-      - name: Build
-        if: ${{ steps.release.outputs.release_created }}
-        uses: ./.github/workflows/build.yml
-        with:
-          tag-name: ${{ steps.release.outputs.tag_name }}
+  build:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    uses: ./.github/workflows/build.yml
+    with:
+      tag-name: ${{ needs.release-please.outputs.tag_name }}
