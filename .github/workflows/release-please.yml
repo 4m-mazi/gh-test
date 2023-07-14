@@ -40,11 +40,13 @@ jobs:
 
   post-release:
     needs: [build]
+    permissions: {}
     runs-on: ubuntu-latest
     steps:
       - run: |
-          gh label create 'autorelease: published' --color ededed || :
+          gh label create 'autorelease: published test' --color ededed || :
           pr_number=$(printf '${{ github.event.head_commit.message }}' | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')
+          gh pr comment "$pr_number" --body 'Successfully published to ghcr.io\n```\n${{ join(fromJson(needs.build.outputs.docker_tags), '\n') }}\n```'
           gh pr edit "$pr_number" \
           --remove-label 'autorelease: tagged' \
           --add-label 'autorelease: published'
