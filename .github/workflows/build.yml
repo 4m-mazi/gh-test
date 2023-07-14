@@ -68,7 +68,7 @@ jobs:
             target/${{ matrix.target }}/release/rust-ci-test
             target/${{ matrix.target }}/release/rust-ci-test.exe
       - name: Upload to release
-        if: github.event_name == 'workflow_call'
+        if: ${{ inputs.tag-name }}
         working-directory: target/${{ matrix.target }}/release/
         run: |
           if [ -e rust-ci-test.exe ]; then
