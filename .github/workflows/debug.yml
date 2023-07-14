@@ -1,0 +1,92 @@
+name: Debug
+on:
+  branch_protection_rule:
+  check_run:
+  check_suite:
+  create:
+  delete:
+  deployment:
+  deployment_status:
+  discussion:
+  discussion_comment:
+  fork:
+  gollum:
+  issue_comment:
+  issues:
+  label:
+  merge_group:
+  milestone:
+  page_build:
+  project:
+  project_card:
+  project_column:
+  public:
+  pull_request:
+    types:
+      - assigned
+      - unassigned
+      - labeled
+      - unlabeled
+      - opened
+      - edited
+      - closed
+      - reopened
+      - synchronize
+      - converted_to_draft
+      - ready_for_review
+      - locked
+      - unlocked
+      - review_requested
+      - review_request_removed
+      - auto_merge_enabled
+      - auto_merge_disabled
+  pull_request_review:
+  pull_request_review_comment:
+  pull_request_target:
+  push:
+  registry_package:
+  release:
+  repository_dispatch:
+# schedule:
+  status:
+  watch:
+  workflow_call:
+  workflow_dispatch:
+# workflow_run:
+
+permissions: {}
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -xe {0}
+    steps:
+      - run: echo ${{ github.event.commits[0].url }} >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "GITHUB_EVENT_PATH
+          \`\`\`json
+          `cat $GITHUB_EVENT_PATH`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "gh
+          \`\`\`console
+          `gh --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker
+          \`\`\`console
+          `docker --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "docker-compose
+          \`\`\`console
+          `docker-compose --version`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo 'github context
+          ```json
+          ${{ toJSON(github) }}
+          ```' >> $GITHUB_STEP_SUMMARY
