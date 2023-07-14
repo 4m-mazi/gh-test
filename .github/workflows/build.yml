@@ -16,7 +16,8 @@ env:
 
 jobs:
   build:
-    permissions: {}
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
