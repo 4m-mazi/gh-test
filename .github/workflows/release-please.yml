@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Create published label
         run: |
-          gh label create 'autorelease: published test' --color ededed || :
+          gh label create 'autorelease: published test test' --color=EDEDED || :
       - name: Get PR number
         id: pr-number
         run: |
@@ -58,5 +58,5 @@ jobs:
       - name: Change labels on PR
         run: |
           gh pr edit ${{ steps.pr-number.outputs.pr_number }} \
-          --remove-label 'autorelease: tagged' \
-          --add-label 'autorelease: published'
+          --remove-label='autorelease: tagged' \
+          --add-label='autorelease: published'
