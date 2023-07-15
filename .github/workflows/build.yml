@@ -10,8 +10,10 @@ on:
         required: true
         type: string
     outputs:
-      docker_tags:
-        value: ${{ jobs.docker.outputs.docker_tags }}
+      image_tags:
+        value: ${{ jobs.docker.outputs.image_tags }}
+      image_url:
+        value: https://ghcr.io/${{ github.repository }}
 
 env:
   REGISTRY: ghcr.io
@@ -90,7 +92,7 @@ jobs:
       packages: write
     runs-on: 'ubuntu-22.04'
     outputs:
-      docker_tags: ${{ steps.meta.outputs.tags }}
+      image_tags: ${{ steps.meta.outputs.tags }}
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GH_REPO: ${{ github.repository }}
