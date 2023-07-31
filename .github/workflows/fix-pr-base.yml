@@ -21,7 +21,7 @@ jobs:
   change-base_branch:
     name: Change base branch
     if: |
-      github.base_ref == 'main' && github.head_ref !== 'develop'
+      github.base_ref == 'main' && github.head_ref != 'develop'
     runs-on: ubuntu-latest
     steps:
       - run: |
