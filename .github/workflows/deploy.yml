@@ -11,6 +11,8 @@ on:
     branches: ["**"]
   pull_request_target:
 
+permissions: {}
+
 jobs:
   pre-deployment:
     outputs:
@@ -47,9 +49,8 @@ jobs:
       url: ${{ steps.publish.outputs.url }}
 
     permissions:
-      contents: write
       deployments: write
-      #pull-requests: write
+      pull-requests: write
 
     steps:
       - id: pr-checkout
