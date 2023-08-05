@@ -49,6 +49,7 @@ jobs:
       url: ${{ steps.publish.outputs.url }}
 
     permissions:
+      contents: read
       deployments: write
       pull-requests: write
 
