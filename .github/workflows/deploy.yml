@@ -101,7 +101,8 @@ jobs:
             <a href='${{ steps.publish.outputs.url }}'>${{ steps.publish.outputs.url }}</a>
             </td></tr>
             <tr><td><strong>Branch Preview URL:</strong></td><td>
-            <a href='https://pr-${{ github.event.pull_request.number }}.fork-pr-deploy-test.pages.dev'>https://pr-${{ github.event.pull_request.number }}.fork-pr-deploy-test.pages.dev</a>
+            <a href='https://${{ env.BRANCH }}.fork-pr-deploy-test.pages.dev'>https://${{ env.BRANCH }}
+.fork-pr-deploy-test.pages.dev</a>
             </td></tr>
             </table>
 
