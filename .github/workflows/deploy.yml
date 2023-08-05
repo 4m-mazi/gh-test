@@ -101,11 +101,12 @@ jobs:
             <a href='${{ steps.publish.outputs.url }}'>${{ steps.publish.outputs.url }}</a>
             </td></tr>
             <tr><td><strong>Branch Preview URL:</strong></td><td>
-            <a href='https://pr-${{ github.event.pull_request.number }}.fork-pr-deploy-test.pages.dev'>https://pr-${{ github.event.pull_request.number }}.fork-pr-deploy-test.pages.dev</a>
+            <a href='https://${{ env.BRANCH }}.fork-pr-deploy-test.pages.dev'>https://${{ env.BRANCH }}
+.fork-pr-deploy-test.pages.dev</a>
             </td></tr>
             </table>
 
-            [View workflow logs](${{ github.repository.html_url }}/actions/runs/${{ github.run_id }})
+            [View workflow logs](${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }})
             [View Cloudflare logs](https://dash.cloudflare.com/?to=/${{ env.CLOUDFLARE_ACCOUNT_ID }}/pages/view/${{ env.CLOUDFLARE_PROJECT_NAME }}/${{ steps.publish.outputs.id }})
           edit-mode: replace
 
@@ -123,6 +124,6 @@ jobs:
             <tr><td><strong>Status:</strong></td><td>&nbsp;❌&nbsp; Deploy failed!</td></tr>
             </table>
 
-            [View workflow logs](${{ github.repository.html_url }}/actions/runs/${{ github.run_id }})
+            [View workflow logs](${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }})
             [View Cloudflare logs](https://dash.cloudflare.com/?to=/${{ env.CLOUDFLARE_ACCOUNT_ID }}/pages/view/${{ env.CLOUDFLARE_PROJECT_NAME }}/${{ steps.publish.outputs.id }})
           edit-mode: replace
