@@ -66,6 +66,10 @@ jobs:
           ref: ${{ env.BRANCH }}
 
       - run: mkdir _site && cp README.md _site/index.html
+      
+      - env:
+          GITHUB_HEAD_REF: ${{ github.event.pull_request.merge_commit_sha || github.event.head_commit.id }}
+        run: echo "GITHUB_HEAD_REF overwrite to `echo $GITHUB_HEAD_REF`" >> $GITHUB_STEP_SUMMARY
 
       - id: publish
         env:
