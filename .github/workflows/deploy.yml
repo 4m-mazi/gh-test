@@ -66,15 +66,10 @@ jobs:
           ref: ${{ env.BRANCH }}
 
       - run: mkdir _site && cp README.md _site/index.html
-      
-      - env:
-          GITHUB_HEAD_REF: ${{ github.event.pull_request.merge_commit_sha || github.event.head_commit.id }}
-        run: echo "GITHUB_HEAD_REF overwrite to `echo $GITHUB_HEAD_REF`" >> $GITHUB_STEP_SUMMARY
 
       - id: publish
-        env:
-          GITHUB_HEAD_REF: ${{ github.event.pull_request.merge_commit_sha || github.event.head_commit.id }}
-        uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca # v1.5.0
+        # This workflow does NOT work with v1.5.0
+        uses: cloudflare/pages-action@61eafe73baad0195ab582cb447b2c6e15a0df9ce # v1.4.1
         with:
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
