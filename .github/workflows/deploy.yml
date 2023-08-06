@@ -66,7 +66,7 @@ jobs:
         with:
           ref: ${{ env.BRANCH }}
 
-      - run: mkdir _site && cp README.md _site/index.html
+      - run: mkdir _site && cp test _site/index.html
 
       - id: publish
         # This workflow does NOT work with v1.5.0
