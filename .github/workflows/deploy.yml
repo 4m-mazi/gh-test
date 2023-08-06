@@ -69,7 +69,7 @@ jobs:
 
       - id: publish
         env:
-          GITHUB_HEAD_REF: ${{ github.event.merge_commit_sha || github.event.head_commit.id }}
+          GITHUB_HEAD_REF: ${{ github.event.pull_request.merge_commit_sha || github.event.head_commit.id }}
         uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca # v1.5.0
         with:
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
