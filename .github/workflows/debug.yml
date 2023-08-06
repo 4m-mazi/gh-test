@@ -86,4 +86,12 @@ jobs:
           `docker-compose --version`
           \`\`\`" >> $GITHUB_STEP_SUMMARY
       - run: |
-          printf 'github context\n```json\n${{ toJSON(github) }}\n```' >> $GITHUB_STEP_SUMMARY
+          echo 'github context
+          ```json
+          ${{ toJSON(github) }}
+          ```' >> $GITHUB_STEP_SUMMARY
+      - run: |
+          echo "All ENV
+          \`\`\`json
+          `env`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
