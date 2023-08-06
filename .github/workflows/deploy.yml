@@ -40,6 +40,7 @@ jobs:
             exit 1
           fi
   deployment:
+    if: ${{ vars.CLOUDFLARE_PROJECT_NAME != '' }}
     needs: ["pre-deployment"]
     env:
       BRANCH: ${{ needs.pre-deployment.outputs.branch }}
@@ -100,9 +101,6 @@ jobs:
             <tr><td><strong>Status:</strong></td><td>&nbsp;✅&nbsp; Deploy successful!</td></tr>
             <tr><td><strong>Preview URL:</strong></td><td>
             <a href='${{ steps.publish.outputs.url }}'>${{ steps.publish.outputs.url }}</a>
-            </td></tr>
-            <tr><td><strong>Branch Preview URL:</strong></td><td>
-            <a href='https://${{ env.BRANCH }}.fork-pr-deploy-test.pages.dev'>https://${{ env.BRANCH }}.fork-pr-deploy-test.pages.dev</a>
             </td></tr>
             </table>
 
