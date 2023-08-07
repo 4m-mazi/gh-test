@@ -15,6 +15,7 @@ permissions: {}
 
 jobs:
   pre-deployment:
+    if: ${{ vars.CLOUDFLARE_PROJECT_NAME != '' }}
     outputs:
       branch: ${{ steps.get.outputs.branch }}
       environment: ${{ steps.get.outputs.environment }}
@@ -40,7 +41,6 @@ jobs:
             exit 1
           fi
   deployment:
-    if: ${{ vars.CLOUDFLARE_PROJECT_NAME != '' }}
     needs: ["pre-deployment"]
     env:
       BRANCH: ${{ needs.pre-deployment.outputs.branch }}
@@ -66,7 +66,7 @@ jobs:
         with:
           ref: ${{ env.BRANCH }}
 
-      - run: mkdir _site && cp README.md _site/index.html
+      - run: mkdir _site && cp test _site/index.html
 
       - id: publish
         # This workflow does NOT work with v1.5.0
@@ -87,6 +87,15 @@ jobs:
           comment-author: "github-actions[bot]"
           body-includes: DEPLOYMENT_COMMENT
 
+      - id: comment-data
+        if: steps.fc.conclusion == 'success'
+        run: |
+          head_sha=$(git rev-parse HEAD)
+          get_short_sha_with_link() {
+            echo "<a href='${{ github.event.repository.html_url }}/commit/$1'><code>$(echo "$1" | head -c 7)</code></a>"
+          }
+          echo "commit_text=$(get_short_sha_with_link $(git rev-parse HEAD)) ( base: $(get_short_sha_with_link ${{ github.event.pull_request.base.sha }}) + head: $(get_short_sha_with_link ${{ github.event.pull_request.head.sha }}) )" >> "$GITHUB_OUTPUT"
+          echo "pr_preview_url=$(echo '${{ steps.publish.outputs.url }}' | perl -pe "s|(//).+?(\.)|\$1$(echo '${{ env.BRANCH }}' | perl -pe 's|/|-|g')\$2|")" >> "$GITHUB_OUTPUT"
       - if: steps.fc.conclusion == 'success'
         uses: peter-evans/create-or-update-comment@c6c9a1a66007646a28c153e2a8580a5bad27bcfa # v3.0.2
         with:
@@ -96,11 +105,14 @@ jobs:
           body: |
             <!-- DEPLOYMENT_COMMENT -->
             <table><tr><td><strong>Latest commit:</strong> </td><td>
-            <code>${{ github.event.pull_request.head.sha }}</code>
+            ${{ steps.comment-data.outputs.commit_text }}
             </td></tr>
             <tr><td><strong>Status:</strong></td><td>&nbsp;✅&nbsp; Deploy successful!</td></tr>
             <tr><td><strong>Preview URL:</strong></td><td>
             <a href='${{ steps.publish.outputs.url }}'>${{ steps.publish.outputs.url }}</a>
+            </td></tr>
+            <tr><td><strong>PR Preview URL:</strong></td><td>
+            <a href='${{ steps.comment-data.outputs.pr_preview_url }}'>${{ steps.comment-data.outputs.pr_preview_url }}</a>
             </td></tr>
             </table>
 
@@ -117,7 +129,7 @@ jobs:
           body: |
             <!-- DEPLOYMENT_COMMENT -->
             <table><tr><td><strong>Latest commit:</strong> </td><td>
-            <code>${{ github.event.pull_request.head.sha }}</code>
+            ${{ steps.comment-data.outputs.commit_text }}
             </td></tr>
             <tr><td><strong>Status:</strong></td><td>&nbsp;❌&nbsp; Deploy failed!</td></tr>
             </table>
