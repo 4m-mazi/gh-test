@@ -25,17 +25,10 @@ jobs:
         run: |
           if ${{ github.event_name == 'push' }}; then
             echo "branch=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
-            if ${{ github.ref_name == 'main' }}; then
-              echo "environment=Production" >> "$GITHUB_OUTPUT"
-            else
-              echo "environment=Preview" >> "$GITHUB_OUTPUT"
-            fi
           elif ${{ github.event_name == 'pull_request_target' }}; then
             echo "branch=pull/${{ github.event.number }}/merge" >> "$GITHUB_OUTPUT"
-            if ${{ github.event.head.repo.html_url != github.repository.html_url }}; then
+            if ${{ github.event.pull_request.head.repo.html_url != github.event.repository.html_url }}; then
               echo "environment=External PR" >> "$GITHUB_OUTPUT"
-            else
-              echo "environment=Preview" >> "$GITHUB_OUTPUT"
             fi
           else
             exit 1
