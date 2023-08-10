@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM --platform=$BUILDPLATFORM busybox:latest AS env
+FROM --platform=$BUILDPLATFORM busybox:latest@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79 AS env
 ARG TARGETPLATFORM
 ARG BINARY_NAME=rust-ci-test
 RUN --mount=type=bind,source=artifact,target=artifact \
