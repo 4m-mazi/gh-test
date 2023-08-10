@@ -13,6 +13,7 @@
     ":rebaseStalePrs",
     ":semanticCommits"
   ],
+  "automergeStrategy": "squash",
   "assignAutomerge": true,
   "assigneesFromCodeOwners": true,
   "dependencyDashboardAutoclose": true,
