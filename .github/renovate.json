@@ -22,14 +22,25 @@
   "reviewersFromCodeOwners": true,
   "packageRules": [
     {
-      "matchDepTypes": ["dependencies", "require"],
-      "labels": ["dependencies", "semver:patch"]
+      "matchDepTypes": [
+        "dependencies",
+        "require"
+      ],
+      "labels": [
+        "dependencies",
+        "semver:patch"
+      ]
     }
   ],
   "regexManagers": [
     {
-      "fileMatch": ["(^|/)\\.npmrc$"],
-      "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)\\.npmrc$"
+      ],
+      "matchStrings": [
+        "use-node-version=(?<currentValue>.*?)\\n"
+      ],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
     }
