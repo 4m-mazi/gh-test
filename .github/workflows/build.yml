@@ -54,7 +54,7 @@ jobs:
         run: |
           sudo apt-get install -y musl-tools --no-install-recommends
       - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
-      - uses: dtolnay/rust-toolchain@f361669954a8ecfc00a3443f35f9ac8e610ffc06 # master
+      - uses: dtolnay/rust-toolchain@5cb429dd810e16ff67df78472fa81cf760f4d1c0 # master
         with:
           toolchain: stable
           target: ${{ matrix.target }}
