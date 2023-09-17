@@ -104,10 +104,12 @@ jobs:
           `docker-compose --version`
           \`\`\`" >> $GITHUB_STEP_SUMMARY
       - run: |
-          echo 'github context
+          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
+          github context
           ```json
           ${{ toJSON(github) }}
-          ```' >> $GITHUB_STEP_SUMMARY
+          ```
+          EOF
       - run: |
           echo "All ENV
           \`\`\`env
