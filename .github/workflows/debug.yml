@@ -104,7 +104,7 @@ jobs:
           `docker-compose --version`
           \`\`\`" >> $GITHUB_STEP_SUMMARY
       - run: |
-          cat << EOF >> $GITHUB_STEP_SUMMARY
+          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
           github context
           ```json
           ${{ toJSON(github) }}
