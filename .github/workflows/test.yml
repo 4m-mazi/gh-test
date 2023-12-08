@@ -1,0 +1,12 @@
+on:
+  push:
+    branches: ["**"]
+
+permissions: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - if: false
+        run: echo "test" >> $GITHUB_STEP_SUMMARY
