@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.17](https://github.com/Mogyuchi/gh-test/compare/v2.0.16...v2.0.17) (2023-12-09)
+
+
+### Bug Fixes
+
+* Update test ([#486](https://github.com/Mogyuchi/gh-test/issues/486)) ([d59a772](https://github.com/Mogyuchi/gh-test/commit/d59a77213c6b613e5a38712a56d1fe113cab7a66))
+
 ## [2.0.16](https://github.com/Mogyuchi/gh-test/compare/v2.0.15...v2.0.16) (2023-12-09)
 
 
