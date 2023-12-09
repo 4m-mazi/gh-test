@@ -6,9 +6,10 @@ permissions: {}
 
 jobs:
   test:
+    if: ${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}
     runs-on: ubuntu-latest
     steps:
-      - if: ${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}
+      - if: ${{ startsWith(github.event.head_commit.message, 'chore(main)')}}
         run: echo "${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}" >> $GITHUB_STEP_SUMMARY
   call-test:
     uses: ./.github/workflows/debug.yml
