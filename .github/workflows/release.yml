@@ -1,38 +1,39 @@
+name: release
+
 on:
   push:
-    branches: main
-
-name: on push to main
+    branches:
+      - main
 
 jobs:
   release-please:
-    if: false
+    if: github.repository_owner == 'Mogyuchi'
     permissions:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.release-please.outputs.release_created }}
-      tag_name: ${{ steps.release-please.outputs.tag_name }}
-      pr: ${{ steps.release-please.outputs.pr }}
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      pr: ${{ steps.release.outputs.pr }}
     steps:
-      - uses: google-github-actions/release-please-action@a2d8d683f209466ee8c695cd994ae2cf08b1642d # v4.0.1
-        id: release-please
+      - uses: google-github-actions/release-please-action@v4.0.1
+        id: release
         with:
           release-type: rust
 
-  docker-publish:
+  build:
     needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       contents: write
       packages: write
-    uses: ./.github/workflows/docker-publish.yml
+    uses: ./.github/workflows/docker.yml
     with:
       tag-name: ${{ needs.release-please.outputs.tag_name }}
 
   post-release:
-    needs: [release-please, docker-publish]
-    if: ${{ needs.release-please.outputs.release_created }}
+    needs: [build]
     permissions:
       pull-requests: write
     env:
@@ -49,11 +50,10 @@ jobs:
           echo "pr_number=$(printf '${{ github.event.head_commit.message }}' | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')" >> "$GITHUB_OUTPUT"
       - name: Add comment to PR
         run: |
-          printf ':robot: Successfully published to ${{ needs.docker-publish.outputs.image_url }} :truck:\n```\n${{ join(needs.docker-publish.outputs.image_tags, '\n') }}\n```' \
+          printf ':robot: Successfully published to ${{ needs.build.outputs.image_url }} :truck:\n```\n${{ join(needs.build.outputs.image_tags, '\n') }}\n```' \
           | gh pr comment ${{ steps.pr-number.outputs.pr_number }} --body-file=-
       - name: Change labels on PR
         run: |
           gh pr edit ${{ steps.pr-number.outputs.pr_number }} \
           --remove-label='autorelease: tagged' \
           --add-label='autorelease: published'
-
