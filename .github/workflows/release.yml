@@ -1,16 +1,13 @@
+name: release
+
 on:
   push:
     branches:
       - main
 
-name: release-please
-
-env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  GH_REPO: ${{ github.repository }}
-
 jobs:
   release-please:
+    if: github.repository_owner == 'Mogyuchi'
     permissions:
       contents: write
       pull-requests: write
@@ -20,21 +17,18 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
       pr: ${{ steps.release.outputs.pr }}
     steps:
-      - uses: google-github-actions/release-please-action@8016a6649226f2ec88ed05441c11bb5410a22d29 # v3.7.10
+      - uses: google-github-actions/release-please-action@a2d8d683f209466ee8c695cd994ae2cf08b1642d # v4.0.1
         id: release
         with:
           release-type: rust
-    ### マージしたあと、pushイベントが発火しないのでダメ
-    # - if: ${{ steps.release.outputs.pr }}
-    #   name: Enable auto merge
-    #   run: gh pr merge ${{ fromJSON(steps.release.outputs.pr).number }} --auto --delete-branch --squash
+
   build:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       contents: write
       packages: write
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/docker.yml
     with:
       tag-name: ${{ needs.release-please.outputs.tag_name }}
 
@@ -42,11 +36,14 @@ jobs:
     needs: [build]
     permissions:
       pull-requests: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
       - name: Create published label
         run: |
-          gh label create 'autorelease: published test test' --color=EDEDED || :
+          gh label create 'autorelease: published' --color=EDEDED || :
       - name: Get PR number
         id: pr-number
         run: |

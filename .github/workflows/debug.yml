@@ -43,6 +43,24 @@ on:
   pull_request_review:
   pull_request_review_comment:
   pull_request_target:
+    types:
+      - assigned
+      - unassigned
+      - labeled
+      - unlabeled
+      - opened
+      - edited
+      - closed
+      - reopened
+      - synchronize
+      - converted_to_draft
+      - ready_for_review
+      - locked
+      - unlocked
+      - review_requested
+      - review_request_removed
+      - auto_merge_enabled
+      - auto_merge_disabled
   push:
   registry_package:
   release:
@@ -86,7 +104,14 @@ jobs:
           `docker-compose --version`
           \`\`\`" >> $GITHUB_STEP_SUMMARY
       - run: |
-          echo 'github context
+          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
+          github context
           ```json
           ${{ toJSON(github) }}
-          ```' >> $GITHUB_STEP_SUMMARY
+          ```
+          EOF
+      - run: |
+          echo "All ENV
+          \`\`\`env
+          `env`
+          \`\`\`" >> $GITHUB_STEP_SUMMARY

@@ -1,26 +1,45 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "dependencyDashboardAutoclose": true,
   "extends": [
+    "config:best-practices",
     "config:js-app",
-    ":rebaseStalePrs",
-    ":disableRateLimiting",
-    ":maintainLockFilesWeekly",
-    ":labels(dependencies, semver:none)",
-    ":semanticCommits",
+    ":automergeAll",
+    ":automergePr",
     ":disablePrControls",
-    "helpers:pinGitHubActionDigests"
+    ":labels(dependencies, semver:none)",
+    ":maintainLockFilesWeekly",
+    ":pathSemanticCommitType(.github/workflows/**, ci)",
+    ":prHourlyLimitNone",
+    ":rebaseStalePrs",
+    ":semanticCommits"
   ],
+  "automergeStrategy": "squash",
+  "assignAutomerge": true,
+  "assigneesFromCodeOwners": true,
+  "dependencyDashboardAutoclose": true,
+  "prConcurrentLimit": 3,
+  "reviewersFromCodeOwners": true,
   "packageRules": [
     {
-      "matchDepTypes": ["dependencies", "require"],
-      "labels": ["dependencies", "semver:patch"]
+      "matchDepTypes": [
+        "dependencies",
+        "require"
+      ],
+      "labels": [
+        "dependencies",
+        "semver:patch"
+      ]
     }
   ],
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["(^|/)\\.npmrc$"],
-      "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)\\.npmrc$"
+      ],
+      "matchStrings": [
+        "use-node-version=(?<currentValue>.*?)\\n"
+      ],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
     }
