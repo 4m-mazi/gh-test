@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - if: false
-        run: echo "test" >> $GITHUB_STEP_SUMMARY
+        run: echo "${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}" >> $GITHUB_STEP_SUMMARY
   call-test:
     uses: ./.github/workflows/debug.yml
