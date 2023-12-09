@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.22](https://github.com/Mogyuchi/gh-test/compare/v2.0.21...v2.0.22) (2023-12-09)
+
+
+### Bug Fixes
+
+* Update test ([76dde4b](https://github.com/Mogyuchi/gh-test/commit/76dde4b9e1b0296b1fa84d61ecc681610c60a40d))
+
 ## [2.0.21](https://github.com/Mogyuchi/gh-test/compare/v2.0.20...v2.0.21) (2023-12-09)
 
 
