@@ -10,3 +10,5 @@ jobs:
     steps:
       - if: false
         run: echo "test" >> $GITHUB_STEP_SUMMARY
+  call-test:
+    uses: ./.github/workflows/debug.yml
