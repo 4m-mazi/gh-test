@@ -20,7 +20,8 @@ env:
 
 jobs:
   build:
-    if: ${{ ! startsWith(github.event.head_commit.message, 'chore(main): release') || github.event.workflow != 'build' }}
+    if: |
+      ${{ !startsWith(github.event.head_commit.message, 'chore(main): release') || github.event.workflow != 'build' }}
     permissions:
       contents: write
     strategy:
