@@ -13,12 +13,11 @@ jobs:
       - run: |
           echo "test1: ${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}" >> $GITHUB_STEP_SUMMARY
   test2:
-    if: |
-      ${{ ! startsWith(github.event.head_commit.message, 'chore(main)')}}
+    if: ${{ !startsWith(github.event.head_commit.message, 'chore(main):\ ')}}
     runs-on: ubuntu-latest
     steps:
       - run: |
           echo "test2: ${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}" >> $GITHUB_STEP_SUMMARY
-  
+
   call-test:
     uses: ./.github/workflows/debug.yml
