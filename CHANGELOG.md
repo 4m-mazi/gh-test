@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.27](https://github.com/Mogyuchi/gh-test/compare/v2.0.26...v2.0.27) (2023-12-11)
+
+
+### Bug Fixes
+
+* Update test ([960513f](https://github.com/Mogyuchi/gh-test/commit/960513f5868ea28052308e1a6fc399d7670d92b0))
+* Update test ([cdb7829](https://github.com/Mogyuchi/gh-test/commit/cdb7829d35e9322547e2d2578e120a18b039213e))
+* Update test ([03035bc](https://github.com/Mogyuchi/gh-test/commit/03035bc6d617895ab171779de76f5ceea9919dbd))
+* Update test ([511f949](https://github.com/Mogyuchi/gh-test/commit/511f94952a3a2c4708c31d23a985b0c14f6b0a5c))
+* Update test ([d30cd7f](https://github.com/Mogyuchi/gh-test/commit/d30cd7f729f8456f73dc7afe23444cd6a4974c31))
+
 ## [2.0.26](https://github.com/Mogyuchi/gh-test/compare/rust-ci-test-v2.0.25...rust-ci-test-v2.0.26) (2023-12-11)
 
 
