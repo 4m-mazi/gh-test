@@ -1,11 +1,16 @@
 {
   "bootstrap-sha": "86d3256e4ee1c7b80f90a5ee92be4f3a8c176abc",
-  "changelog-path": "CHANGELOG.md",
-  "release-type": "rust",
-  "bump-minor-pre-major": false,
-  "bump-patch-for-minor-pre-major": false,
-  "draft": false,
-  "prerelease": false,
-  "pull-request-title-pattern": "release: v${version}",
+  "packages": {
+    ".": {
+      "changelog-path": "CHANGELOG.md",
+      "release-type": "rust",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
+      "draft": false,
+      "prerelease": false,
+      "include-component-in-tag": false,
+      "pull-request-title-pattern": "release: v${version}"
+    }
+  },
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
