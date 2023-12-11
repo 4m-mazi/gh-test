@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.24](https://github.com/Mogyuchi/gh-test/compare/rust-ci-test-v2.0.23...rust-ci-test-v2.0.24) (2023-12-11)
+
+
+### Bug Fixes
+
+* Update test ([511f949](https://github.com/Mogyuchi/gh-test/commit/511f94952a3a2c4708c31d23a985b0c14f6b0a5c))
+
 ## [2.0.23](https://github.com/Mogyuchi/gh-test/compare/rust-ci-test-v2.0.22...rust-ci-test-v2.0.23) (2023-12-11)
 
 
