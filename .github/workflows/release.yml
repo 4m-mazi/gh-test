@@ -20,9 +20,9 @@ jobs:
       - uses: google-github-actions/release-please-action@a2d8d683f209466ee8c695cd994ae2cf08b1642d # v4.0.1
         id: release
         with:
-          release-type: rust
+          config-file: .github/.config/release-please-config.json
 
-  build:
+  docker-publish:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
@@ -33,7 +33,7 @@ jobs:
       tag-name: ${{ needs.release-please.outputs.tag_name }}
 
   post-release:
-    needs: [build]
+    needs: [docker-publish]
     permissions:
       pull-requests: write
     env:
@@ -50,7 +50,7 @@ jobs:
           echo "pr_number=$(printf '${{ github.event.head_commit.message }}' | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')" >> "$GITHUB_OUTPUT"
       - name: Add comment to PR
         run: |
-          printf ':robot: Successfully published to ${{ needs.build.outputs.image_url }} :truck:\n```\n${{ join(needs.build.outputs.image_tags, '\n') }}\n```' \
+          printf ':robot: Successfully published to ${{ needs.docker-publish.outputs.image_url }} :truck:\n```\n${{ join(needs.build.outputs.image_tags, '\n') }}\n```' \
           | gh pr comment ${{ steps.pr-number.outputs.pr_number }} --body-file=-
       - name: Change labels on PR
         run: |
