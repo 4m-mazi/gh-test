@@ -21,7 +21,7 @@ jobs:
         id: release
         with:
           config-file: .github/.config/release-please-config.json
-          release-type: rust
+          manifest-file: .release-please-manifest.json
 
   docker-publish:
     needs: release-please
