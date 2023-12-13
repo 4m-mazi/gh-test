@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.30](https://github.com/Mogyuchi/gh-test/compare/v2.0.29...v2.0.30) (2023-12-13)
+
+
+### Dependencies
+
+* Update test ([#505](https://github.com/Mogyuchi/gh-test/issues/505)) ([afb6821](https://github.com/Mogyuchi/gh-test/commit/afb6821773129225648ef2ea6be97af04069fa63))
+
+
+### Miscellaneous Chores
+
+* release-please config ([2327a47](https://github.com/Mogyuchi/gh-test/commit/2327a47c10ba0a1fbc525b214f887da8a857b3be))
+
+
+### Continuous Integration
+
+* **deps:** update taiki-e/install-action action to v2.22.1 ([#506](https://github.com/Mogyuchi/gh-test/issues/506)) ([882f04e](https://github.com/Mogyuchi/gh-test/commit/882f04ec90682f80d9107bf0cdaebeddf0cd0977))
+
 ## [2.0.29](https://github.com/Mogyuchi/gh-test/compare/v2.0.28...v2.0.29) (2023-12-12)
 
 
