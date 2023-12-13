@@ -59,7 +59,7 @@
     {
       "type": "ci",
       "section": "Continuous Integration",
-      "hidden": false
+      "hidden": true
     }
   ],
   "packages": {
