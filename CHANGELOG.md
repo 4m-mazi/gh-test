@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://github.com/Mogyuchi/gh-test/compare/v2.0.30...v3.0.0) (2023-12-17)
+
+
+### meta
+
+* correct release ([06d62b6](https://github.com/Mogyuchi/gh-test/commit/06d62b6abf7052a476d2e770ac44502c43c062d1))
+
+
+### Miscellaneous Chores
+
+* Update Dockerfile ([f6d46a5](https://github.com/Mogyuchi/gh-test/commit/f6d46a598b8161d1ab2b464cdfb50431654221bd))
+* Update test ([78b6b65](https://github.com/Mogyuchi/gh-test/commit/78b6b65d0faf9b0fa19bda13f9232ccd6ff1a7c4))
+
 ## [2.0.30](https://github.com/Mogyuchi/gh-test/compare/v2.0.29...v2.0.30) (2023-12-13)
 
 
