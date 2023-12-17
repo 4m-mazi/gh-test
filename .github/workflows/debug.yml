@@ -115,3 +115,9 @@ jobs:
           \`\`\`env
           `env`
           \`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - run: |
+          echo "
+          startsWith(github.ref, 'refs/tags/v0.'): ${{ startsWith(github.ref, 'refs/tags/v0.') }}
+          startsWith(inputs.tag-name, 'v0.'): ${{ startsWith(inputs.tag-name, 'v0.') }}
+          " >> $GITHUB_STEP_SUMMARY
