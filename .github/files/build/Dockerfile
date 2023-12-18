@@ -12,6 +12,6 @@ RUN --mount=type=bind,source=artifact,target=artifact \
       cp artifact/aarch64-unknown-linux-musl/binary .\
     ;fi
 
-FROM scratch
+FROM --platform=$BUILDPLATFORM scratch as runner
 COPY --from=env --chmod=755 binary .
 ENTRYPOINT ["./binary"]
