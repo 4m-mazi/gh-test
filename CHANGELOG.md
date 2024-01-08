@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.2](https://github.com/Mogyuchi/gh-test/compare/v3.0.1...v3.0.2) (2024-01-08)
+
+
+### Miscellaneous Chores
+
+* **deps:** pin busybox docker tag to e8d8e78 ([#520](https://github.com/Mogyuchi/gh-test/issues/520)) ([20ca10b](https://github.com/Mogyuchi/gh-test/commit/20ca10b4cd500bd0f64ff1b6f0909770e7072642))
+* **deps:** update busybox:1.36.1-uclibc docker digest to 27441c6 ([#526](https://github.com/Mogyuchi/gh-test/issues/526)) ([08cfa56](https://github.com/Mogyuchi/gh-test/commit/08cfa56584284a99affc3333aff3b462a1b88f97))
+* **deps:** update busybox:1.36.1-uclibc docker digest to c616bde ([#524](https://github.com/Mogyuchi/gh-test/issues/524)) ([92dd7a0](https://github.com/Mogyuchi/gh-test/commit/92dd7a0953a9bcf6009e872e0d8f7c392d5a0406))
+
 ## [3.0.1](https://github.com/Mogyuchi/gh-test/compare/v3.0.0...v3.0.1) (2023-12-18)
 
 
