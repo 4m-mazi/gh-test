@@ -62,6 +62,7 @@
       "hidden": true
     }
   ],
+  "draft": true,
   "packages": {
     ".": {
       "changelog-path": "CHANGELOG.md",
