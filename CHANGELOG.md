@@ -1,5 +1,49 @@
 # Changelog
 
+## [3.0.0](https://github.com/Mogyuchi/gh-test/compare/v3.1.4...v3.0.0) (2024-01-09)
+
+
+### meta
+
+* correct release ([06d62b6](https://github.com/Mogyuchi/gh-test/commit/06d62b6abf7052a476d2e770ac44502c43c062d1))
+
+
+### Features
+
+* Update test ([51277a5](https://github.com/Mogyuchi/gh-test/commit/51277a50d467f8c74c53be0b6dc61b4fb28693e0))
+
+
+### Bug Fixes
+
+* Update test ([5cf8e9d](https://github.com/Mogyuchi/gh-test/commit/5cf8e9d1360ce285ca27c11d76e3a1b11d79dd1b))
+* Update test ([eb9a031](https://github.com/Mogyuchi/gh-test/commit/eb9a0313a5541cff80b813449448ce3b5081383b))
+* Update test ([9196c2f](https://github.com/Mogyuchi/gh-test/commit/9196c2fbd5832a3cf8998bd82998a067c53cfab0))
+* Update test ([62dfd46](https://github.com/Mogyuchi/gh-test/commit/62dfd46f6f8897075a0a4f32f13cff8128d7c261))
+* Update test ([a40770c](https://github.com/Mogyuchi/gh-test/commit/a40770cc0f47f57b31adde0740520b85a42d9f57))
+* Update test ([ce97757](https://github.com/Mogyuchi/gh-test/commit/ce97757a6de383079f7db93beaf3811b7f5f104f))
+* Update test ([a0b71b1](https://github.com/Mogyuchi/gh-test/commit/a0b71b1c096c5adea410aaaf65cf62cb21c45005))
+* Update test ([960513f](https://github.com/Mogyuchi/gh-test/commit/960513f5868ea28052308e1a6fc399d7670d92b0))
+* Update test ([cdb7829](https://github.com/Mogyuchi/gh-test/commit/cdb7829d35e9322547e2d2578e120a18b039213e))
+* Update test ([03035bc](https://github.com/Mogyuchi/gh-test/commit/03035bc6d617895ab171779de76f5ceea9919dbd))
+* Update test ([511f949](https://github.com/Mogyuchi/gh-test/commit/511f94952a3a2c4708c31d23a985b0c14f6b0a5c))
+* Update test ([d30cd7f](https://github.com/Mogyuchi/gh-test/commit/d30cd7f729f8456f73dc7afe23444cd6a4974c31))
+
+
+### Dependencies
+
+* Update test ([873f539](https://github.com/Mogyuchi/gh-test/commit/873f539249741928fa8e6adf9bcdb11c7b1a9416))
+* Update test ([#505](https://github.com/Mogyuchi/gh-test/issues/505)) ([afb6821](https://github.com/Mogyuchi/gh-test/commit/afb6821773129225648ef2ea6be97af04069fa63))
+
+
+### Miscellaneous Chores
+
+* **deps:** pin busybox docker tag to e8d8e78 ([#520](https://github.com/Mogyuchi/gh-test/issues/520)) ([20ca10b](https://github.com/Mogyuchi/gh-test/commit/20ca10b4cd500bd0f64ff1b6f0909770e7072642))
+* **deps:** update busybox:1.36.1-uclibc docker digest to 27441c6 ([#526](https://github.com/Mogyuchi/gh-test/issues/526)) ([08cfa56](https://github.com/Mogyuchi/gh-test/commit/08cfa56584284a99affc3333aff3b462a1b88f97))
+* **deps:** update busybox:1.36.1-uclibc docker digest to c616bde ([#524](https://github.com/Mogyuchi/gh-test/issues/524)) ([92dd7a0](https://github.com/Mogyuchi/gh-test/commit/92dd7a0953a9bcf6009e872e0d8f7c392d5a0406))
+* release-please config ([2327a47](https://github.com/Mogyuchi/gh-test/commit/2327a47c10ba0a1fbc525b214f887da8a857b3be))
+* Update Dockerfile ([f6d46a5](https://github.com/Mogyuchi/gh-test/commit/f6d46a598b8161d1ab2b464cdfb50431654221bd))
+* Update test ([78b6b65](https://github.com/Mogyuchi/gh-test/commit/78b6b65d0faf9b0fa19bda13f9232ccd6ff1a7c4))
+
 ## [3.1.4](https://github.com/Mogyuchi/gh-test/compare/v3.1.3...v3.1.4) (2024-01-09)
 
 
