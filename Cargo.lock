@@ -4,4 +4,4 @@ version = 3
 
 [[package]]
 name = "rust-ci-test"
-version = "3.1.2"
+version = "3.1.3"
