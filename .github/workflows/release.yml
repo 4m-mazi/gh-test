@@ -37,6 +37,7 @@ jobs:
     needs: [release-please, docker-publish]
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
+      contents: write
       pull-requests: write
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
