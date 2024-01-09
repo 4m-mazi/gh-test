@@ -34,7 +34,8 @@ jobs:
       tag-name: ${{ needs.release-please.outputs.tag_name }}
 
   post-release:
-    needs: [docker-publish]
+    needs: [release-please, docker-publish]
+    if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       pull-requests: write
     env:
@@ -42,6 +43,7 @@ jobs:
       GH_REPO: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
+      - run: gh release edit ${{ needs.release-please.outputs.tag_name }} --draft=false
       - name: Create published label
         run: |
           gh label create 'autorelease: published' --color=EDEDED || :
