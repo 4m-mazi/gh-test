@@ -1,14 +1,26 @@
 name: Fallback pr create
 on:
   pull_request:
-  issue_comment:
   pull_request_review:
   pull_request_review_comment:
 
 jobs:
-  approved:
-    name: '!!!'
-    if:  ${{ !github.event.issue || github.event.issue.pull_request }}
+  get-statusCheckRollup:
+    runs-on: ubuntu-22.04
+    outputs:
+      status: ${{ steps.step1.outputs.status }}
+    steps:
+      - id: set-statusCheckRollup
+        run: echo "status=${{ toJSON(${gh pr view 215 --json statusCheckRollup -q '.statusCheckRollup[].name'}) }}" >> "$GITHUB_OUTPUT"
+  pr:
+    name: 'pr'
+    needs: get-statusCheckRollup
     runs-on: ubuntu-22.04
     steps:
-      - run: "true"
+      - name: check_do-not-merge
+        run: |
+          echo "${{ needs.get-statusCheckRollup }}"
+          if ${{ !contains(fromJSON(needs.get-statusCheckRollup), '') }}; then
+          true
+      - name: do-not-merge
+        uses: ./github/workflows/do-not-merge.yml
