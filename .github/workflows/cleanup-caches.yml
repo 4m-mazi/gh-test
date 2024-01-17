@@ -4,6 +4,8 @@ on:
     types:
       - closed
   workflow_dispatch:
+  push:
+    branches: "**"
 
 jobs:
   cleanup:
@@ -13,4 +15,4 @@ jobs:
       actions: write
     steps:
       - name: Cleanup
-        uses: 4m-mazi/souji-action@436bf232be3086769d91561af0aafad09eca8de5
+        uses: 4m-mazi/souji-action@e7e91fdc79120b19d7ed8e5ad7f37197ec86c35e
