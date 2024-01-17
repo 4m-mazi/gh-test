@@ -1,1 +1,3 @@
 # rust-ci-test
+
+test
