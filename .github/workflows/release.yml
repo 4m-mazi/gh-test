@@ -72,6 +72,8 @@ jobs:
       # You have to check out your repo first.
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
+          sparse-checkout: ''
+          sparse-checkout-cone-mode: false
           fetch-tags: true
       - uses: fischerscode/tagger@5ca3fa63ce3003fb7183cae547644b29f3b632be # v0.2.0
         with:
