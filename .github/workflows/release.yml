@@ -62,3 +62,15 @@ jobs:
           gh pr edit ${{ steps.pr-number.outputs.pr_number }} \
           --remove-label='autorelease: tagged' \
           --add-label='autorelease: published'
+  move-tags:
+    needs: [release-please, post-release]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions: {}
+    runs-on: ubuntu-latest
+    steps:
+      # You have to check out your repo first.
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: fischerscode/tagger@v0.2.0
+        with:
+          prefix: v
+          tag: ${{ needs.release-please.outputs.tag_name }}
