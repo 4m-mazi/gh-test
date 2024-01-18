@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.1](https://github.com/Mogyuchi/gh-test/compare/v3.2.0...v3.2.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* Update test ([b888933](https://github.com/Mogyuchi/gh-test/commit/b88893339ed69dc0a74bbe777bb09acaddcc1567))
+
 ## [3.2.0](https://github.com/Mogyuchi/gh-test/compare/v3.1.11...v3.2.0) (2024-01-18)
 
 
