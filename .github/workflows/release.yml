@@ -74,4 +74,4 @@ jobs:
       - uses: fischerscode/tagger@5ca3fa63ce3003fb7183cae547644b29f3b632be # v0.2.0
         with:
           prefix: v
-          tag: ${{ needs.release-please.outputs.tag_name }}
+          tag: refs/tags/${{ needs.release-please.outputs.tag_name }}
