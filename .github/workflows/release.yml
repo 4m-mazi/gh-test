@@ -65,7 +65,8 @@ jobs:
   move-tags:
     needs: [release-please, post-release]
     if: ${{ needs.release-please.outputs.release_created }}
-    permissions: {}
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       # You have to check out your repo first.
