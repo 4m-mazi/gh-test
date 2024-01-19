@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.6.0@sha256:ac85f380a63b13dfcefa89046420e1781752bab202122f8f50032edf31be0021
-FROM --platform=$BUILDPLATFORM busybox:1.36.1-uclibc@sha256:41edc0b6679bf1abc3acd1c31107326f91bc944d737e574947247ccac73ecc7c AS env
+FROM --platform=$BUILDPLATFORM busybox:1.36.1-uclibc@sha256:cc71f45a5a48738c4c295314b2bc9bcc18eb0c33e7bb127c3735b751b724141b AS env
 ARG TARGETPLATFORM
 RUN --mount=type=bind,source=artifact,target=artifact \
     if [ "$TARGETPLATFORM" = 'darwin/amd64' ]; then\
