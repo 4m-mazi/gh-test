@@ -3,6 +3,7 @@ on:
   pull_request:
     types:
       - closed
+  delete:
   workflow_dispatch:
 
 jobs:
