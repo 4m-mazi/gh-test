@@ -1,17 +1,33 @@
-name: souji
+name: cleanup caches by a branch
 on:
-  pull_request_target:
+  pull_request:
     types:
       - closed
-  delete:
-  workflow_dispatch:
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
-    permissions:
-      # https://docs.github.com/en/rest/actions/cache?apiVersion=2022-11-28#delete-a-github-actions-cache-for-a-repository-using-a-cache-id
-      actions: write
     steps:
+      - name: debug
+        run: echo ${{ github.repository }}
       - name: Cleanup
-        uses: 4m-mazi/souji-action@cdef7f507c4bed326aec95989999988f8a10185b # v1.0.0
+        run: |
+          gh extension install actions/gh-actions-cache
+          
+          echo "Fetching list of cache key"
+          cacheKeysForPR=$(gh actions-cache list -R $REPO -B $BRANCH -L 100 | cut -f 1 )
+
+          echo "$cacheKeysForPR"
+
+          ## Setting this to not fail the workflow while deleting cache keys. 
+          set +e
+          echo "Deleting caches..."
+          for cacheKey in $cacheKeysForPR
+          do
+              gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
+          done
+          echo "Done"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: refs/pull/${{ github.event.pull_request.number }}/merge
