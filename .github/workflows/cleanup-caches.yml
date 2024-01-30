@@ -13,6 +13,6 @@ jobs:
       actions: write
     steps:
       - name: Cleanup
-        uses: 4m-mazi/souji-action@improve-logging
-
-
+        uses: 4m-mazi/souji-action@dry-run-option
+        with:
+          dry-run: true
