@@ -15,4 +15,4 @@ jobs:
       - name: Cleanup
         uses: 4m-mazi/souji-action@dry-run-option
         with:
-          dry-run: true
+          dry-run: false
