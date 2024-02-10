@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.4.1](https://github.com/Mogyuchi/gh-test/compare/v3.4.0...v3.4.1) (2024-02-10)
+
+
+### Bug Fixes
+
+* Update main.rs ([dd09e02](https://github.com/Mogyuchi/gh-test/commit/dd09e02fff7c4ceda156e3e6b258c3aacf69dd2d))
+* Update test ([#633](https://github.com/Mogyuchi/gh-test/issues/633)) ([8ec149c](https://github.com/Mogyuchi/gh-test/commit/8ec149ce292796d5217fecef452ab075795eae2d))
+* Update test ([#634](https://github.com/Mogyuchi/gh-test/issues/634)) ([2532495](https://github.com/Mogyuchi/gh-test/commit/25324959c23ff551c6e0afd3ee0087f50d5675bc))
+* Update test ([#635](https://github.com/Mogyuchi/gh-test/issues/635)) ([e090fa3](https://github.com/Mogyuchi/gh-test/commit/e090fa3c4b152a7ceb35a27ebc6ee7553c05cfaa))
+* Update test ([#636](https://github.com/Mogyuchi/gh-test/issues/636)) ([f1e9825](https://github.com/Mogyuchi/gh-test/commit/f1e9825216ca940e676590b165b03cb3652e5fc8))
+* Update test ([#637](https://github.com/Mogyuchi/gh-test/issues/637)) ([a0d8e8c](https://github.com/Mogyuchi/gh-test/commit/a0d8e8c1fe048d1521014bb4b06bce8804f2b3c5))
+* Update test ([#638](https://github.com/Mogyuchi/gh-test/issues/638)) ([651fb89](https://github.com/Mogyuchi/gh-test/commit/651fb89168fcd27e88e4518b92de54b016665478))
+* Update test ([#639](https://github.com/Mogyuchi/gh-test/issues/639)) ([435d2a3](https://github.com/Mogyuchi/gh-test/commit/435d2a38d601edb884ee08327930ea7bfeb815e3))
+* Update test ([#640](https://github.com/Mogyuchi/gh-test/issues/640)) ([c49a505](https://github.com/Mogyuchi/gh-test/commit/c49a505d2093f7ac88edd408ce47b8bc87baf63d))
+
 ## [3.4.0](https://github.com/Mogyuchi/gh-test/compare/v3.3.0...v3.4.0) (2024-02-06)
 
 
