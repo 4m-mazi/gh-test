@@ -34,29 +34,42 @@ jobs:
     with:
       tag-name: ${{ needs.release-please.outputs.tag_name }}
 
-  post-release:
+  publish-release:
     needs: [release-please, docker-publish]
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       contents: write
-      pull-requests: write
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GH_REPO: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
       - run: gh release edit ${{ needs.release-please.outputs.tag_name }} --draft=false
-      - name: Create published label
-        run: |
-          gh label create 'autorelease: published' --color=EDEDED || :
+
+  get-pr-number:
+    needs: [release-please]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions: {}
+    runs-on: ubuntu-latest
+    outputs:
+      pr_number: ${{ steps.pr-number.outputs.pr_number }}
+    steps:
       - name: Get PR number
         id: pr-number
         run: |
           echo "pr_number=$(printf '${{ github.event.head_commit.message }}' | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')" >> "$GITHUB_OUTPUT"
+
+  update-release-comment:
+    needs: [release-please, publish-release, get-pr-number]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
       - uses: peter-evans/find-comment@d5fe37641ad8451bdd80312415672ba26c86575e # v3.0.0
         id: fc
         with:
-          issue-number: ${{ steps.pr-number.outputs.pr_number }}
+          issue-number: ${{ needs.get-pr-number.outputs.pr_number }}
           comment-author: "github-actions[bot]"
           body-includes: ":robot: Release is"
       - if: steps.fc.conclusion == 'success'
@@ -64,21 +77,47 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           comment-id: ${{ steps.fc.outputs.comment-id }}
-          issue-number: ${{ steps.pr-number.outputs.pr_number }}
+          issue-number: ${{ needs.get-pr-number.outputs.pr_number }}
           body: |
             :robot: Release is at ${{ github.event.repository.html_url }}/releases/tag/${{ needs.release-please.outputs.tag_name }} :sunflower:
           edit-mode: replace
+
+  add-comment:
+    needs: [release-please, docker-publish, get-pr-number]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Add comment to PR
         run: |
           printf ':robot: Successfully published to ${{ needs.docker-publish.outputs.image_url }} :truck:\n```\n${{ join(needs.docker-publish.outputs.image_tags, '\n') }}\n```' \
-          | gh pr comment ${{ steps.pr-number.outputs.pr_number }} --body-file=-
+          | gh pr comment ${{ needs.get-pr-number.outputs.pr_number }} --body-file=-
+
+  label-published:
+    needs: [release-please, docker-publish, get-pr-number]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create published label
+        run: |
+          gh label create 'autorelease: published' --color=EDEDED || true
       - name: Change labels on PR
         run: |
-          gh pr edit ${{ steps.pr-number.outputs.pr_number }} \
+          gh pr edit ${{ needs.get-pr-number.outputs.pr_number }} \
           --remove-label='autorelease: tagged' \
           --add-label='autorelease: published'
+
   move-tags:
-    needs: [release-please, post-release]
+    needs: [release-please, publish-release]
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       contents: write
