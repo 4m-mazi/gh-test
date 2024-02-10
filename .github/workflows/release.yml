@@ -82,7 +82,7 @@ jobs:
             :robot: Release is at ${{ github.event.repository.html_url }}/releases/tag/${{ needs.release-please.outputs.tag_name }} :sunflower:
           edit-mode: replace
 
-  add-comment:
+  add-docker-comment:
     needs: [release-please, docker-publish, get-pr-number]
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
@@ -98,7 +98,7 @@ jobs:
           | gh pr comment ${{ needs.get-pr-number.outputs.pr_number }} --body-file=-
 
   label-published:
-    needs: [release-please, docker-publish, get-pr-number]
+    needs: [release-please, publish-release, get-pr-number]
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       pull-requests: write
