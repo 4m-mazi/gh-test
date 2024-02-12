@@ -84,7 +84,7 @@ jobs:
     steps:
       - run: |
           echo "github.ref_name
-          \`\`\`json
+          \`\`\`
           ${{ github.ref_name }}
           \`\`\`" >> $GITHUB_STEP_SUMMARY
       - run: echo ${{ github.event.commits[0].url }} >> $GITHUB_STEP_SUMMARY
