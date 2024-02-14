@@ -65,7 +65,7 @@ on:
   registry_package:
   release:
   repository_dispatch:
-# schedule:
+  # schedule:
   status:
   watch:
   workflow_call:
@@ -83,10 +83,7 @@ jobs:
         shell: bash -xe {0}
     steps:
       - run: |
-          echo "github.ref_name
-          \`\`\`
-          ${{ github.ref_name }}
-          \`\`\`" >> $GITHUB_STEP_SUMMARY
+          rustup toolchain install stable
       - run: echo ${{ github.event.commits[0].url }} >> $GITHUB_STEP_SUMMARY
       - run: |
           echo "GITHUB_EVENT_PATH
