@@ -1,14 +1,20 @@
 name: clippy-action
 on: [pull_request]
+env:
+  RUSTFLAGS: "-Dwarnings"
 jobs:
   clippy:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
           components: clippy
-      - uses: giraffate/clippy-action@v1.0.1
+      - uses: giraffate/clippy-action@main
         with:
           reporter: "github-pr-review"
+          level: "info"
+          github_token: ${{ github.token }}
