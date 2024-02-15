@@ -7,5 +7,4 @@ fn main() {
     } else if cfg!(target_os = "windows") {
         println!("You are running windows!");
     }
-    return;
 }
