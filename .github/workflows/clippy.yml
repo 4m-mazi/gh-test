@@ -1,20 +1,23 @@
-name: clippy-action
-on: [pull_request]
+name: Clippy check
+
+on:
+  push:
+    branches: ["**"]
+
 env:
   RUSTFLAGS: "-Dwarnings"
+
+permissions: {}
+
 jobs:
-  clippy:
+  clippy_check:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@be73d7920c329f220ce78e0234b8f96b7ae60248 # master
         with:
           toolchain: stable
           components: clippy
-      - uses: giraffate/clippy-action@main
-        with:
-          reporter: "github-pr-review"
-          level: "info"
-          github_token: ${{ github.token }}
+      - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features
