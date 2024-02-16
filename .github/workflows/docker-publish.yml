@@ -63,6 +63,8 @@ jobs:
         with:
           toolchain: stable
           target: ${{ matrix.target }}
+      - id: rustc
+        uses: ./.github/actions/rust-info
       - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
         with:
           key: ${{ matrix.target }}
@@ -96,7 +98,7 @@ jobs:
     needs: build
     permissions:
       packages: write
-    runs-on: 'ubuntu-latest'
+    runs-on: "ubuntu-latest"
     outputs:
       image_tags: ${{ steps.meta.outputs.tags }}
     env:

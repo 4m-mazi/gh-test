@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+
+name: rust info
+description: get rust info
+
+outputs:
+  package-names:
+    description: package name "foo"
+    value: ${{steps.cargo.outputs.package-names}}
+  host:
+    description: host "x86_64-unknown-linux-gnu"
+    value: ${{steps.rustc.outputs.host}}
+
+runs:
+  using: composite
+  steps:
+    - id: cargo
+      run: |
+        echo "package-names=$(cargo metadata --no-deps | jq --compact-output '.packages | map(.name)')" >> $GITHUB_OUTPUT
+      shell: bash
+    - id: rustc
+      run: |
+        echo "host=$(rustc -vV | awk '/host/ { print $2 }')" >> $GITHUB_OUTPUT
+      shell: bash
