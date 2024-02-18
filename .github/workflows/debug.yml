@@ -65,12 +65,13 @@ on:
   registry_package:
   release:
   repository_dispatch:
-# schedule:
+  # schedule:
   status:
   watch:
   workflow_call:
   workflow_dispatch:
-# workflow_run:
+  workflow_run:
+    workflows: ["**"]
 
 permissions: {}
 
