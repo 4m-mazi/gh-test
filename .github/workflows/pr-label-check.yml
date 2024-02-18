@@ -1,18 +1,21 @@
-name: DO NOT MERGE
+name: PR label check
 on:
   pull_request:
     types:
-      - opened
+      - opened # for "Require status checks to pass"
+      - synchronize # ditto
       - labeled
       - unlabeled
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   pull-requests: read
 
 jobs:
   do-not-merge:
-    name: '!!!'
-    if: github.event.label.name == 'do NOT merge!!!'
     runs-on: ubuntu-22.04
     steps:
       - run: |
