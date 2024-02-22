@@ -10,7 +10,7 @@ on:
 
 jobs:
   release-please:
-    if: github.repository_owner == 'Mogyuchi'
+    if: github.repository.fork == false
     permissions:
       contents: write
       pull-requests: write
