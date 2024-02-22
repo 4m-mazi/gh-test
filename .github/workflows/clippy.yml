@@ -1,0 +1,27 @@
+name: Clippy check
+
+on:
+  push:
+    branches: ["**"]
+
+env:
+  RUSTFLAGS: "-Dwarnings"
+
+permissions: {}
+
+jobs:
+  clippy_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: dtolnay/rust-toolchain@be73d7920c329f220ce78e0234b8f96b7ae60248 # master
+        with:
+          toolchain: stable
+          components: clippy
+      - id: rustc
+        uses: ./.github/actions/rust-info
+      - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
+        with:
+          key: ${{ steps.rustc.outputs.host }}
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features
