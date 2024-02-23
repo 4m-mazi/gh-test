@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.4.7](https://github.com/4m-mazi/gh-test/compare/v3.4.6...v3.4.7) (2024-02-23)
+
+
+### Bug Fixes
+
+* Update test ([812b48c](https://github.com/4m-mazi/gh-test/commit/812b48cfeae2454f7e2446156b0045e07b6b93d9))
+* Update test ([#666](https://github.com/4m-mazi/gh-test/issues/666)) ([895a582](https://github.com/4m-mazi/gh-test/commit/895a582542dd32df7b4d51f4e33afdc0322f9de8))
+* Update test ([#668](https://github.com/4m-mazi/gh-test/issues/668)) ([a0d3d93](https://github.com/4m-mazi/gh-test/commit/a0d3d93d242345a2354597fd8ff920e717ad36ef))
+* Update test ([#670](https://github.com/4m-mazi/gh-test/issues/670)) ([06007d5](https://github.com/4m-mazi/gh-test/commit/06007d574372c90ac9ecd716881c8bf29640e28e)), closes [#669](https://github.com/4m-mazi/gh-test/issues/669)
+* Update test ([#672](https://github.com/4m-mazi/gh-test/issues/672)) ([e6516b6](https://github.com/4m-mazi/gh-test/commit/e6516b64e2bd84e819be2fa0736f14394221fbcb))
+
+
+### Documentation
+
+* version ([a87b862](https://github.com/4m-mazi/gh-test/commit/a87b862735971a53c5ade87b397e1e58edb4da24))
+
+
+### Miscellaneous Chores
+
+* Create rust-toolchain.toml ([a533e7d](https://github.com/4m-mazi/gh-test/commit/a533e7dec61b2d57e6968b1c19c3749c7d6b99bf))
+* Update rust-toolchain.toml ([f877bc7](https://github.com/4m-mazi/gh-test/commit/f877bc799307e2c6023b646ed2bfc6a5b481a144))
+
 ## [3.4.6](https://github.com/Mogyuchi/gh-test/compare/v3.4.5...v3.4.6) (2024-02-12)
 
 
