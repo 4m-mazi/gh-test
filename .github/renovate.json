@@ -12,7 +12,6 @@
     ":prHourlyLimitNone",
     ":rebaseStalePrs",
     ":semanticCommits",
-    "helpers:pinGitHubActionDigestsToSemver",
     "regexManagers:githubActionsVersions",
     "security:openssf-scorecard"
   ],
