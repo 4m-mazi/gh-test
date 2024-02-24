@@ -12,11 +12,14 @@
     ":prHourlyLimitNone",
     ":rebaseStalePrs",
     ":semanticCommits",
-    "regexManagers:githubActionsVersions"
+    "helpers:pinGitHubActionDigestsToSemver",
+    "regexManagers:githubActionsVersions",
+    "security:openssf-scorecard"
   ],
   "automergeStrategy": "squash",
   "assignAutomerge": true,
   "assigneesFromCodeOwners": true,
+  "commitMessageExtra": "from {{#if currentValue}}{{{currentValue}}}{{else}}{{{currentDigestShort}}}{{/if}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}",
   "dependencyDashboardAutoclose": true,
   "prConcurrentLimit": 3,
   "reviewersFromCodeOwners": true,
