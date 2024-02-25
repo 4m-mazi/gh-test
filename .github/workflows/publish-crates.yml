@@ -1,4 +1,4 @@
-name: publish crates
+name: "publish crates"
 on:
   push:
     branches: ["**"]
@@ -9,6 +9,7 @@ permissions: {}
 
 jobs:
   set-up:
+    if: ${{ !( github.workflow == 'publish crates' && startsWith(github.event.head_commit.message, 'release:') && github.event.head_commit.author.name == 'github-actions[bot]' ) }}
     runs-on: ubuntu-latest
     permissions: {}
     outputs:
@@ -19,9 +20,8 @@ jobs:
           DRY_RUN: ${{ github.workflow == 'publish crates' }}
         run: echo "dry-run=$DRY_RUN" >> $GITHUB_OUTPUT
   publish:
-    if: ${{ !( github.workflow == 'crates publish' && startsWith(github.event.head_commit.message, 'release:') && github.event.head_commit.author.name == 'github-actions[bot]' ) }}
     needs: ["set-up"]
-    name: "${{ needs.set-up.outputs.dry-run && 'DRY-RUN' || '' }} publish"
+    name: "${{ fromJson(needs.set-up.outputs.dry-run) && 'DRY-RUN' || '' }} publish"
     runs-on: ubuntu-latest
     permissions: {}
     steps:
@@ -32,5 +32,5 @@ jobs:
       - uses: katyo/publish-crates@33e1d18666cdfacf9f6c3547194d2c1d39cbf849 # v2
         with:
           registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-          dry-run: ${{ true || needs.set-up.outputs.dry-run }}
+          dry-run: ${{ true || fromJson(needs.set-up.outputs.dry-run) }}
           ignore-unpublished-changes: true
