@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.13](https://github.com/4m-mazi/gh-test/compare/v3.4.12...v3.4.13) (2024-02-27)
+
+
+### Bug Fixes
+
+* Update test ([8696049](https://github.com/4m-mazi/gh-test/commit/86960497fd66868183f116addea24a8d4bf4a780))
+
 ## [3.4.12](https://github.com/4m-mazi/gh-test/compare/v3.4.11...v3.4.12) (2024-02-27)
 
 
