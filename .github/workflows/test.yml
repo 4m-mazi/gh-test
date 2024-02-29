@@ -20,6 +20,11 @@ jobs:
     steps:
       - run: |
           echo "test2: ${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}" >> $GITHUB_STEP_SUMMARY
+  test3:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "test3: ${{ false == null }}" >> $GITHUB_STEP_SUMMARY
 
   call-test:
     uses: ./.github/workflows/debug.yml
