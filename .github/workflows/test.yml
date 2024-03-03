@@ -7,7 +7,7 @@ permissions: {}
 
 jobs:
   test1:
-    if: ${{ startsWith(github.event.head_commit.message, 'release:')}}
+    if: true # test
     runs-on: ubuntu-latest
     steps:
       - run: |
