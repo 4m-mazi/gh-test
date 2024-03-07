@@ -21,7 +21,7 @@ env:
   BINARY_NAME: ${{ github.event.repository.name }}
 
   # renovate: datasource=github-releases depName=docker/buildx
-  BUILDX_VERSION: v0.12.1
+  BUILDX_VERSION: v0.13.0
 
 jobs:
   build:
