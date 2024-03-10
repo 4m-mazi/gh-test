@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.4.16](https://github.com/4m-mazi/gh-test/compare/v3.4.15...v3.4.16) (2024-03-10)
+
+
+### Bug Fixes
+
+* Update test ([6cd7c10](https://github.com/4m-mazi/gh-test/commit/6cd7c106edc42d2e4434d07f75c6e626226d5430))
+
+
+### Miscellaneous Chores
+
+* **deps:** update busybox:1.36.1-uclibc docker digest to 97e3873 ([#699](https://github.com/4m-mazi/gh-test/issues/699)) ([c1ff49d](https://github.com/4m-mazi/gh-test/commit/c1ff49de1721fd64e7c8abd2e8358c50fa34e91d))
+* **deps:** update busybox:1.36.1-uclibc docker digest to f7ca678 ([#694](https://github.com/4m-mazi/gh-test/issues/694)) ([4ef8eb1](https://github.com/4m-mazi/gh-test/commit/4ef8eb17ebf45b2b47d887d6bf09cf2e6c8fc7d0))
+* **deps:** update docker/dockerfile docker tag to v1.7.0 ([#695](https://github.com/4m-mazi/gh-test/issues/695)) ([e06e2de](https://github.com/4m-mazi/gh-test/commit/e06e2de995ad5aa1ddbda4a8aa446900ed7f4471))
+
 ## [3.4.15](https://github.com/4m-mazi/gh-test/compare/v3.4.14...v3.4.15) (2024-03-03)
 
 
