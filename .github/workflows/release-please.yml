@@ -34,7 +34,7 @@ jobs:
     permissions: {}
     uses: ./.github/workflows/publish-crates.yml
     with:
-      dry-run: true
+      dry-run: false
 
   docker-publish:
     needs: release-please
