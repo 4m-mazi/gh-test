@@ -2,7 +2,7 @@
 
 <!-- x-release-please-start-version -->
 
-version: 3.4.16 foo
-https://example.com/3.4.16/bar
+version: 3.4.17 foo
+https://example.com/3.4.17/bar
 
 <!-- x-release-please-end -->
