@@ -1,8 +1,5 @@
 name: release-please
 
-env:
-  RELEASE_PLEASE_AUTHOR: github-actions[bot]
-
 on:
   push:
     branches: ["main"]
@@ -17,16 +14,16 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     outputs:
+      app-name: ${{ format('{0}[bot]', steps.generate_token.outputs.app-slug) }}
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
-      pr: ${{ steps.release.outputs.pr }}
     steps:
       - name: Generate a token
         id: generate_token
         uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1.9.0
         with:
           app-id: ${{ secrets.MAZI_RELEASE_APP_ID }}
-          private-key: ${{ secrets.MAZI_RELEASE_APP_PRIVATE_KEY }}
+          private-key: ${{ secrets.MAZI_RELEASE_APP_PRIVATE_KEY }}output
       - uses: google-github-actions/release-please-action@cc61a07e2da466bebbc19b3a7dd01d6aecb20d1e # v4.0.2
         id: release
         with:
@@ -91,7 +88,7 @@ jobs:
         id: fc
         with:
           issue-number: ${{ needs.get-pr-number.outputs.pr_number }}
-          comment-author: ${{ env.RELEASE_PLEASE_AUTHOR }}
+          comment-author: ${{ needs.release-please.outputs.app-name }}
           body-includes: ":robot: Release is at ${{ github.event.repository.html_url }}/releases/tag/untagged-"
       - if: steps.fc.conclusion == 'success'
         uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
