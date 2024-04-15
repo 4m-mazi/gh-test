@@ -15,6 +15,6 @@ jobs:
       actions: write
     steps:
       - name: Cleanup
-        uses: 4m-mazi/souji-action@merge_group-event
+        uses: 4m-mazi/souji-action@v1.2.0
         with:
-          dry-run: false
+          dry-run: true
