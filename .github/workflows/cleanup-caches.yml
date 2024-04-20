@@ -21,6 +21,6 @@ jobs:
       - name: Cleanup
         uses: 4m-mazi/souji-action@test
         with:
-          branch-names: |
+          branch-name: |
             refs/pull/713/merge
           dry-run: true
