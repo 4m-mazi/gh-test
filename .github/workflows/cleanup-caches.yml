@@ -7,7 +7,6 @@ on:
   workflow_dispatch:
     inputs:
       branchNames:
-        description: 'List of branch(ref) names with caches to be deleted'
         required: false
         type: string
 
@@ -22,8 +21,5 @@ jobs:
       - name: Cleanup
         uses: 4m-mazi/souji-action@test
         with:
-          branch-names: |
-            main
-            refs/pull/123/merge
-            refs/tags/1.0.0
+          branch-names: main refs/pull/123/merge refs/tags/1.0.0
           dry-run: true
