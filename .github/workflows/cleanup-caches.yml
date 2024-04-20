@@ -5,6 +5,10 @@ on:
       - closed
   delete:
   workflow_dispatch:
+    inputs:
+      branchName:
+        required: false
+        type: string
 
   merge_group:
 
