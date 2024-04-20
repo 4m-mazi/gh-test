@@ -21,4 +21,5 @@ jobs:
       - name: Cleanup
         uses: 4m-mazi/souji-action@test
         with:
+          branch: ${{ inputs.branchName }}
           dry-run: true
