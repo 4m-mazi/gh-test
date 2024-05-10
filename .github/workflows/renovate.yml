@@ -71,7 +71,7 @@ jobs:
           app-id: ${{ vars.MAZI_RENOVATE_APP_ID }}
           private-key: ${{ secrets.MAZI_RENOVATE_PRIVATE_KEY }}
 
-      - uses: renovatebot/github-action@2e021d24483d81e77e0e902d0809adfbfff276fc # v40.1.10
+      - uses: renovatebot/github-action@063e0c946b9c1af35ef3450efc44114925d6e8e6 # v40.1.11
         with:
           configurationFile: .github/renovate.json
           token: ${{ steps.generate_token.outputs.token }}
