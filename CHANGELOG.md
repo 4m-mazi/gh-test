@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.21](https://github.com/4m-mazi/gh-test/compare/v3.4.20...v3.4.21) (2024-05-12)
+
+
+### Miscellaneous Chores
+
+* test の更新 ([#723](https://github.com/4m-mazi/gh-test/issues/723)) ([e660e5a](https://github.com/4m-mazi/gh-test/commit/e660e5a3958a19ca369b1f26279b760b70c2551a))
+
 ## [3.4.20](https://github.com/4m-mazi/gh-test/compare/v3.4.19...v3.4.20) (2024-05-11)
 
 
