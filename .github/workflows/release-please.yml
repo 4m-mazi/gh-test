@@ -9,9 +9,7 @@ permissions: {}
 jobs:
   release-please:
     if: github.repository.fork == false
-    permissions:
-      contents: write
-      pull-requests: write
+    permissions: {}
     runs-on: ubuntu-latest
     outputs:
       app-name: ${{ format('{0}[bot]', steps.generate_token.outputs.app-slug) }}
