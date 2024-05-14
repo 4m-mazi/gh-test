@@ -16,7 +16,7 @@ jobs:
       tag_name: ${{ steps.release-please.outputs.tag_name }}
       pr: ${{ steps.release-please.outputs.pr }}
     steps:
-      - uses: google-github-actions/release-please-action@a37ac6e4f6449ce8b3f7607e4d97d0146028dc0b # v4.1.0
+      - uses: googleapis/release-please-action@a37ac6e4f6449ce8b3f7607e4d97d0146028dc0b # v4.1.0
         id: release-please
         with:
           release-type: rust
