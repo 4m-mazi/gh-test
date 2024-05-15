@@ -1,34 +1,31 @@
 name: test
 on:
-  push:
-    branches: ["**"]
-
+  workflow_dispatch:
+    inputs: # null for another event
+      skip:
+        type: choice
+        default: no
+        options:
+          - no
+          - workflow
+          - job
 permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-workflow
+  cancel-in-progress: ${{ inputs.skip != 'job' }}
 
 jobs:
   test1:
-    if: true # test
+    if: ${{ inputs.skip == 'false'}}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
-          inputs
-          ```json
-          ${{ toJSON(inputs) }}
-          ```
-          ${{ toJSON(inputs) == '{}' }}
-          EOF
+      - run: sleep 60
   test2:
-    if: ${{ !startsWith(github.event.head_commit.message, 'chore(main):\ ')}}
+    concurrency:
+      group: ${{ github.workflow }}-job
+      cancel-in-progress: true
+    if: ${{ inputs.skip != 'job'}}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "test2: ${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}" >> $GITHUB_STEP_SUMMARY
-  test3:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "test3: ${{ false == null }}" >> $GITHUB_STEP_SUMMARY
-
-  call-test:
-    uses: ./.github/workflows/debug.yml
+      - run: sleep 120
