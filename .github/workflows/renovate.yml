@@ -1,7 +1,10 @@
 name: Renovate
 on:
   push:
-    branches: ["main"]
+    branches: [
+        "main",
+        "renovate/reconfigure", # https://docs.renovatebot.com/config-validation/#validation-of-renovate-config-change-prs
+      ]
   # This lets you dispatch a renovate job with different cache options if you want to reset or disable the cache manually.
   workflow_dispatch:
     inputs:
@@ -19,7 +22,6 @@ on:
 
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
-  cache_archive: renovate_cache.tar.gz
   # This is the dir renovate provides -- if we set our own directory via cacheDir, we can run into permissions issues.
   # It is also possible to cache a higher level of the directory, but it has minimal benefit. While renovate execution
   # time gets faster, it also takes longer to upload the cache as it grows bigger.
@@ -33,22 +35,17 @@ env:
 jobs:
   renovate:
     name: Renovate
+    concurrency:
+      group: ${{ github.workflow }}
     runs-on: ubuntu-latest
     permissions:
       actions: write
     steps:
       - uses: actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b # v4.1.5
 
-      # This third party action allows you to download the cache artifact from different workflow runs
-      # Note that actions/cache doesn't work well because the cache key would need to be computed from
-      # a file within the cache, meaning there would never be any data to restore. With other keys, the
-      # cache wouldn't necessarily upload when it changes. actions/download-artifact also doesn't work
-      # because it only handles artifacts uploaded in the same run, and we want to restore from the
-      # previous successful run.
       - uses: actions/cache/restore@v4.0.2
         id: restore-cache
         if: github.event.inputs.repoCache != 'disabled'
-        continue-on-error: true
         with:
           key: ${{ env.cache_key }}
           path: ${{ env.cache_dir }}
@@ -84,9 +81,9 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: gh cache delete ${{ steps.restore-cache.outputs.cache-primary-key }}
         continue-on-error: true
+
       - uses: actions/cache/save@v4.0.2
         if: github.event.inputs.repoCache != 'disabled'
         with:
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
           path: ${{ env.cache_dir }}
-
