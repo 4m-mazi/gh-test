@@ -74,9 +74,10 @@ jobs:
           RENOVATE_AUTODISCOVER: true
           RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository }}"
 
-      - run: ls $cache_dir
+      - id: hash
+        run: echo "hash=$(find ${{ env.cache_dir }} -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum)" >> "$GITHUB_OUTPUT"
       - uses: actions/cache/save@v4.0.2
         if: github.event.inputs.repoCache != 'disabled'
         with:
-          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
+          key: ${{ steps.restore-cache.outputs.cache-primary-key }}-${{ steps.hash.outputs.hash }}
           path: ${{ env.cache_dir }}
