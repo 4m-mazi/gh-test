@@ -44,6 +44,7 @@ jobs:
       # because it only handles artifacts uploaded in the same run, and we want to restore from the
       # previous successful run.
       - uses: actions/cache/restore@v4.0.2
+        id: restore-cache
         if: github.event.inputs.repoCache != 'disabled'
         continue-on-error: true
         with:
@@ -51,7 +52,9 @@ jobs:
           path: ${{ env.cache_dir }}
 
       - run: sudo chown -R runneradmin:root /tmp/renovate/
-      
+
+      - run: ls $cache_dir
+
       - name: Generate a token
         id: generate_token
         uses: actions/create-github-app-token@a0de6af83968303c8c955486bf9739a57d23c7f1 # v1.10.0
@@ -71,16 +74,9 @@ jobs:
           RENOVATE_AUTODISCOVER: true
           RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository }}"
 
-      # Compression helps performance in the upload step!
-      - name: Compress renovate cache
-        run: |
-          ls $cache_dir
-          # The -C is important -- otherwise we end up extracting the files with
-          # their full path, ultimately leading to a nested directory situation.
-          # To solve *that*, we'd have to extract to root (/), which isn't safe.
-          tar -czvf $cache_archive -C $cache_dir .
+      - run: ls $cache_dir
       - uses: actions/cache/save@v4.0.2
         if: github.event.inputs.repoCache != 'disabled'
         with:
-          key: ${{ env.cache_key }}
+          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
           path: ${{ env.cache_dir }}
