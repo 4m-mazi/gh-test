@@ -5,7 +5,7 @@
     "config:js-app",
     ":automergeAll",
     ":automergePr",
-    ":disablePrControls",
+    // ":disablePrControls",
     ":labels(dependencies, semver:none)",
     ":maintainLockFilesWeekly",
     ":pathSemanticCommitType(.github/workflows/**, ci)",
