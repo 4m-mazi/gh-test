@@ -102,10 +102,11 @@ jobs:
         env:
           # This enables the cache -- if this is set, it's not necessary to add it to renovate.json.
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
-          LOG_LEVEL: debug
           RENOVATE_AUTODISCOVER: true
           RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository }}"
+          RENOVATE_PLATFORM_COMMIT: true
           FORCE_COLOR: 3 # chalk.supportsColor
+          LOG_LEVEL: debug
 
       - name: delete old cache
         env:
