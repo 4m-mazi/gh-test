@@ -98,12 +98,14 @@ jobs:
           configurationFile: .github/renovate.json5
           token: ${{ steps.generate_token.outputs.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
+          env-regex: "^(?:RENOVATE_\\w+|LOG_LEVEL|FORCE_COLOR)$"
         env:
           # This enables the cache -- if this is set, it's not necessary to add it to renovate.json.
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
           LOG_LEVEL: debug
           RENOVATE_AUTODISCOVER: true
           RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository }}"
+          FORCE_COLOR: 3 # chalk.supportsColor
 
       - name: delete old cache
         env:
