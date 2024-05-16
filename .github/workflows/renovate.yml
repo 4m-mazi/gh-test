@@ -1,10 +1,29 @@
 name: Renovate
 on:
+  issues:
+    # Dependency Dashboard
+    types: [edited]
+  pull_request_target:
+    types:
+      # rebaseLabel
+      - labeled
+      # stopUpdatingLabel
+      - unlabeled
+      # PrControls
+      - edited
+      # ignore update
+      - closed
+      # Edited/Blocked
+      - synchronize
+    branches: ["main"]
   push:
-    branches: [
-        "main",
-        "renovate/reconfigure", # https://docs.renovatebot.com/config-validation/#validation-of-renovate-config-change-prs
-      ]
+    branches:
+      - "main"
+      # https://docs.renovatebot.com/config-validation/#validation-of-renovate-config-change-prs
+      - "renovate/reconfigure"
+  schedule:
+    # Run every 30 minutes:
+    - cron: "0,30 * * * *"
   # This lets you dispatch a renovate job with different cache options if you want to reset or disable the cache manually.
   workflow_dispatch:
     inputs:
@@ -16,9 +35,8 @@ on:
           - enabled
           - disabled
           - reset
-  schedule:
-    # Run every 30 minutes:
-    - cron: "0,30 * * * *"
+
+permissions: {}
 
 # Adding these as env variables makes it easy to re-use them in different steps and in bash.
 env:
@@ -33,8 +51,20 @@ env:
   RENOVATE_VERSION: 37.361.0
 
 jobs:
+  env:
+    runs-on: ubuntu-latest
+    outputs:
+      renovate_actor: "mazi-renovate[bot]"
+      dashboard_title: "Dependency Dashboard"
+      rebaseLabel: "rebase"
+      stopUpdatingLabel: "stop-updating"
+    steps:
+      - run: true
+
   renovate:
     name: Renovate
+    needs: [env]
+    if: ${{ github.actor != needs.env.outputs.renovate_actor && ((github.event.issue.title == needs.env.outputs.dashboard_title && github.event.issue.user.login == needs.env.outputs.renovate_actor) || (github.event.pull_request.user.login == needs.env.outputs.renovate_actor && ((github.event.action == 'labeled' && github.event.label.name == needs.env.outputs.rebaseLabel) || (github.event.action == 'unlabeled' && github.event.label.name == needs.env.outputs.stopUpdatingLabel) || contains(fromJSON('["edited", "closed", "synchronize"]'), github.event.action))) || contains(fromJSON('["push", "schedule"]'), github.event_name)) }}
     concurrency:
       group: ${{ github.workflow }}
     runs-on: ubuntu-latest
@@ -71,7 +101,7 @@ jobs:
         env:
           # This enables the cache -- if this is set, it's not necessary to add it to renovate.json.
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
-          LOG_LEVEL: ${{ vars.LOG_LEVEL }}
+          LOG_LEVEL: debug
           RENOVATE_AUTODISCOVER: true
           RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository }}"
 
