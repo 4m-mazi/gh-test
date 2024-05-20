@@ -64,7 +64,22 @@ jobs:
   renovate:
     name: Renovate
     needs: [env]
-    if: ${{ github.actor != needs.env.outputs.renovate_actor && ((github.event.issue.title == needs.env.outputs.dashboard_title && github.event.issue.user.login == needs.env.outputs.renovate_actor) || (github.event.pull_request.user.login == needs.env.outputs.renovate_actor && ((github.event.action == 'labeled' && github.event.label.name == needs.env.outputs.rebaseLabel) || (github.event.action == 'unlabeled' && github.event.label.name == needs.env.outputs.stopUpdatingLabel) || contains(fromJSON('["edited", "closed", "synchronize"]'), github.event.action))) || contains(fromJSON('["push", "schedule"]'), github.event_name)) }}
+    if: >-
+      ${{
+        github.actor != needs.env.outputs.renovate_actor
+        && (
+            (github.event.issue.title == needs.env.outputs.dashboard_title && github.event.issue.user.login == needs.env.outputs.renovate_actor)
+            || (
+                github.event.pull_request.user.login == needs.env.outputs.renovate_actor
+                && (
+                    (github.event.action == 'labeled' && github.event.label.name == needs.env.outputs.rebaseLabel)
+                    || (github.event.action == 'unlabeled' && github.event.label.name == needs.env.outputs.stopUpdatingLabel)
+                    || contains(fromJSON('["edited", "closed", "synchronize"]'), github.event.action)
+                )
+            )
+            || contains(fromJSON('["push", "schedule"]'), github.event_name)
+        )
+      }}
     concurrency:
       group: ${{ github.workflow }}
     runs-on: ubuntu-latest
