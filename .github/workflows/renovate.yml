@@ -127,7 +127,7 @@ jobs:
         run: gh cache delete ${{ steps.restore-cache.outputs.cache-primary-key }}
         continue-on-error: true
 
-      - run: tree -h --du -F -C /tmp/renovate/
+      - run: tree -L 5 -h --du -F -C /tmp/renovate
         continue-on-error: true
 
       - uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
