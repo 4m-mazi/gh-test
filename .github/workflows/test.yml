@@ -1,5 +1,7 @@
 name: test
 on:
+  push:
+    branches: ["**"]
   workflow_dispatch:
     inputs: # null for another event
       skip:
@@ -9,10 +11,16 @@ permissions: {}
 
 jobs:
   test1:
-    concurrency:
-      group: ${{ github.workflow }}
-      cancel-in-progress: true
-    if: ${{ inputs.skip == false}}
+    if: >
+      false
     runs-on: ubuntu-latest
     steps:
-      - run: sleep 120
+      - run: |
+          true
+  test2:
+    if: >-
+      false
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          true
