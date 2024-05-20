@@ -48,7 +48,7 @@ env:
   cache_key: renovate-cache
   # tool versions
   # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate pinDigests=false
-  RENOVATE_VERSION: 37.361.0
+  RENOVATE_VERSION: 37.368.9
 
 jobs:
   env:
@@ -59,7 +59,7 @@ jobs:
       rebaseLabel: "rebase"
       stopUpdatingLabel: "stop-updating"
     steps:
-      - run: true
+      - run: ""
 
   renovate:
     name: Renovate
@@ -95,9 +95,6 @@ jobs:
           key: ${{ env.cache_key }}
           path: ${{ env.cache_dir }}
 
-      - run: tree $cache_dir
-        continue-on-error: true
-
       - run: sudo chown -R runneradmin:root /tmp/renovate/
         continue-on-error: true
 
@@ -128,6 +125,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: gh cache delete ${{ steps.restore-cache.outputs.cache-primary-key }}
+        continue-on-error: true
+
+      - run: tree -h --du -F -C /tmp/renovate/
         continue-on-error: true
 
       - uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
