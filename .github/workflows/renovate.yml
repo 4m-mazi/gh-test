@@ -48,7 +48,7 @@ env:
   # This can be manually changed to bust the cache if neccessary.
   cache_key: renovate-cache
   # tool versions
-  # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
+  # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate versioning=semver
   RENOVATE_VERSION: 37.368.9
 
 jobs:
