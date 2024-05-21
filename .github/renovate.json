@@ -5,14 +5,14 @@
     "config:js-app",
     ":automergeAll",
     ":automergePr",
-    // ":disablePrControls",
+    ":disablePrControls",
     ":labels(dependencies, semver:none)",
     ":maintainLockFilesWeekly",
     ":pathSemanticCommitType(.github/workflows/**, ci)",
     ":prHourlyLimitNone",
     ":rebaseStalePrs",
     ":semanticCommits",
-    // "customManagers:githubActionsVersions",
+    "customManagers:githubActionsVersions",
     "security:openssf-scorecard"
   ],
   "automergeStrategy": "squash",
@@ -32,6 +32,16 @@
         "dependencies",
         "semver:patch"
       ]
+    },
+    {
+      "matchManagers": [
+        "regex"
+      ],
+      "matchFileNames": [
+        "(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$",
+        "(^|/)action\\.ya?ml$"
+      ],
+      "pinDigests": false
     }
   ],
   "customManagers": [
@@ -45,16 +55,6 @@
       ],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$",
-        "(^|/)action\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: pinDigests=(?<pinDigests>[^\\s]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*:\\s*[\"']?(?<currentValue>.+?)[\"']?\\s"
-      ]
     }
   ]
 }
