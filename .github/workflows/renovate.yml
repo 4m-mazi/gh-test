@@ -78,7 +78,7 @@ jobs:
                     || contains(fromJSON('["edited", "closed", "synchronize"]'), github.event.action)
                 )
             )
-            || contains(fromJSON('["push", "schedule"]'), github.event_name)
+            || contains(fromJSON('["push", "schedule", "workflow_dispatch"]'), github.event_name)
         )
       }}
     concurrency:
