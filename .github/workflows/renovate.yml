@@ -49,7 +49,7 @@ env:
   cache_key: renovate-cache
   # tool versions
   # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate pinDigests=false
-  RENOVATE_VERSION: 37.368.8
+  RENOVATE_VERSION: 37.372.1
 
 jobs:
   env:
