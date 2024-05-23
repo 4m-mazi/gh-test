@@ -37,10 +37,6 @@
       "matchManagers": [
         "custom.regex"
       ],
-      "matchFileNames": [
-        "(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$",
-        "(^|/)action\\.ya?ml$"
-      ],
       "pinDigests": false
     }
   ],
