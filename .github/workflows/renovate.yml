@@ -108,7 +108,7 @@ jobs:
         with:
           token: ${{ steps.generate_token.outputs.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
-          env-regex: "^(?:RENOVATE_\\w+|LOG_LEVEL|FORCE_COLOR)$"
+          env-regex: "^(?:RENOVATE_\\w+|FORCE_COLOR|LOG_LEVEL)$"
         env:
           # This enables the cache -- if this is set, it's not necessary to add it to renovate.json.
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
@@ -127,7 +127,6 @@ jobs:
         continue-on-error: true
 
       - run: tree -L 6 -h --du -F /tmp/renovate
-        continue-on-error: true
 
       - uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         if: github.event.inputs.repoCache != 'disabled' && github.ref_name == github.event.repository.default_branch
