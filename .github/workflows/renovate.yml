@@ -48,7 +48,7 @@ env:
   # This can be manually changed to bust the cache if neccessary.
   cache_key: renovate-cache
   # tool versions
-  # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate pinDigests=false
+  # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
   RENOVATE_VERSION: 37.372.1
 
 jobs:
@@ -108,7 +108,7 @@ jobs:
 
       - uses: renovatebot/github-action@063e0c946b9c1af35ef3450efc44114925d6e8e6 # v40.1.11
         with:
-          configurationFile: .github/renovate.json5
+          configurationFile: .github/renovate.json
           token: ${{ steps.generate_token.outputs.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
           env-regex: "^(?:RENOVATE_\\w+|LOG_LEVEL|FORCE_COLOR)$"
