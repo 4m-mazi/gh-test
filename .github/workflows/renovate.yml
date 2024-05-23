@@ -114,6 +114,7 @@ jobs:
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
           RENOVATE_AUTODISCOVER: true
           RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository }}"
+          RENOVATE_DEPENDENCY_DASHBOARD_FOOTER: "- [ ] <!-- manual job -->Check this box to trigger a request for Renovate to run again on this repository"
           RENOVATE_PLATFORM_COMMIT: true
           FORCE_COLOR: 3 # chalk.supportsColor
           LOG_LEVEL: debug
