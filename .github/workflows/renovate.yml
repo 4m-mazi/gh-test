@@ -119,7 +119,7 @@ jobs:
           FORCE_COLOR: 3 # chalk.supportsColor
           LOG_LEVEL: debug
 
-      - run: tree -L 6 -h --du -F /tmp/renovate
+      - run: tree -L 6 -h --du -F "${cache_dir}"
 
       - name: delete old cache
         if: github.event.inputs.repoCache != 'disabled' && github.ref_name == github.event.repository.default_branch
