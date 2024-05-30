@@ -40,7 +40,7 @@
       "pinDigests": false
     }
   ],
-  "customManagers": [
+  "Managers": [
     {
       "customType": "regex",
       "fileMatch": [
