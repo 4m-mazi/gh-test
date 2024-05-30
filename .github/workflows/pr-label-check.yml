@@ -16,8 +16,13 @@ permissions:
 
 jobs:
   do-not-merge:
+    # Remove `do-not-merge` label before merging
+    if: ${{ ! contains(github.event.pull_request.labels.*.name, 'do NOT merge!!!') }}
     runs-on: ubuntu-latest
     steps:
-      - if: contains(github.event.pull_request.labels.*.name, 'do NOT merge!!!')
-        name: "Remove `do-not-merge` label before merging"
-        run: exit 1
+      - run: exit 0
+  pr-labels-ok:
+    needs: [do-not-merge]
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
