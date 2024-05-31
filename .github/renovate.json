@@ -5,7 +5,6 @@
     "config:js-app",
     ":automergeAll",
     ":automergePr",
-    ":disablePrControls",
     ":labels(dependencies, semver:none)",
     ":maintainLockFilesWeekly",
     ":pathSemanticCommitType(.github/workflows/**, ci)",
@@ -20,6 +19,8 @@
   "assigneesFromCodeOwners": true,
   "commitMessageExtra": "from {{#if currentValue}}{{{currentValue}}}{{else}}{{{currentDigestShort}}}{{/if}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}",
   "dependencyDashboardAutoclose": true,
+  "fetchChangeLogs": "off",
+  "prBodyTemplate": "{{{header}}}{{{table}}}{{{notes}}}{{{changelogs}}}{{{footer}}}",
   "prConcurrentLimit": 3,
   "reviewersFromCodeOwners": true,
   "packageRules": [
