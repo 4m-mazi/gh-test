@@ -15,7 +15,7 @@
     "security:openssf-scorecard"
   ],
   "platformAutomerge": false,
-  "automergeStrategy": "squash",
+  "automergeStrategy": "rebase",
   "assignAutomerge": true,
   "assigneesFromCodeOwners": true,
   "commitBodyTable": true,
