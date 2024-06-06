@@ -14,14 +14,13 @@
     "customManagers:githubActionsVersions",
     "security:openssf-scorecard"
   ],
+  "platformAutomerge": false,
   "automergeStrategy": "squash",
   "assignAutomerge": true,
   "assigneesFromCodeOwners": true,
   "commitBodyTable": true,
   "commitMessageExtra": "from {{#if currentValue}}{{{currentValue}}}{{else}}{{{currentDigestShort}}}{{/if}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}",
   "dependencyDashboardAutoclose": true,
-  "fetchChangeLogs": "off",
-  "prBodyTemplate": "{{{header}}}{{{table}}}{{{notes}}}{{{changelogs}}}{{{footer}}}",
   "prConcurrentLimit": 3,
   "reviewersFromCodeOwners": true,
   "packageRules": [
