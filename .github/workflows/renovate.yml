@@ -60,7 +60,7 @@ jobs:
       rebaseLabel: "rebase"
       stopUpdatingLabel: "stop-updating"
     steps:
-      - run: ""
+      - run: "exit 0"
 
   renovate:
     name: Renovate
