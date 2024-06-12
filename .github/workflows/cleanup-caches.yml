@@ -13,11 +13,9 @@ on:
 
 jobs:
   cleanup:
-    runs-on: ubuntu-latest
     permissions:
       actions: write
-    steps:
-      - name: Cleanup
-        uses: 4m-mazi/souji-action@7b968d0f5b22b33600ca69829fc08914f8bcccd9 # v1.3.0
-        with:
-          branch-names: ${{ inputs.branchNames }}
+      contents: read
+    uses: 4m-mazi/souji-action/.github/workflows/_souji.yml@reusable-workflow
+    with:
+      branch-names: ${{ inputs.branchNames }}
