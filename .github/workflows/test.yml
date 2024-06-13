@@ -1,24 +1,42 @@
 name: test
 on:
-  push:
-    branches: ["**"]
-  workflow_dispatch:
-    inputs: # null for another event
-      skip:
-        type: boolean
-        default: false
+  workflow_call:
 permissions: {}
+
+env:
+  HERE: "4m-mazi/gh-test/.github/workflows/test.yml"
 
 jobs:
   test1:
+    permissions:
+      contents: read
     if: >
       true
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+        with:
+          sparse-checkout: |
+            ${{ github.workflow }}
+          sparse-checkout-cone-mode: false
       - run: |
-  test2:
-    if: >-
-      true
-    runs-on: ubuntu-latest
-    steps:
-      - run: ''
+          ls -lah
+      - id: escape
+        run: |
+          cat << 'EOF' | sed -e 's/"/\\"/g' -e 's/^/result=/' >> "$GITHUB_OUTPUT"
+          yq '[.jobs.*.uses | select(tag == "!!str" and test("^${{ env.HERE }}@"))][0] | sub("^${{ env.HERE }}@", "")' ${{ github.workflow }}
+          EOF
+
+      - id: get-ref
+        uses: docker://mikefarah/yq:4.43.1-githubaction
+        with:
+          args: |
+            "${{ steps.escape.outputs.result }}"
+          
+
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+        with:
+          repository: 4m-mazi/gh-test
+          ref: ${{ steps.get-ref.outputs.result }}
+          path: 'souji-action'
+      - uses: ./souji-action/

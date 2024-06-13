@@ -4,4 +4,4 @@ on:
 
 jobs:
   call:
-    uses: 4m-mazi/gh-test/.github/workflows/debug.yml@4cf8a995b52ae9b78a8b9694d473e8a3453281de
+    uses: 4m-mazi/gh-test/.github/workflows/test.yml@main
