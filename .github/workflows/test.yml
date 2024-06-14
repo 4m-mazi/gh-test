@@ -28,7 +28,7 @@ jobs:
           EOF
 
       - id: get-ref
-        uses: docker://mikefarah/yq:4.43.1-githubaction
+        uses: docker://mikefarah/yq:4.44.1-githubaction@sha256:ecec8897cfc63329efa97179e4ddc5b2b571ab19dce13c98988fbca5fc778127
         with:
           args: |
             "${{ steps.escape.outputs.result }}"
