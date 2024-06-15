@@ -65,6 +65,7 @@ on:
   registry_package:
   release:
   repository_dispatch:
+    types: [debug]
   # schedule:
   status:
   watch:
