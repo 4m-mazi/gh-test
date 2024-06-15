@@ -1,40 +1,7 @@
 name: Renovate
 on:
-  issues:
-    # Dependency Dashboard
-    types: [edited]
-  pull_request_target:
-    types:
-      # rebaseLabel
-      - labeled
-      # stopUpdatingLabel
-      - unlabeled
-      # PrControls
-      - edited
-      # ignore update
-      - closed
-      # Edited/Blocked
-      - synchronize
-    branches: ["main"]
-  push:
-    branches:
-      - "main"
-      # https://docs.renovatebot.com/config-validation/#validation-of-renovate-config-change-prs
-      - "renovate/reconfigure"
-  schedule:
-    # Run every 30 minutes:
-    - cron: "0,30 * * * *"
-  # This lets you dispatch a renovate job with different cache options if you want to reset or disable the cache manually.
-  workflow_dispatch:
-    inputs:
-      repoCache:
-        description: "Reset or disable the cache?"
-        type: choice
-        default: enabled
-        options:
-          - enabled
-          - disabled
-          - reset
+  repository_dispatch:
+    types: [trigger-renovate]
 
 permissions: {}
 
@@ -52,35 +19,8 @@ env:
   RENOVATE_VERSION: 37.408.1
 
 jobs:
-  env:
-    runs-on: ubuntu-latest
-    outputs:
-      renovate_actor: "mazi-renovate[bot]"
-      dashboard_title: "Dependency Dashboard"
-      rebaseLabel: "rebase"
-      stopUpdatingLabel: "stop-updating"
-    steps:
-      - run: "exit 0"
-
   renovate:
     name: Renovate
-    needs: [env]
-    if: >-
-      ${{
-        github.actor != needs.env.outputs.renovate_actor
-        && (
-            (github.event.issue.title == needs.env.outputs.dashboard_title && github.event.issue.user.login == needs.env.outputs.renovate_actor)
-            || (
-                github.event.pull_request.user.login == needs.env.outputs.renovate_actor
-                && (
-                    (github.event.action == 'labeled' && github.event.label.name == needs.env.outputs.rebaseLabel)
-                    || (github.event.action == 'unlabeled' && github.event.label.name == needs.env.outputs.stopUpdatingLabel)
-                    || contains(fromJSON('["edited", "closed", "synchronize"]'), github.event.action)
-                )
-            )
-            || contains(fromJSON('["push", "schedule", "workflow_dispatch"]'), github.event_name)
-        )
-      }}
     concurrency:
       group: ${{ github.workflow }}
     runs-on: ubuntu-latest
@@ -89,7 +29,7 @@ jobs:
     steps:
       - uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         id: restore-cache
-        if: github.event.inputs.repoCache != 'disabled'
+        if: github.event.client_payload.repoCache != 'disabled'
         with:
           key: ${{ env.cache_key }}
           path: ${{ env.cache_dir }}
@@ -111,7 +51,7 @@ jobs:
           env-regex: "^(?:RENOVATE_\\w+|FORCE_COLOR|LOG_LEVEL)$"
         env:
           # This enables the cache -- if this is set, it's not necessary to add it to renovate.json.
-          RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
+          RENOVATE_REPOSITORY_CACHE: ${{ github.event.client_payload.repoCache || 'enabled' }}
           RENOVATE_AUTODISCOVER: true # Renovate runs NOT only on this repository.
           RENOVATE_AUTODISCOVER_FILTER: "${{ github.repository_owner }}/*"
           RENOVATE_DEPENDENCY_DASHBOARD_FOOTER: "- [ ] <!-- manual job -->Check this box to trigger a request for Renovate to run again on this repository"
@@ -123,7 +63,7 @@ jobs:
       - run: tree -L 5 -h --du -F "${cache_dir}"
 
       - name: delete old cache
-        if: github.event.inputs.repoCache != 'disabled' && github.ref_name == github.event.repository.default_branch
+        if: github.event.client_payload.repoCache != 'disabled' && github.ref_name == github.event.repository.default_branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -131,7 +71,7 @@ jobs:
         continue-on-error: true
 
       - uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
-        if: github.event.inputs.repoCache != 'disabled' && github.ref_name == github.event.repository.default_branch
+        if: github.event.client_payload.repoCache != 'disabled' && github.ref_name == github.event.repository.default_branch
         with:
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
           path: ${{ env.cache_dir }}
