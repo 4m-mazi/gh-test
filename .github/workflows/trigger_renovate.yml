@@ -21,9 +21,6 @@ on:
       - "main"
       # https://docs.renovatebot.com/config-validation/#validation-of-renovate-config-change-prs
       - "renovate/reconfigure"
-  schedule:
-    # Run every 30 minutes:
-    - cron: "0,30 * * * *"
   # This lets you dispatch a renovate job with different cache options if you want to reset or disable the cache manually.
   workflow_dispatch:
     inputs:
@@ -39,7 +36,7 @@ on:
 permissions: {}
 
 jobs:
-  trigger-renovate:
+  renovate:
     uses: 4m-mazi/gh-test/.github/workflows/_renovate.yml@main
     with:
       renovate_actor: "mazi-renovate[bot]"
