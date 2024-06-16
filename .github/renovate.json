@@ -14,7 +14,7 @@
     "customManagers:githubActionsVersions",
     "security:openssf-scorecard"
   ],
-  "platformAutomerge": false,
+  "platformAutomerge": true,
   "automergeStrategy": "squash",
   "assignAutomerge": true,
   "assigneesFromCodeOwners": true,
