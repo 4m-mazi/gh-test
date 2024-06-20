@@ -2,6 +2,7 @@ name: test
 on:
   push:
     branches: ["**"]
+  pull_request:
   workflow_dispatch:
     inputs: # null for another event
       skip:
@@ -11,14 +12,30 @@ permissions: {}
 
 jobs:
   test1:
-    if: >
-      true
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - run: exit 1
+        continue-on-error: true
+      - run: exit 1
+        continue-on-error: true
+      - run: exit 1
+        continue-on-error: true
   test2:
-    if: >-
-      true
     runs-on: ubuntu-latest
     steps:
-      - run: ''
+      - run: exit 1
+        continue-on-error: true
+      - run: exit 1
+        continue-on-error: true
+      - run: exit 0
+  test3:
+    runs-on: ubuntu-latest
+    steps:
+      - id: step1
+        run: exit 0
+        continue-on-error: true
+      - id: step2
+        run: exit 0
+        continue-on-error: true
+      - if: contains(steps.*.outcome, 'failure')
+        run: exit 1
