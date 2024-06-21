@@ -35,7 +35,7 @@ jobs:
         run: exit 0
         continue-on-error: true
       - id: step2
-        run: exit 1
+        run: exit 0
         continue-on-error: true
       - name: 'Fail this job if any step has failed'
         if: contains(steps.*.outcome, 'failure')
