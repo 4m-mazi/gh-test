@@ -50,8 +50,6 @@ jobs:
             || contains(fromJSON('["push", "schedule", "workflow_dispatch"]'), github.event_name)
         )
       }}
-    concurrency:
-      group: ${{ github.workflow }}
     runs-on: ubuntu-latest
     steps:
       - name: Generate a token
