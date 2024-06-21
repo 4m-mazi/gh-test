@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.8.0@sha256:d6d396f3780b1dd56a3acbc975f57bd2fc501989b50164c41387c42d04e780d0
+# syntax=docker/dockerfile:1.8.1@sha256:e87caa74dcb7d46cd820352bfea12591f3dba3ddc4285e19c7dcd13359f7cefd
 FROM --platform=$BUILDPLATFORM busybox:1.36.1-uclibc@sha256:97d85ff9630b634ddff3e3ff69fd02bc3b69de8dba0c5002eb0ad6915d1bf4c0 AS env
 ARG TARGETPLATFORM
 RUN --mount=type=bind,source=artifact,target=artifact \
