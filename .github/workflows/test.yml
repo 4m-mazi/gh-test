@@ -39,6 +39,4 @@ jobs:
         continue-on-error: true
       - name: 'Fail this job if any step has failed'
         if: contains(steps.*.outcome, 'failure')
-        run: |
-          echo "::error ::${{ toJson(steps) }}"
-          exit 1
+        run: exit 1
