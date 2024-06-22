@@ -14,12 +14,17 @@ jobs:
   test1:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
-        continue-on-error: true
-      - run: exit 1
-        continue-on-error: true
-      - run: exit 1
-        continue-on-error: true
+      - run: exit 0
+      - id: step1
+        run: exit 0
+      - id: step2
+        if: ${{ success() || contains(fromJson('["success", "failure"]'),steps.step1.outcome) }}
+        run: exit 1
+      - id: step3
+        if: ${{ success() || contains(fromJson('["success", "failure"]'),steps.step2.outcome) }}
+        run: exit 0
+      - if: ${{ success() || contains(fromJson('["success", "failure"]'),steps.step3.outcome) }}
+        run: exit 0
   test2:
     runs-on: ubuntu-latest
     steps:
@@ -37,5 +42,6 @@ jobs:
       - id: step2
         run: exit 0
         continue-on-error: true
-      - if: contains(steps.*.outcome, 'failure')
+      - name: 'Fail this job if any step has failed'
+        if: contains(steps.*.outcome, 'failure')
         run: exit 1
