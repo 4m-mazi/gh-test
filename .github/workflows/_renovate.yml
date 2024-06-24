@@ -36,18 +36,21 @@ jobs:
   trigger-renovate:
     if: >-
       ${{
-        github.actor != inputs.renovate_actor
-        && (
-            (github.event.issue.title == inputs.dependencyDashboardTitle && github.event.issue.user.login == inputs.renovate_actor)
-            || (
-                github.event.pull_request.user.login == inputs.renovate_actor
-                && (
-                    (github.event.action == 'labeled' && github.event.label.name == inputs.rebaseLabel)
-                    || (github.event.action == 'unlabeled' && github.event.label.name == inputs.stopUpdatingLabel)
-                    || contains(fromJSON('["edited", "closed", "synchronize"]'), github.event.action)
+        contains(fromJSON('["push", "schedule", "workflow_dispatch"]'), github.event_name)
+        || (
+            github.actor != inputs.renovate_actor
+            && (
+                (github.event.issue.title == inputs.dependencyDashboardTitle && github.event.issue.user.login == inputs.renovate_actor)
+                || (
+                    github.event.pull_request.user.login == inputs.renovate_actor
+                    && github.event.pull_request.merged == false
+                    && (
+                        (github.event.action == 'labeled' && github.event.label.name == inputs.rebaseLabel)
+                        || (github.event.action == 'unlabeled' && github.event.label.name == inputs.stopUpdatingLabel)
+                        || contains(fromJSON('["edited", "closed", "synchronize"]'), github.event.action)
+                    )
                 )
             )
-            || contains(fromJSON('["push", "schedule", "workflow_dispatch"]'), github.event_name)
         )
       }}
     runs-on: ubuntu-latest
