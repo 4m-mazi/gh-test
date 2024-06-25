@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.4.22](https://github.com/4m-mazi/gh-test/compare/v3.4.21...v3.4.22) (2024-06-24)
+
+
+### Miscellaneous Chores
+
+* commitBodyTable ([1e9ead4](https://github.com/4m-mazi/gh-test/commit/1e9ead40c9dcaf04989fde76e54e16745b0ef8a2))
+* **config:** migrate renovate config ([#743](https://github.com/4m-mazi/gh-test/issues/743)) ([0d7e31a](https://github.com/4m-mazi/gh-test/commit/0d7e31af54805f8bd1803e869def57043ee5482a))
+* **config:** migrate renovate config ([#755](https://github.com/4m-mazi/gh-test/issues/755)) ([d3b7759](https://github.com/4m-mazi/gh-test/commit/d3b7759ffd34fa54b56fdb1b375a497c2a35e18d))
+* **deps:** lock file maintenance ([#799](https://github.com/4m-mazi/gh-test/issues/799)) ([898d0c4](https://github.com/4m-mazi/gh-test/commit/898d0c47489eba95ede6bc8aa8a2f361962d0096))
+* **deps:** pin dependency @types/node from ^20.14.1 to 20.14.2 ([#784](https://github.com/4m-mazi/gh-test/issues/784)) ([1b92275](https://github.com/4m-mazi/gh-test/commit/1b92275028e8dcc405d456309423543301d0b888))
+* **deps:** update dependency @types/node from 20.14.2 to v20.14.8 ([#806](https://github.com/4m-mazi/gh-test/issues/806)) ([6a09453](https://github.com/4m-mazi/gh-test/commit/6a09453669942fd910e44493b2d3c2acb64fa3ae))
+* **deps:** update docker/dockerfile docker tag to v1.8.0 ([#797](https://github.com/4m-mazi/gh-test/issues/797)) ([bcade85](https://github.com/4m-mazi/gh-test/commit/bcade85f76b6724824bffbb12f9202d848b409d4))
+* **deps:** update docker/dockerfile docker tag to v1.8.1 ([#808](https://github.com/4m-mazi/gh-test/issues/808)) ([60b8e2b](https://github.com/4m-mazi/gh-test/commit/60b8e2b4d4710002314d8ea7183b51f151c13f48))
+* disable platformAutomerge ([afd6eb2](https://github.com/4m-mazi/gh-test/commit/afd6eb26acbce8f269b9c2adac1f970c67168456))
+* enable platformAutomerge ([22945d0](https://github.com/4m-mazi/gh-test/commit/22945d02a438bcad100095411af0e045c9df5307))
+* remove changelogs and configDescription ([17d34b8](https://github.com/4m-mazi/gh-test/commit/17d34b8828081247a7cb9a5f6e5fcddb42307c94))
+* renovate ([354c35c](https://github.com/4m-mazi/gh-test/commit/354c35ccec67cd7ad0b32261a408a2cc9466f349))
+* update renovate config ([7a706e3](https://github.com/4m-mazi/gh-test/commit/7a706e3503b9d0721719c30152c73d81cc6fb85e))
+* Update renovate.yml ([34ef36f](https://github.com/4m-mazi/gh-test/commit/34ef36feb145064a76e4e9e3f7bbef1135570156))
+* Update test ([4a5b4d1](https://github.com/4m-mazi/gh-test/commit/4a5b4d132a635937d41c19b592488301659860aa))
+
 ## [3.4.21](https://github.com/4m-mazi/gh-test/compare/v3.4.20...v3.4.21) (2024-05-12)
 
 
