@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://docs.renovatebot.com/renovate-schema.json
+
+allowedPostUpgradeCommands:
+  - "^pnpm install --frozen-lockfile --ignore-scripts$"
+  - "^pnpm run build$"
+onboardingConfigFileName: .renovaterc.json

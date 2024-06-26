@@ -6,7 +6,7 @@ on:
         type: string
       repoCache:
         description: "Reset or disable the cache?"
-        default: 'enabled'
+        default: "enabled"
         required: false
         type: string
       dependencyDashboardTitle:
@@ -30,13 +30,14 @@ on:
 permissions: {}
 
 env:
-  RENOVATE_REPO: 4m-mazi/gh-test
+  RENOVATE_REPOSITORY_OWNER: 4m-mazi
+  RENOVATE_REPOSITORY_NAME: gh-test
 
 jobs:
   trigger-renovate:
     if: >-
       ${{
-        contains(fromJSON('["push", "schedule", "workflow_dispatch"]'), github.event_name)
+        contains(fromJSON('["push", "workflow_dispatch"]'), github.event_name)
         || (
             github.actor != inputs.renovate_actor
             && (
@@ -59,12 +60,19 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@c8f55efbd427e7465d6da1106e7979bc8aaee856 # v1.10.1
         with:
+          # [permissions]─────────────────────────────────────
+          #   [read and write]
+          #     repo: Contents
+          # ──────────────────────────────────────────────────
           app-id: ${{ secrets.app-id }}
           private-key: ${{ secrets.private-key }}
+          owner: ${{ env.RENOVATE_REPOSITORY_OWNER }}
+          repositories: ${{ env.RENOVATE_REPOSITORY_NAME }}
 
-      - name: 'Create a repository dispatch event'
+      - name: "Create a repository dispatch event"
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+          RENOVATE_REPO: ${{ env.RENOVATE_REPOSITORY_OWNER }}/${{ env.RENOVATE_REPOSITORY_NAME }}
           CACHE: ${{ inputs.repoCache }}
         run: |
           gh api \

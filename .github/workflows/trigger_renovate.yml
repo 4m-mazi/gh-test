@@ -1,4 +1,4 @@
-name: trigger Renovate
+name: Trigger Renovate
 on:
   issues:
     # Dependency Dashboard
@@ -42,5 +42,9 @@ jobs:
       renovate_actor: "mazi-renovate[bot]"
       repoCache: ${{ inputs.repoCache }}
     secrets:
-      app-id: ${{ vars.MAZI_RENOVATE_APP_ID }}
-      private-key: ${{ secrets.MAZI_RENOVATE_PRIVATE_KEY }}
+      # [permissions]─────────────────────────────────────
+      #   [read and write]
+      #     repo: Contents
+      # ──────────────────────────────────────────────────
+      app-id: ${{ vars.MAZI_TRIGGER_APP_ID }}
+      private-key: ${{ secrets.MAZI_TRIGGER_PRIVATE_KEY }}
