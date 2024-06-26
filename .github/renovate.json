@@ -39,15 +39,6 @@
         "custom.regex"
       ],
       "pinDigests": false
-    },
-    {
-      "matchPackageNames": ["@vercel/ncc"],
-      "postUpgradeTasks": {
-        "commands": [
-          "pnpm install --frozen-lockfile --ignore-scripts",
-          "pnpm run build"
-        ]
-      }
     }
   ],
   "customManagers": [
