@@ -2,7 +2,8 @@ on:
   workflow_call:
     inputs:
       renovate_actor:
-        required: true
+        default: "mazi-renovate[bot]"
+        required: false
         type: string
       repoCache:
         description: "Reset or disable the cache?"
