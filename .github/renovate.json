@@ -5,7 +5,7 @@
     "config:js-app",
     ":automergeAll",
     ":automergePr",
-    ":labels(dependencies, semver:none)",
+    ":labels(dependencies)",
     ":maintainLockFilesWeekly",
     ":pathSemanticCommitType(.github/workflows/**, ci)",
     ":prHourlyLimitNone",
@@ -19,37 +19,46 @@
   "assignAutomerge": true,
   "assigneesFromCodeOwners": true,
   "commitBodyTable": true,
+  "commitMessageAction": "bump",
   "commitMessageExtra": "from {{#if currentValue}}{{{currentValue}}}{{else}}{{{currentDigestShort}}}{{/if}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}",
+  "commitMessageTopic": "{{depName}}",
   "dependencyDashboardAutoclose": true,
   "prConcurrentLimit": 3,
   "reviewersFromCodeOwners": true,
   "packageRules": [
     {
-      "matchDepTypes": [
-        "dependencies",
-        "require"
-      ],
-      "labels": [
-        "dependencies",
-        "semver:patch"
-      ]
+      "matchDepTypes": ["dependencies", "require"],
+      "semanticCommitType": "deps",
+      "semanticCommitScope": null
     },
     {
-      "matchManagers": [
-        "custom.regex"
-      ],
+      "matchDepTypes": ["devDependencies"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps-dev"
+    },
+    {
+      "matchManagers": ["npm"],
+      "addLabels": ["javascript"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "addLabels": ["github_actions"],
+      "commitMessageTopic": "{{depName}}"
+    },
+    {
+      "matchManagers": ["custom.regex"],
       "pinDigests": false
+    },
+    {
+      "matchDepTypes": ["packageManager"],
+      "commitMessageExtra": "from {{{currentVersion}}} to {{{newValue}}}"
     }
   ],
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "(^|/)\\.npmrc$"
-      ],
-      "matchStrings": [
-        "use-node-version=(?<currentValue>.*?)\\n"
-      ],
+      "fileMatch": ["(^|/)\\.npmrc$"],
+      "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
     }
