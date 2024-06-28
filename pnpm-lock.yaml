@@ -12,7 +12,7 @@ importers:
         specifier: 20.14.9
         version: 20.14.9
       '@vercel/ncc':
-        specifier: ^0.38.1
+        specifier: 0.38.1
         version: 0.38.1
 
 packages:
