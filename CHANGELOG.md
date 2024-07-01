@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.4.23](https://github.com/4m-mazi/gh-test/compare/v3.4.22...v3.4.23) (2024-07-01)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** pin @vercel/ncc from ^0.38.1 to 0.38.1 ([aad9a30](https://github.com/4m-mazi/gh-test/commit/aad9a30049fe15ddcea49b2b1627c7d83c43dd9f))
+* **deps:** update dependency @types/node from 20.14.8 to v20.14.9 ([d78edfe](https://github.com/4m-mazi/gh-test/commit/d78edfe9ed07beb78bd833c6b19f72551d4ccee9))
+
 ## [3.4.22](https://github.com/4m-mazi/gh-test/compare/v3.4.21...v3.4.22) (2024-06-24)
 
 
