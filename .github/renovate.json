@@ -40,9 +40,7 @@
       "matchManagers": ["npm"],
       "addLabels": ["javascript"],
       "postUpgradeTasks": {
-        "commands": [
-          "pnpm install --frozen-lockfile --ignore-scripts"
-        ],
+        "commands": ["pnpm install --frozen-lockfile --ignore-scripts"],
         "executionMode": "branch"
       }
     },
@@ -57,7 +55,10 @@
     },
     {
       "matchDepTypes": ["packageManager"],
-      "commitMessageExtra": "from {{{currentVersion}}} to {{{newValue}}}"
+      "commitMessageExtra": "from {{{currentVersion}}} to {{{newValue}}}",
+      "postUpgradeTasks": {
+        "commands": ["corepack use '{{{depName}}}@{{{newVersion}}}'"]
+      }
     }
   ],
   "customManagers": [
