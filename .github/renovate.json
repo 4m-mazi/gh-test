@@ -38,7 +38,13 @@
     },
     {
       "matchManagers": ["npm"],
-      "addLabels": ["javascript"]
+      "addLabels": ["javascript"],
+      "postUpgradeTasks": {
+        "commands": [
+          "pnpm install --frozen-lockfile --ignore-scripts"
+        ],
+        "executionMode": "branch"
+      }
     },
     {
       "matchManagers": ["github-actions"],
