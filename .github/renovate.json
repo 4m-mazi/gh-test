@@ -20,7 +20,7 @@
   "assigneesFromCodeOwners": true,
   "commitBodyTable": true,
   "commitMessageAction": "bump",
-  "commitMessageExtra": "from {{#if currentValue}}{{{currentValue}}}{{else}}{{{currentDigestShort}}}{{/if}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isSingleVersion}}{{newVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}",
+  "commitMessageExtra": "from {{#if currentValue}}{{{replace '^v' '' currentValue}}}{{else}}{{{currentDigestShort}}}{{/if}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isSingleVersion}}{{replace '^v' '' newVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}",
   "commitMessageTopic": "{{depName}}",
   "dependencyDashboardAutoclose": true,
   "prConcurrentLimit": 3,
