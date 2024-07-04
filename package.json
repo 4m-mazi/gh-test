@@ -13,6 +13,6 @@
   "packageManager": "pnpm@8.15.8",
   "devDependencies": {
     "@types/node": "^20.14.0",
-    "@vercel/ncc": "0.38.1"
+    "@vercel/ncc": "0.38.0"
   }
 }
