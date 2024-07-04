@@ -31,6 +31,9 @@ jobs:
   test3:
     runs-on: ubuntu-latest
     steps:
+      - uses: docker://mikefarah/yq:4.44.1-githubaction@sha256:ecec8897cfc63329efa97179e4ddc5b2b571ab19dce13c98988fbca5fc778127
+        continue-on-error: true
+        
       - id: step1
         run: exit 0
         continue-on-error: true
