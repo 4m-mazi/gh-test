@@ -6,7 +6,7 @@ settings:
 
 devDependencies:
   '@types/node':
-    specifier: ^20.14.0
+    specifier: 20.14.9
     version: 20.14.9
   '@vercel/ncc':
     specifier: 0.38.1
