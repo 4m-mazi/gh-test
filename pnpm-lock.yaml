@@ -9,16 +9,16 @@ importers:
   .:
     devDependencies:
       '@types/node':
-        specifier: 20.14.9
-        version: 20.14.9
+        specifier: 20.14.10
+        version: 20.14.10
       '@vercel/ncc':
         specifier: 0.38.1
         version: 0.38.1
 
 packages:
 
-  '@types/node@20.14.9':
-    resolution: {integrity: sha512-06OCtnTXtWOZBJlRApleWndH4JsRVs1pDCc8dLSQp+7PpUpX3ePdHyeNSFTeSe7FtKyQkrlPvHwJOW3SLd8Oyg==}
+  '@types/node@20.14.10':
+    resolution: {integrity: sha512-MdiXf+nDuMvY0gJKxyfZ7/6UFsETO7mGKF54MVD/ekJS6HdFtpZFBgrh6Pseu64XTb2MLyFPlbW6hj8HYRQNOQ==}
 
   '@vercel/ncc@0.38.1':
     resolution: {integrity: sha512-IBBb+iI2NLu4VQn3Vwldyi2QwaXt5+hTyh58ggAMoCGE6DJmPvwL3KPBWcJl1m9LYPChBLE980Jw+CS4Wokqxw==}
@@ -29,7 +29,7 @@ packages:
 
 snapshots:
 
-  '@types/node@20.14.9':
+  '@types/node@20.14.10':
     dependencies:
       undici-types: 5.26.5
 
