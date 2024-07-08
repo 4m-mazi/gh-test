@@ -1,30 +1,38 @@
-lockfileVersion: '6.0'
+lockfileVersion: '9.0'
 
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-devDependencies:
-  '@types/node':
-    specifier: 20.14.9
-    version: 20.14.9
-  '@vercel/ncc':
-    specifier: 0.38.1
-    version: 0.38.1
+importers:
+
+  .:
+    devDependencies:
+      '@types/node':
+        specifier: 20.14.9
+        version: 20.14.9
+      '@vercel/ncc':
+        specifier: 0.38.1
+        version: 0.38.1
 
 packages:
 
-  /@types/node@20.14.9:
+  '@types/node@20.14.9':
     resolution: {integrity: sha512-06OCtnTXtWOZBJlRApleWndH4JsRVs1pDCc8dLSQp+7PpUpX3ePdHyeNSFTeSe7FtKyQkrlPvHwJOW3SLd8Oyg==}
-    dependencies:
-      undici-types: 5.26.5
-    dev: true
 
-  /@vercel/ncc@0.38.1:
+  '@vercel/ncc@0.38.1':
     resolution: {integrity: sha512-IBBb+iI2NLu4VQn3Vwldyi2QwaXt5+hTyh58ggAMoCGE6DJmPvwL3KPBWcJl1m9LYPChBLE980Jw+CS4Wokqxw==}
     hasBin: true
-    dev: true
 
-  /undici-types@5.26.5:
+  undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
-    dev: true
+
+snapshots:
+
+  '@types/node@20.14.9':
+    dependencies:
+      undici-types: 5.26.5
+
+  '@vercel/ncc@0.38.1': {}
+
+  undici-types@5.26.5: {}
