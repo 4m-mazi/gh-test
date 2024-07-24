@@ -139,7 +139,7 @@ jobs:
       - name: Delete org.opencontainers.image.licenses label
         id: labels
         run: |
-          labels=$(echo "${{ steps.meta.outputs.labels }}" | sed '/^org.opencontainers.image.licenses=/d')
+          labels=$(echo '${{ steps.meta.outputs.labels }}' | sed '/^org.opencontainers.image.licenses=/d')
           {
             echo 'labels<<EOF'
             echo "$labels"
