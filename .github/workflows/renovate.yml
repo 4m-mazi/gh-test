@@ -45,21 +45,6 @@ jobs:
       - run: sudo chown -R runneradmin:root /tmp/renovate/
         continue-on-error: true
 
-      - name: Generate a token
-        id: generate_token
-        uses: actions/create-github-app-token@31c86eb3b33c9b601a1f60f98dcbfd1d70f379b4 # v1.10.3
-        with:
-          # [permissions]─────────────────────────────────────────────────────────────────
-          #   [read-only]
-          #     repo: Administration, Dependabot alerts, Metadata, Packages
-          #     org:  Members
-          #   [read and write]
-          #     repo: Checks, Commit statuses, Contents, Issues, Pull requests, Workflows
-          # ──────────────────────────────────────────────────────────────────────────────
-          app-id: ${{ vars.MAZI_RENOVATE_APP_ID }}
-          private-key: ${{ secrets.MAZI_RENOVATE_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-
       - name: "Checkout ${{ env.config_file }}"
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -69,7 +54,7 @@ jobs:
 
       - uses: renovatebot/github-action@8ce0fe8066eb6b16e1bf499b21bc96e5ccd962a4 # v40.2.3
         with:
-          token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ github.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
           env-regex: "^(?:RENOVATE_\\w+|FORCE_COLOR|LOG_LEVEL)$"
         env:
