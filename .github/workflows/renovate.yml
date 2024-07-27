@@ -5,7 +5,16 @@ on:
   schedule:
     # Run every 30 minutes:
     - cron: "0,30 * * * *"
-
+  workflow_dispatch:
+    inputs:
+      repoCache:
+        description: "Reset or disable the cache?"
+        type: choice
+        default: enabled
+        options:
+          - enabled
+          - disabled
+          - reset
 permissions: {}
 
 env:
