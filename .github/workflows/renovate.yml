@@ -78,6 +78,8 @@ jobs:
 
       - run: tree -L 5 -h --du -F -C -- "${cache_dir}"
 
+      - run: cat "${cache_dir}/renovate/repository/github/4m-mazi/gh-test.json"
+
       - name: delete old cache
         if: github.event.client_payload.repoCache != 'disabled' && github.ref_name == github.event.repository.default_branch
         env:
