@@ -28,6 +28,45 @@
   "reviewersFromCodeOwners": true,
   "packageRules": [
     {
+      "groupName": "Node.js",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^/)node$/",
+        "!calico/node",
+        "!docker.io/calico/node",
+        "!kindest/node"
+      ],
+      "matchUpdateTypes": ["major"]
+    },
+    {
+      "groupName": "Node.js",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^/)node$/",
+        "!calico/node",
+        "!docker.io/calico/node",
+        "!kindest/node"
+      ],
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "groupName": "Node.js",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^/)node$/",
+        "!calico/node",
+        "!docker.io/calico/node",
+        "!kindest/node"
+      ],
+      "matchUpdateTypes": ["patch"]
+    },
+    {
       "matchDepTypes": ["dependencies", "require"],
       "semanticCommitType": "deps",
       "semanticCommitScope": null
