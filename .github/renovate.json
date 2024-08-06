@@ -29,50 +29,81 @@
   "reviewersFromCodeOwners": true,
   "packageRules": [
     {
-      "matchDepTypes": ["dependencies", "require"],
+      "matchDepTypes": [
+        "dependencies",
+        "require"
+      ],
       "semanticCommitType": "deps",
       "semanticCommitScope": null
     },
     {
-      "matchDepTypes": ["devDependencies"],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
       "semanticCommitType": "chore",
       "semanticCommitScope": "deps-dev"
     },
     {
-      "matchManagers": ["npm"],
-      "addLabels": ["javascript"],
+      "matchManagers": [
+        "npm"
+      ],
+      "addLabels": [
+        "javascript"
+      ],
       "postUpgradeTasks": {
-        "commands": ["pnpm install --frozen-lockfile --ignore-scripts"],
+        "commands": [
+          "pnpm install --frozen-lockfile --ignore-scripts"
+        ],
         "executionMode": "branch"
       }
     },
     {
-      "matchManagers": ["github-actions"],
-      "addLabels": ["github_actions"],
+      "matchManagers": [
+        "github-actions"
+      ],
+      "addLabels": [
+        "github_actions"
+      ],
       "commitMessageTopic": "{{depName}}"
     },
     {
-      "matchManagers": ["custom.regex"],
+      "matchManagers": [
+        "custom.regex"
+      ],
       "pinDigests": false
     },
     {
-      "matchDepTypes": ["packageManager"],
+      "matchDepTypes": [
+        "packageManager"
+      ],
       "commitMessageExtra": "from {{{currentVersion}}} to {{{newVersion}}}",
       "postUpgradeTasks": {
-        "commands": ["corepack use '{{{depName}}}@{{{newVersion}}}'"]
+        "commands": [
+          "corepack use '{{{depName}}}@{{{newVersion}}}'"
+        ]
       }
     },
     {
       "groupName": "discord.js monorepo",
-      "matchUpdateTypes": ["patch", "minor", "major"],
-      "matchPackagePrefixes": ["@discordjs/"]
+      "matchUpdateTypes": [
+        "patch",
+        "minor",
+        "major"
+      ],
+      "matchPackageNames": [
+        "@discordjs/{/,}**"
+      ]
     }
   ],
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["(^|/)\\.npmrc$"],
-      "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
+      "fileMatch": [
+        "(^|/)\\.npmrc$"
+      ],
+      "matchStrings": [
+        "use-node-version=(?<currentValue>.*?)\\n"
+      ],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
     }
