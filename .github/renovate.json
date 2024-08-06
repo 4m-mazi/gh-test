@@ -29,7 +29,10 @@
   "reviewersFromCodeOwners": true,
   "packageRules": [
     {
-      "matchDepTypes": ["dependencies", "require"],
+      "matchDepTypes": [
+        "dependencies",
+        "require"
+      ],
       "semanticCommitType": "deps",
       "semanticCommitScope": null
     },
