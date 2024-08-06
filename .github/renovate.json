@@ -61,11 +61,6 @@
       "postUpgradeTasks": {
         "commands": ["corepack use '{{{depName}}}@{{{newVersion}}}'"]
       }
-    },
-    {
-      "groupName": "discord.js monorepo",
-      "matchUpdateTypes": ["patch", "minor", "major"],
-      "matchPackagePrefixes": ["@discordjs/"]
     }
   ],
   "customManagers": [
