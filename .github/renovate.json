@@ -66,12 +66,6 @@
       "groupName": "discord.js monorepo",
       "matchUpdateTypes": ["patch", "minor", "major"],
       "matchPackagePrefixes": ["@discordjs/"]
-    },
-    {
-      "extends": ["monorepo:sentry-javascript"],
-      "groupName": "sentry-javascript monorepo",
-      "matchUpdateTypes": ["patch", "minor", "major"],
-      "matchPackagePrefixes": ["@sentry/"]
     }
   ],
   "customManagers": [
