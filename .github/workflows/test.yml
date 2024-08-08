@@ -2,24 +2,44 @@ name: test
 on:
   push:
     branches: ["**"]
-
+  pull_request:
+  workflow_dispatch:
+    inputs: # null for another event
+      skip:
+        type: boolean
+        default: false
 permissions: {}
 
 jobs:
   test1:
-    if: ${{ startsWith(github.event.head_commit.message, 'release:')}}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "`startsWith(github.event.head_commit.message, 'release:')`: ${{ startsWith(github.event.head_commit.message, 'release:')}}" >> $GITHUB_STEP_SUMMARY
-      - run: |
-          echo "`github.event.head_commit.author.name == 'github-actions[bot]'`: ${{ github.event.head_commit.author.name == 'github-actions[bot]'}}" >> $GITHUB_STEP_SUMMARY
+      - run: exit 1
+        continue-on-error: true
+      - run: exit 1
+        continue-on-error: true
+      - run: exit 1
+        continue-on-error: true
   test2:
-    if: ${{ !startsWith(github.event.head_commit.message, 'chore(main):\ ')}}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "test2: ${{ !startsWith(github.event.head_commit.message, 'chore(main)')}}" >> $GITHUB_STEP_SUMMARY
-
-  call-test:
-    uses: ./.github/workflows/debug.yml
+      - run: exit 1
+        continue-on-error: true
+      - run: exit 1
+        continue-on-error: true
+      - run: exit 0
+  test3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker://mikefarah/yq:4.44.1-githubaction@sha256:ecec8897cfc63329efa97179e4ddc5b2b571ab19dce13c98988fbca5fc778127
+        continue-on-error: true
+      - uses: goto-bus-stop/setup-zig@v2
+      
+      - id: step1
+        run: exit 0
+        continue-on-error: true
+      - id: step2
+        run: exit 0
+        continue-on-error: true
+      - if: contains(steps.*.outcome, 'failure')
+        run: exit 1

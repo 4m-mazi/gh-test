@@ -1,0 +1,84 @@
+on:
+  workflow_call:
+    inputs:
+      renovate_actor:
+        default: "mazi-renovate[bot]"
+        required: false
+        type: string
+      repoCache:
+        description: "Reset or disable the cache?"
+        default: "enabled"
+        required: false
+        type: string
+      dependencyDashboardTitle:
+        default: "Dependency Dashboard"
+        required: false
+        type: string
+      rebaseLabel:
+        default: "rebase"
+        required: false
+        type: string
+      stopUpdatingLabel:
+        default: "stop-updating"
+        required: false
+        type: string
+    secrets:
+      app-id:
+        required: true
+      private-key:
+        required: true
+
+permissions: {}
+
+env:
+  RENOVATE_REPOSITORY_OWNER: 4m-mazi
+  RENOVATE_REPOSITORY_NAME: gh-test
+
+jobs:
+  trigger-renovate:
+    if: >-
+      ${{
+        contains(fromJSON('["push", "workflow_dispatch"]'), github.event_name)
+        || (
+            github.actor != inputs.renovate_actor
+            && (
+                (github.event.issue.title == inputs.dependencyDashboardTitle && github.event.issue.user.login == inputs.renovate_actor)
+                || (
+                    github.event.pull_request.user.login == inputs.renovate_actor
+                    && github.event.pull_request.merged == false
+                    && (
+                        (github.event.action == 'labeled' && github.event.label.name == inputs.rebaseLabel)
+                        || (github.event.action == 'unlabeled' && github.event.label.name == inputs.stopUpdatingLabel)
+                        || contains(fromJSON('["edited", "closed", "synchronize"]'), github.event.action)
+                    )
+                )
+            )
+        )
+      }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@31c86eb3b33c9b601a1f60f98dcbfd1d70f379b4 # v1.10.3
+        with:
+          # [permissions]─────────────────────────────────────
+          #   [read and write]
+          #     repo: Contents
+          # ──────────────────────────────────────────────────
+          app-id: ${{ secrets.app-id }}
+          private-key: ${{ secrets.private-key }}
+          owner: ${{ env.RENOVATE_REPOSITORY_OWNER }}
+          repositories: ${{ env.RENOVATE_REPOSITORY_NAME }}
+
+      - name: "Create a repository dispatch event"
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+          RENOVATE_REPO: ${{ env.RENOVATE_REPOSITORY_OWNER }}/${{ env.RENOVATE_REPOSITORY_NAME }}
+          CACHE: ${{ inputs.repoCache }}
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/$RENOVATE_REPO/dispatches \
+             -f "event_type=renovate" -F "client_payload[repoCache]=$CACHE"

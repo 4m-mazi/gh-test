@@ -1,5 +1,167 @@
 # Changelog
 
+## [3.4.22](https://github.com/4m-mazi/gh-test/compare/v3.4.21...v3.4.22) (2024-06-24)
+
+
+### Miscellaneous Chores
+
+* commitBodyTable ([1e9ead4](https://github.com/4m-mazi/gh-test/commit/1e9ead40c9dcaf04989fde76e54e16745b0ef8a2))
+* **config:** migrate renovate config ([#743](https://github.com/4m-mazi/gh-test/issues/743)) ([0d7e31a](https://github.com/4m-mazi/gh-test/commit/0d7e31af54805f8bd1803e869def57043ee5482a))
+* **config:** migrate renovate config ([#755](https://github.com/4m-mazi/gh-test/issues/755)) ([d3b7759](https://github.com/4m-mazi/gh-test/commit/d3b7759ffd34fa54b56fdb1b375a497c2a35e18d))
+* **deps:** lock file maintenance ([#799](https://github.com/4m-mazi/gh-test/issues/799)) ([898d0c4](https://github.com/4m-mazi/gh-test/commit/898d0c47489eba95ede6bc8aa8a2f361962d0096))
+* **deps:** pin dependency @types/node from ^20.14.1 to 20.14.2 ([#784](https://github.com/4m-mazi/gh-test/issues/784)) ([1b92275](https://github.com/4m-mazi/gh-test/commit/1b92275028e8dcc405d456309423543301d0b888))
+* **deps:** update dependency @types/node from 20.14.2 to v20.14.8 ([#806](https://github.com/4m-mazi/gh-test/issues/806)) ([6a09453](https://github.com/4m-mazi/gh-test/commit/6a09453669942fd910e44493b2d3c2acb64fa3ae))
+* **deps:** update docker/dockerfile docker tag to v1.8.0 ([#797](https://github.com/4m-mazi/gh-test/issues/797)) ([bcade85](https://github.com/4m-mazi/gh-test/commit/bcade85f76b6724824bffbb12f9202d848b409d4))
+* **deps:** update docker/dockerfile docker tag to v1.8.1 ([#808](https://github.com/4m-mazi/gh-test/issues/808)) ([60b8e2b](https://github.com/4m-mazi/gh-test/commit/60b8e2b4d4710002314d8ea7183b51f151c13f48))
+* disable platformAutomerge ([afd6eb2](https://github.com/4m-mazi/gh-test/commit/afd6eb26acbce8f269b9c2adac1f970c67168456))
+* enable platformAutomerge ([22945d0](https://github.com/4m-mazi/gh-test/commit/22945d02a438bcad100095411af0e045c9df5307))
+* remove changelogs and configDescription ([17d34b8](https://github.com/4m-mazi/gh-test/commit/17d34b8828081247a7cb9a5f6e5fcddb42307c94))
+* renovate ([354c35c](https://github.com/4m-mazi/gh-test/commit/354c35ccec67cd7ad0b32261a408a2cc9466f349))
+* update renovate config ([7a706e3](https://github.com/4m-mazi/gh-test/commit/7a706e3503b9d0721719c30152c73d81cc6fb85e))
+* Update renovate.yml ([34ef36f](https://github.com/4m-mazi/gh-test/commit/34ef36feb145064a76e4e9e3f7bbef1135570156))
+* Update test ([4a5b4d1](https://github.com/4m-mazi/gh-test/commit/4a5b4d132a635937d41c19b592488301659860aa))
+
+## [3.4.21](https://github.com/4m-mazi/gh-test/compare/v3.4.20...v3.4.21) (2024-05-12)
+
+
+### Miscellaneous Chores
+
+* test の更新 ([#723](https://github.com/4m-mazi/gh-test/issues/723)) ([e660e5a](https://github.com/4m-mazi/gh-test/commit/e660e5a3958a19ca369b1f26279b760b70c2551a))
+
+## [3.4.20](https://github.com/4m-mazi/gh-test/compare/v3.4.19...v3.4.20) (2024-05-11)
+
+
+### Bug Fixes
+
+* Update test ([0efd2e1](https://github.com/4m-mazi/gh-test/commit/0efd2e18e0cd0644f4c32a7f78eebd629a0806fd))
+* Update test ([#714](https://github.com/4m-mazi/gh-test/issues/714)) ([455fb66](https://github.com/4m-mazi/gh-test/commit/455fb66e2fb633a174c1fb6c97aeea0b10b7e9e3))
+
+
+### Miscellaneous Chores
+
+* **deps:** update busybox:1.36.1-uclibc docker digest to 97d85ff ([#731](https://github.com/4m-mazi/gh-test/issues/731)) ([369d7c6](https://github.com/4m-mazi/gh-test/commit/369d7c6362536bf626d34db7faf80264a1a7f446))
+* **deps:** update docker/dockerfile docker tag to v1.7.1 ([#732](https://github.com/4m-mazi/gh-test/issues/732)) ([24d7805](https://github.com/4m-mazi/gh-test/commit/24d7805e761e582bf46c505370bf699786c0f486))
+
+## [3.4.19](https://github.com/4m-mazi/gh-test/compare/v3.4.18...v3.4.19) (2024-03-21)
+
+
+### Bug Fixes
+
+* Update test ([eb0dd39](https://github.com/4m-mazi/gh-test/commit/eb0dd39d5058e90761bdb4432f3b1ffb6424a8f8))
+
+## [3.4.18](https://github.com/4m-mazi/gh-test/compare/v3.4.17...v3.4.18) (2024-03-13)
+
+
+### Bug Fixes
+
+* Update test ([dc73c92](https://github.com/4m-mazi/gh-test/commit/dc73c92a9853acbf1a6ca59769333624c2d616b9))
+* Update test ([c5defaf](https://github.com/4m-mazi/gh-test/commit/c5defaff212af66c0ab79f38ec60bc78a9cf0e81))
+
+## [3.4.17](https://github.com/4m-mazi/gh-test/compare/v3.4.16...v3.4.17) (2024-03-10)
+
+
+### Bug Fixes
+
+* Update test ([9e24276](https://github.com/4m-mazi/gh-test/commit/9e2427653b762831edd5bc03f9b40e260068036f))
+
+## [3.4.16](https://github.com/4m-mazi/gh-test/compare/v3.4.15...v3.4.16) (2024-03-10)
+
+
+### Bug Fixes
+
+* Update test ([6cd7c10](https://github.com/4m-mazi/gh-test/commit/6cd7c106edc42d2e4434d07f75c6e626226d5430))
+
+
+### Miscellaneous Chores
+
+* **deps:** update busybox:1.36.1-uclibc docker digest to 97e3873 ([#699](https://github.com/4m-mazi/gh-test/issues/699)) ([c1ff49d](https://github.com/4m-mazi/gh-test/commit/c1ff49de1721fd64e7c8abd2e8358c50fa34e91d))
+* **deps:** update busybox:1.36.1-uclibc docker digest to f7ca678 ([#694](https://github.com/4m-mazi/gh-test/issues/694)) ([4ef8eb1](https://github.com/4m-mazi/gh-test/commit/4ef8eb17ebf45b2b47d887d6bf09cf2e6c8fc7d0))
+* **deps:** update docker/dockerfile docker tag to v1.7.0 ([#695](https://github.com/4m-mazi/gh-test/issues/695)) ([e06e2de](https://github.com/4m-mazi/gh-test/commit/e06e2de995ad5aa1ddbda4a8aa446900ed7f4471))
+
+## [3.4.15](https://github.com/4m-mazi/gh-test/compare/v3.4.14...v3.4.15) (2024-03-03)
+
+
+### Bug Fixes
+
+* Update test ([0353225](https://github.com/4m-mazi/gh-test/commit/0353225dbd5e80b5bbb5e8d9baf8fd772e6608b4))
+
+## [3.4.14](https://github.com/4m-mazi/gh-test/compare/v3.4.13...v3.4.14) (2024-02-29)
+
+
+### Bug Fixes
+
+* Update test ([aad8882](https://github.com/4m-mazi/gh-test/commit/aad8882cd76416e4c5192cb8e0ea1a5e47c14376))
+
+## [3.4.13](https://github.com/4m-mazi/gh-test/compare/v3.4.12...v3.4.13) (2024-02-27)
+
+
+### Bug Fixes
+
+* Update test ([8696049](https://github.com/4m-mazi/gh-test/commit/86960497fd66868183f116addea24a8d4bf4a780))
+
+## [3.4.12](https://github.com/4m-mazi/gh-test/compare/v3.4.11...v3.4.12) (2024-02-27)
+
+
+### Bug Fixes
+
+* Update test ([#685](https://github.com/4m-mazi/gh-test/issues/685)) ([f966ee3](https://github.com/4m-mazi/gh-test/commit/f966ee3cc910c72250e97f507b7c8b6b1a9aca9b))
+
+## [3.4.11](https://github.com/4m-mazi/gh-test/compare/v3.4.10...v3.4.11) (2024-02-25)
+
+
+### Bug Fixes
+
+* Update test ([92d4817](https://github.com/4m-mazi/gh-test/commit/92d481712bc14c016266f6f8121dae4c1fdea4c2))
+* Update test ([33f96e4](https://github.com/4m-mazi/gh-test/commit/33f96e43d6cdac0c65d941447d8c6f4b2864f934))
+
+## [3.4.10](https://github.com/4m-mazi/gh-test/compare/v3.4.9...v3.4.10) (2024-02-24)
+
+
+### Bug Fixes
+
+* Update test ([46464c4](https://github.com/4m-mazi/gh-test/commit/46464c4ae3bbca47acb30911647b57790f46b72c))
+
+## [3.4.9](https://github.com/4m-mazi/gh-test/compare/v3.4.8...v3.4.9) (2024-02-24)
+
+
+### Bug Fixes
+
+* Update test ([6611a21](https://github.com/4m-mazi/gh-test/commit/6611a21e694c6796dc7580d1b34073d3367207b7))
+
+
+### Documentation
+
+* Update README.md ([2b4d079](https://github.com/4m-mazi/gh-test/commit/2b4d079a920906c9cae70eec4c45bf7a7f600b1a))
+
+## [3.4.8](https://github.com/4m-mazi/gh-test/compare/v3.4.7...v3.4.8) (2024-02-23)
+
+
+### Bug Fixes
+
+* Update test ([#675](https://github.com/4m-mazi/gh-test/issues/675)) ([08aa92f](https://github.com/4m-mazi/gh-test/commit/08aa92f3ae1cf764f4e59c833d33ab67dfe6ec30))
+
+## [3.4.7](https://github.com/4m-mazi/gh-test/compare/v3.4.6...v3.4.7) (2024-02-23)
+
+
+### Bug Fixes
+
+* Update test ([812b48c](https://github.com/4m-mazi/gh-test/commit/812b48cfeae2454f7e2446156b0045e07b6b93d9))
+* Update test ([#666](https://github.com/4m-mazi/gh-test/issues/666)) ([895a582](https://github.com/4m-mazi/gh-test/commit/895a582542dd32df7b4d51f4e33afdc0322f9de8))
+* Update test ([#668](https://github.com/4m-mazi/gh-test/issues/668)) ([a0d3d93](https://github.com/4m-mazi/gh-test/commit/a0d3d93d242345a2354597fd8ff920e717ad36ef))
+* Update test ([#670](https://github.com/4m-mazi/gh-test/issues/670)) ([06007d5](https://github.com/4m-mazi/gh-test/commit/06007d574372c90ac9ecd716881c8bf29640e28e)), closes [#669](https://github.com/4m-mazi/gh-test/issues/669)
+* Update test ([#672](https://github.com/4m-mazi/gh-test/issues/672)) ([e6516b6](https://github.com/4m-mazi/gh-test/commit/e6516b64e2bd84e819be2fa0736f14394221fbcb))
+
+
+### Documentation
+
+* version ([a87b862](https://github.com/4m-mazi/gh-test/commit/a87b862735971a53c5ade87b397e1e58edb4da24))
+
+
+### Miscellaneous Chores
+
+* Create rust-toolchain.toml ([a533e7d](https://github.com/4m-mazi/gh-test/commit/a533e7dec61b2d57e6968b1c19c3749c7d6b99bf))
+* Update rust-toolchain.toml ([f877bc7](https://github.com/4m-mazi/gh-test/commit/f877bc799307e2c6023b646ed2bfc6a5b481a144))
+
 ## [3.4.6](https://github.com/Mogyuchi/gh-test/compare/v3.4.5...v3.4.6) (2024-02-12)
 
 

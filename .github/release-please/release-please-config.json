@@ -71,7 +71,10 @@
       "bump-patch-for-minor-pre-major": false,
       "prerelease": false,
       "include-component-in-tag": false,
-      "pull-request-title-pattern": "release: v${version}"
+      "pull-request-title-pattern": "release: v${version}",
+      "extra-files": [
+        "README.md"
+      ]
     }
   },
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"

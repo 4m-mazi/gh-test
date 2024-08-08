@@ -1,0 +1,28 @@
+name: PR label check
+on:
+  pull_request:
+    types:
+      - opened # for "Require status checks to pass"
+      - synchronize # ditto
+      - labeled
+      - unlabeled
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  pull-requests: read
+
+jobs:
+  do-not-merge:
+    # Remove `do-not-merge` label before merging
+    if: ${{ ! contains(github.event.pull_request.labels.*.name, 'do NOT merge!!!') }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
+  pr-labels-ok:
+    needs: [do-not-merge]
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0

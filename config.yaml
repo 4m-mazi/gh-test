@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://docs.renovatebot.com/renovate-schema.json
+
+allowedPostUpgradeCommands:
+  - "^corepack use"
+  - "^pnpm install --frozen-lockfile --ignore-scripts$"
+  - "^pnpm run build$"
+onboardingConfigFileName: .renovaterc.json
+
+# HACK
+packageRules:
+  - matchDepTypes: [packageManager]
+    postUpgradeTasks:
+      commands:
+        - "corepack use '{{{depName}}}@{{{newVersion}}}'"
