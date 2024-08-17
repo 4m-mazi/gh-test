@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.24](https://github.com/4m-mazi/gh-test/compare/v3.4.23...v3.4.24) (2024-08-17)
+
+
+### Build System
+
+* update release profile ([9f541ec](https://github.com/4m-mazi/gh-test/commit/9f541ec5534256eb9f40efe8b14dbf93291e26a7))
+
 ## [3.4.23](https://github.com/4m-mazi/gh-test/compare/v3.4.22...v3.4.23) (2024-08-17)
 
 
