@@ -1,5 +1,29 @@
 # Changelog
 
+## [3.4.23](https://github.com/4m-mazi/gh-test/compare/v3.4.22...v3.4.23) (2024-08-17)
+
+
+### Bug Fixes
+
+* Update test ([#655](https://github.com/4m-mazi/gh-test/issues/655)) ([1c6009c](https://github.com/4m-mazi/gh-test/commit/1c6009c2acb2b876aadd205ef15fc893034bd37b))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump @types/node from 20.14.10 to 20.14.11 ([#843](https://github.com/4m-mazi/gh-test/issues/843)) ([2550fa6](https://github.com/4m-mazi/gh-test/commit/2550fa6f33e1e61afc70f8a9260ad641a0eeedf6))
+* **deps-dev:** bump @types/node from 20.14.11 to 20.14.12 ([#861](https://github.com/4m-mazi/gh-test/issues/861)) ([6be228d](https://github.com/4m-mazi/gh-test/commit/6be228dd436e218be0821ac55e0849c75fd05961))
+* **deps-dev:** bump @types/node from 20.14.12 to 20.14.13 ([#871](https://github.com/4m-mazi/gh-test/issues/871)) ([153d9a9](https://github.com/4m-mazi/gh-test/commit/153d9a9ce90f26a2d38337753a25677673502dbc))
+* **deps-dev:** bump @types/node from 20.14.9 to 20.14.10 ([#834](https://github.com/4m-mazi/gh-test/issues/834)) ([876be99](https://github.com/4m-mazi/gh-test/commit/876be9901429848648903c140e55300e68fac58c))
+* **deps-dev:** bump @vercel/ncc from 0.38.0 to 0.38.1 ([#831](https://github.com/4m-mazi/gh-test/issues/831)) ([e64e16c](https://github.com/4m-mazi/gh-test/commit/e64e16cd19db8aeb6417a7986a95a952f58d7f5f))
+* **deps-dev:** pin @types/node from ^20.14.0 to 20.14.9 ([#826](https://github.com/4m-mazi/gh-test/issues/826)) ([04158be](https://github.com/4m-mazi/gh-test/commit/04158be7cc56c1559866d807b388b2c62757e97b))
+* **deps-dev:** pin @vercel/ncc from ^0.38.1 to 0.38.1 ([aad9a30](https://github.com/4m-mazi/gh-test/commit/aad9a30049fe15ddcea49b2b1627c7d83c43dd9f))
+* **deps:** bump docker/dockerfile docker tag to v1.9.0 ([#845](https://github.com/4m-mazi/gh-test/issues/845)) ([78ea44a](https://github.com/4m-mazi/gh-test/commit/78ea44a3addd5027a38ec59689e8c10585aa7084))
+* **deps:** bump pnpm from 8.15.8 to 9.5.0 ([#785](https://github.com/4m-mazi/gh-test/issues/785)) ([fef2c89](https://github.com/4m-mazi/gh-test/commit/fef2c89bfaea6df95278677df8c375c461cb3359))
+* **deps:** bump pnpm from 9.5.0 to 9.6.0 ([#856](https://github.com/4m-mazi/gh-test/issues/856)) ([de8a26d](https://github.com/4m-mazi/gh-test/commit/de8a26d8415e608f997b0e7d6c2931467cf94d99))
+* **deps:** bump pnpm from 9.6.0 to 9.7.0 ([#889](https://github.com/4m-mazi/gh-test/issues/889)) ([2ac43a8](https://github.com/4m-mazi/gh-test/commit/2ac43a81540d60773a9fd5840bb9c70552e0377d))
+* **deps:** bump pnpm from 9.7.0 to 9.7.1 ([#892](https://github.com/4m-mazi/gh-test/issues/892)) ([8f74857](https://github.com/4m-mazi/gh-test/commit/8f748575269bdc28ca719fae2e696ba558c1bf62))
+* **deps:** update dependency @types/node from 20.14.8 to v20.14.9 ([d78edfe](https://github.com/4m-mazi/gh-test/commit/d78edfe9ed07beb78bd833c6b19f72551d4ccee9))
+
 ## [3.4.22](https://github.com/4m-mazi/gh-test/compare/v3.4.21...v3.4.22) (2024-06-24)
 
 
