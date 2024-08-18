@@ -126,7 +126,7 @@ jobs:
       - id: build_image
         if: ${{ needs.env.outputs.PUSH && matrix.arch }}
         name: Build Image
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@v2.13
         with:
           archs: ${{ matrix.arch }}
           base-image: scratch
@@ -139,7 +139,7 @@ jobs:
       - id: push
         if: ${{ steps.build_image.conclusion == 'success' }}
         name: Push To GHCR
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v2.8
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.build_image.outputs.tags }}
