@@ -55,7 +55,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
         with:
-          images: ${{ needs.env.outputs.REGISTRY_IMAGE }}
+          images: ${{ env.IMAGE_REGISTRY }}/${{ needs.env.outputs.IMAGE_NAMESPACE }}/${{ env.IMAGE_NAME }}
           tags: |
             type=semver,pattern={{version}},value=${{ inputs.tag-name }}
             type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag-name }}
@@ -67,18 +67,19 @@ jobs:
     needs: [env]
     permissions:
       contents: write
+      packages: write
     strategy:
       fail-fast: false
       matrix:
         include:
           - target: aarch64-unknown-linux-gnu
             use-cross: true
-          - platform: linux/arm64
+          - arch: arm64
             target: aarch64-unknown-linux-musl
             use-cross: true
           - target: x86_64-unknown-linux-gnu
             use-cross: false
-          - platform: linux/amd64
+          - arch: amd64
             target: x86_64-unknown-linux-musl
             use-cross: false
         #  - os: macos-latest
@@ -123,11 +124,11 @@ jobs:
             dist/${{ needs.env.outputs.BINARY_NAME }}
             dist/${{ needs.env.outputs.BINARY_NAME }}.exe
       - id: build_image
-        if: ${{ needs.env.outputs.PUSH && matrix.platform }}
+        if: ${{ needs.env.outputs.PUSH && matrix.arch }}
         name: Build Image
         uses: redhat-actions/buildah-build@v2
         with:
-          platforms: ${{ matrix.platform }}
+          archs: ${{ matrix.arch }}
           base-image: scratch
           image: ${{ env.IMAGE_NAME }}
           tags: tmp
@@ -144,7 +145,7 @@ jobs:
           tags: ${{ steps.build_image.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}/${{ needs.env.outputs.IMAGE_NAMESPACE }}
           username: ${{ github.actor }}
-          password: ${{ github.token }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - id: export-digest
         if: ${{ steps.push.conclusion == 'success' }}
