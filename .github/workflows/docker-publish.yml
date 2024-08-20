@@ -31,17 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       BINARY_NAME: ${{ steps.meta.outputs.BINARY_NAME }}
-      IMAGE_NAMESPACE: ${{ steps.lowercase.outputs.IMAGE_NAMESPACE }}
       PUSH: ${{ github.event_name != 'pull_request' && github.ref_name == github.event.repository.default_branch }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - id: meta
         run: |
           echo "BINARY_NAME=$(cargo metadata --offline --no-deps --format-version=1 | jq -r '.packages[].name')" >> $GITHUB_OUTPUT
-      - id: lowercase
-        run: |
-          image_namespace='${{ env.IMAGE_NAMESPACE }}'
-          echo "IMAGE_NAMESPACE=${image_namespace@L}" >> $GITHUB_OUTPUT
 
   build:
     needs: [env]
@@ -133,7 +128,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
         with:
-          images: ${{ env.IMAGE_REGISTRY }}/${{ needs.env.outputs.IMAGE_NAMESPACE }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/${{ env.IMAGE_NAME }}
           tags: |
             type=semver,pattern={{version}},value=${{ inputs.tag-name }}
             type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag-name }}
