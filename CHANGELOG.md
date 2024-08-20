@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.4.25](https://github.com/4m-mazi/gh-test/compare/v3.4.24...v3.4.25) (2024-08-20)
+
+
+### Bug Fixes
+
+* Update test ([d7e8459](https://github.com/4m-mazi/gh-test/commit/d7e8459b6b347e94031249db01c7ee7b1c540679))
+* Update test ([7738a85](https://github.com/4m-mazi/gh-test/commit/7738a855d0c1eb78d76139005ce2bb5feb01ec3c))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump @types/node from 20.16.0 to 20.16.1 ([#903](https://github.com/4m-mazi/gh-test/issues/903)) ([38b157a](https://github.com/4m-mazi/gh-test/commit/38b157aaff94c6553ae865756500675eb94c4db3))
+* **deps:** bump node from 20.14.0 to 20.16.0 ([#874](https://github.com/4m-mazi/gh-test/issues/874)) ([feecd61](https://github.com/4m-mazi/gh-test/commit/feecd614400e67f8843507edf1e8b6c5dfecc407))
+
+
+### Build System
+
+* switch to buildah ([173aa97](https://github.com/4m-mazi/gh-test/commit/173aa976ef7f5b7691894bc624accc07ba0748b3))
+
 ## [3.4.24](https://github.com/4m-mazi/gh-test/compare/v3.4.23...v3.4.24) (2024-08-17)
 
 
