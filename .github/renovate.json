@@ -30,6 +30,7 @@
   "packageRules": [
     {
       "matchDepTypes": ["dependencies", "require"],
+      "matchUpdateTypes": ["lockFileMaintenance"],
       "semanticCommitType": "deps",
       "semanticCommitScope": null
     },
