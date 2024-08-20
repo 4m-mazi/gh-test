@@ -42,26 +42,6 @@ jobs:
         run: |
           image_namespace='${{ env.IMAGE_NAMESPACE }}'
           echo "IMAGE_NAMESPACE=${image_namespace@L}" >> $GITHUB_OUTPUT
-  meta:
-    needs: [env]
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.meta.outputs.version}}
-      tags: ${{ steps.meta.outputs.tags }}
-      labels: ${{ steps.meta.outputs.labels }}
-      json: ${{ steps.meta.outputs.json }}
-    steps:
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
-        with:
-          images: ${{ env.IMAGE_REGISTRY }}/${{ needs.env.outputs.IMAGE_NAMESPACE }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=semver,pattern={{version}},value=${{ inputs.tag-name }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag-name }}
-            type=semver,pattern={{major}},value=${{ inputs.tag-name }}
-            type=edge
-            type=ref,event=branch
 
   build:
     needs: [env]
@@ -71,16 +51,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        target: [aarch64-unknown-linux-gnu, aarch64-unknown-linux-musl]
+        use-cross: [true]
         include:
-          - target: aarch64-unknown-linux-gnu
-            use-cross: true
-          - arch: arm64
-            target: aarch64-unknown-linux-musl
-            use-cross: true
           - target: x86_64-unknown-linux-gnu
             use-cross: false
-          - arch: amd64
-            target: x86_64-unknown-linux-musl
+          - target: x86_64-unknown-linux-musl
             use-cross: false
         #  - os: macos-latest
         #    target: aarch64-apple-darwin
@@ -123,45 +99,6 @@ jobs:
           path: |
             dist/${{ needs.env.outputs.BINARY_NAME }}
             dist/${{ needs.env.outputs.BINARY_NAME }}.exe
-      - id: build_image
-        if: ${{ fromJson(needs.env.outputs.PUSH) && matrix.arch }}
-        name: Build Image
-        uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2.13
-        with:
-          archs: ${{ matrix.arch }}
-          base-image: scratch
-          image: ${{ env.IMAGE_NAME }}
-          tags: tmp
-          content: |
-            dist/${{ needs.env.outputs.BINARY_NAME }}
-          entrypoint: ./${{ needs.env.outputs.BINARY_NAME }}
-          oci: true
-      - id: push
-        if: ${{ steps.build_image.conclusion == 'success' }}
-        name: Push To GHCR
-        uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2.8
-        with:
-          image: ${{ env.IMAGE_NAME }}
-          tags: ${{ steps.build_image.outputs.tags }}
-          registry: ${{ env.IMAGE_REGISTRY }}/${{ needs.env.outputs.IMAGE_NAMESPACE }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - id: export-digest
-        if: ${{ steps.push.conclusion == 'success' }}
-        name: Export digest
-        run: |
-          mkdir -p /tmp/digests
-          digest="${{ steps.push.outputs.digest }}"
-          touch "/tmp/digests/${digest#sha256:}"
-      - if: ${{ steps.export-digest.conclusion == 'success' }}
-        name: Upload digest
-        uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
-        with:
-          name: digests-${{ matrix.target }}
-          path: /tmp/digests/*
-          if-no-files-found: error
-          retention-days: 1
 
       - name: Upload to release
         if: ${{ inputs.tag-name }}
@@ -177,35 +114,58 @@ jobs:
             gh release upload ${{ inputs.tag-name }} "$filename"#${{ matrix.target }} --clobber
           fi
 
-  merge:
+  image:
     permissions:
       packages: write
-    needs: [env, meta, build]
+    needs: [env, build]
     if: ${{ fromJson(needs.env.outputs.PUSH) }}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -xe {0}
     steps:
-      - name: Download digests
+      - name: Download build artifact
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
-          path: /tmp/digests
-          pattern: digests-*
-          merge-multiple: true
+          path: artifact
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
         with:
-          registry: ${{ env.IMAGE_REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          images: ${{ env.IMAGE_REGISTRY }}/${{ needs.env.outputs.IMAGE_NAMESPACE }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}},value=${{ inputs.tag-name }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag-name }}
+            type=semver,pattern={{major}},value=${{ inputs.tag-name }}
+            type=edge
+            type=ref,event=branch
 
-      - name: Create manifest list and push
-        working-directory: /tmp/digests
-        env:
-          DOCKER_METADATA_OUTPUT_JSON: ${{ needs.meta.outputs.json }}
+      - name: Build Image (linux/amd64)
         run: |
-          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-          $(printf '${{ env.IMAGE_REGISTRY }}/${{ needs.env.outputs.IMAGE_NAMESPACE }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)
+          newcontainer=$(buildah from --platform=linux/amd64 scratch)
+          buildah copy $newcontainer ./artifact/x86_64-unknown-linux-musl/${{ needs.env.outputs.BINARY_NAME }} /${{ needs.env.outputs.BINARY_NAME }}
+          buildah config --entrypoint="./${{ needs.env.outputs.BINARY_NAME }}" $newcontainer
 
-      - name: Inspect image
+          buildah config --author="Mogyuchi" $(awk '{print "--label=" $0}' <<< "${{ steps.meta.outputs.labels }}") $newcontainer
+          buildah inspect $newcontainer
+
+          buildah commit --manifest=localhost/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }} $newcontainer
+          buildah rm $newcontainer
+      - name: Build Image (linux/arm64)
         run: |
-          docker buildx imagetools inspect ${{ env.IMAGE_REGISTRY }}/${{ needs.env.outputs.IMAGE_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ needs.meta.outputs.version }}
+          newcontainer=$(buildah from --platform=linux/arm64 scratch)
+          buildah copy $newcontainer ./artifact/aarch64-unknown-linux-musl/${{ needs.env.outputs.BINARY_NAME }} /${{ needs.env.outputs.BINARY_NAME }}
+          buildah config --entrypoint="./${{ needs.env.outputs.BINARY_NAME }}" $newcontainer
+
+          buildah config --author="Mogyuchi" $(awk '{print "--label=" $0}' <<< "${{ steps.meta.outputs.labels }}") $newcontainer
+          buildah inspect $newcontainer
+
+          buildah commit --manifest=localhost/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }} $newcontainer
+          buildah rm $newcontainer
+
+      - id: push
+        name: Push To GHCR
+        run: |
+          buildah manifest inspect localhost/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+          echo "${{ steps.meta.outputs.tags }}" | xargs -I{} --max-args=1 buildah --log-level=trace manifest push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --all localhost/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }} docker://{}
