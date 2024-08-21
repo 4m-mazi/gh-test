@@ -94,6 +94,7 @@ jobs:
           path: |
             dist/${{ needs.env.outputs.BINARY_NAME }}
             dist/${{ needs.env.outputs.BINARY_NAME }}.exe
+          if-no-files-found: error
 
       - name: Upload to release
         if: ${{ inputs.tag-name }}
