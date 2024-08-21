@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.26](https://github.com/4m-mazi/gh-test/compare/v3.4.25...v3.4.26) (2024-08-21)
+
+
+### Dependencies
+
+* lock file maintenance ([#907](https://github.com/4m-mazi/gh-test/issues/907)) ([2a13513](https://github.com/4m-mazi/gh-test/commit/2a13513f1ffdb12b28a005e78320c0cdf3a16023))
+
 ## [3.4.25](https://github.com/4m-mazi/gh-test/compare/v3.4.24...v3.4.25) (2024-08-20)
 
 
