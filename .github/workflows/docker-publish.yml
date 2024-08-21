@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - id: meta
         run: |
-          echo "BINARY_NAME=$(cargo metadata --offline --no-deps --format-version=1 | jq -r '.packages[].name')" >> $GITHUB_OUTPUT
+          echo "BINARY_NAME=$(cargo metadata --offline --no-deps --format-version=1 | jq -r '.packages[].targets[] | select(.kind | map(. == "bin") | any ) | .name')" >> $GITHUB_OUTPUT
 
   build:
     needs: [env]
