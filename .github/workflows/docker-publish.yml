@@ -11,7 +11,7 @@ on:
         type: string
     outputs:
       image_tags:
-        value: ${{ jobs.docker.outputs.image_tags }}
+        value: ${{ jobs.image.outputs.image_tags }}
       image_url:
         value: https://ghcr.io/${{ github.repository }}
 
@@ -116,6 +116,8 @@ jobs:
     needs: [env, build]
     if: ${{ fromJson(needs.env.outputs.PUSH) }}
     runs-on: ubuntu-latest
+    outputs:
+      image_tags: ${{ steps.meta.outputs.tags }}
     defaults:
       run:
         shell: bash -xe {0}
