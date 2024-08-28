@@ -1,5 +1,5 @@
 fn main() {
-    println!("Hello, world!!!");
+    println!("Hello, world!!! - {}", env!("GIT_DESCRIBE"));
     if cfg!(target_os = "macos") {
         println!("You are running macos!");
     } else if cfg!(target_os = "linux") {
