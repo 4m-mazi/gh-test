@@ -159,4 +159,6 @@ jobs:
         name: Push To GHCR
         run: |
           buildah manifest inspect localhost/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
-          tac <<< '${{ steps.meta.outputs.tags }}' | xargs -I{} --max-args=1 buildah --log-level=trace manifest push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --all localhost/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }} docker://{}
+          tac <<< '${{ steps.meta.outputs.tags }}' \
+          | parallel --halt=now,fail=1 --jobs=1 'buildah --log-level=trace manifest push --creds=${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --all --digestfile="$RUNNER_TEMP/image-digest" localhost/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }} docker://{} && printf "\`\`\`\n%s@$(cat "$RUNNER_TEMP/image-digest")\n\`\`\`\n" {} >> "$GITHUB_STEP_SUMMARY"'
+
