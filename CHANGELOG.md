@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.4.29](https://github.com/4m-mazi/gh-test/compare/v3.4.28...v3.4.29) (2024-08-30)
+
+
+### Bug Fixes
+
+* Update test ([b7791dc](https://github.com/4m-mazi/gh-test/commit/b7791dc7f27afdac8fc296f14e3673c9328c3d94))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump pnpm from 9.7.1 to 9.8.0 ([#923](https://github.com/4m-mazi/gh-test/issues/923)) ([840764a](https://github.com/4m-mazi/gh-test/commit/840764ab3f69a879aae3f390f46d53e7659d9ea6))
+* **deps:** bump pnpm from 9.8.0 to 9.9.0 ([#931](https://github.com/4m-mazi/gh-test/issues/931)) ([d0eac5e](https://github.com/4m-mazi/gh-test/commit/d0eac5e2f63ab61d3be19d6df981ef5367777915))
+* **deps:** pin rust crate git2 from 0.19.0 to =0.19.0 ([#934](https://github.com/4m-mazi/gh-test/issues/934)) ([e661e93](https://github.com/4m-mazi/gh-test/commit/e661e93cb5fafb174f8f26f34725995aacfa0321))
+
 ## [3.4.28](https://github.com/4m-mazi/gh-test/compare/v3.4.27...v3.4.28) (2024-08-21)
 
 
