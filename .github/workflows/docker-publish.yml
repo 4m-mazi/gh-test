@@ -39,6 +39,7 @@ jobs:
           echo "BINARY_NAME=$(cargo metadata --offline --no-deps --format-version=1 | jq -r '.packages[].targets[] | select(.kind | map(. == "bin") | any ) | .name')" >> $GITHUB_OUTPUT
 
   create-tag:
+    needs: [env]
     runs-on: ubuntu-latest
     permissions:
       contents: write
