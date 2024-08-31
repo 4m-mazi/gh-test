@@ -34,9 +34,12 @@ jobs:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
     permissions: {}
-    uses: ./.github/workflows/publish-crates.yml
-    with:
-      dry-run: true
+    runs-on: ubuntu-latest
+    steps:
+      - run: ''
+   # uses: ./.github/workflows/publish-crates.yml
+   # with:
+   #   dry-run: true
 
   docker-publish:
     needs: release-please
