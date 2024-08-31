@@ -1,7 +1,10 @@
 use git2::{DescribeFormatOptions, DescribeOptions, Repository};
 
 fn main() {
-    let Ok(repo) = Repository::open(".") else {
+    let Ok(repo) = Repository::open(".").map_err(|e| {
+        println!("cargo::warning={}", e);
+        e
+    }) else {
         return;
     };
     let Ok(git_describe_result) = repo
@@ -16,6 +19,9 @@ fn main() {
                     .always_use_long_format(true)
                     .dirty_suffix("-dirty"),
             ))
+        }).map_err(|e| {
+            println!("cargo::warning={}", e);
+            e
         })
     else {
         return;
