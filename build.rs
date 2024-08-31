@@ -1,4 +1,4 @@
-use git2::{DescribeFormatOptions, DescribeOptions, Repository};
+use git2::{DescribeFormatOptions, DescribeOptions, Error, Repository};
 
 fn main() {
     let git_describe_result = match get_git_describe_result() {
@@ -7,7 +7,7 @@ fn main() {
     }
 }
 
-fn get_git_describe_result() {
+fn get_git_describe_result() -> Result<String, Error> {
     let repo = Repository::open(".")?;
     let describe = repo.describe(
         DescribeOptions::new()
