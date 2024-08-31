@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.4.32](https://github.com/4m-mazi/gh-test/compare/v3.4.31...v3.4.32) (2024-08-31)
+
+
+### Code Refactoring
+
+* build.rs ([#944](https://github.com/4m-mazi/gh-test/issues/944)) ([f61e6aa](https://github.com/4m-mazi/gh-test/commit/f61e6aa610dcdbf51e34c335b511abb74a657df3))
+
+
+### Build System
+
+* warning ([59ee1a7](https://github.com/4m-mazi/gh-test/commit/59ee1a70afae911f7d1527b88d6070ab0e463035))
+
 ## [3.4.31](https://github.com/4m-mazi/gh-test/compare/v3.4.30...v3.4.31) (2024-08-31)
 
 
