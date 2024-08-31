@@ -1,7 +1,7 @@
 use git2::{DescribeFormatOptions, DescribeOptions, Error, Repository};
 
 fn main() {
-    let git_describe_result = match get_git_describe_result() {
+    match get_git_describe_result() {
         Ok(result) => println!("cargo::rustc-env=GIT_DESCRIBE={result}"),
         Err(e) => println!("cargo::warning={}", e),
     }
