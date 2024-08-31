@@ -38,8 +38,28 @@ jobs:
         run: |
           echo "BINARY_NAME=$(cargo metadata --offline --no-deps --format-version=1 | jq -r '.packages[].targets[] | select(.kind | map(. == "bin") | any ) | .name')" >> $GITHUB_OUTPUT
 
+  create-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - if: ${{ inputs.tag-name }}
+        name: Create tag
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "/repos/$OWNER_REPO/git/refs" \
+             -f "ref=refs/tags/$TAG" -f "sha=$SHA"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER_REPO: ${{ github.repository }}
+          TAG: ${{ inputs.tag-name }}
+          SHA: ${{ github.sha }}
+
   build:
-    needs: [env]
+    needs: [create-tag, env]
     permissions:
       contents: write
       packages: write
