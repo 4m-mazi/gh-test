@@ -69,7 +69,7 @@ jobs:
           cat << 'EOF' >> $GITHUB_STEP_SUMMARY
 
           ```
-          ${{ env.metadata['image.name'] }}@${{ env.metadata['containerimage.digest'] }}
+          ${{ fromJson(env.metadata)['image.name'] }}@${{ fromJson(env.metadata)['containerimage.digest'] }}
           ```
         env:
           metadata: ${{ steps.build.outputs.metadata }}
