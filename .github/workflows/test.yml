@@ -64,7 +64,8 @@ jobs:
           labels: ${{ steps.test-meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - name: Display image digest
+      - if: ${{ github.event_name != 'pull_request' && github.ref_name == github.event.repository.default_branch }}
+        name: Display image digest
         run: |
           name=$(cut --delimiter=',' --fields=1 <<< "$NAME")
 
