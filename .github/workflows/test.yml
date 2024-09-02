@@ -66,11 +66,12 @@ jobs:
           cache-to: type=gha,mode=max
       - name: Display image digest
         run: |
-          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
+          name=$(cut --delimiter=',' --fields=1 <<< "$NAME")
 
-          ```
-          ${{ fromJson(env.metadata)['image.name'] }}@${{ fromJson(env.metadata)['containerimage.digest'] }}
-          ```
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "$name@$DIGEST" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
         env:
-          metadata: ${{ steps.build.outputs.metadata }}
+          NAME: ${{ fromJson(steps.build.outputs.metadata)['image.name'] }}
+          DIGEST: ${{ fromJson(steps.build.outputs.metadata)['containerimage.digest'] }}
 
