@@ -46,12 +46,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [aarch64-unknown-linux-gnu, aarch64-unknown-linux-musl]
-        use-cross: [true]
-        include:
+        platform:
+          - target: aarch64-unknown-linux-gnu
+            os: ubuntu-latest
+            use-cross: true
+          - target: aarch64-unknown-linux-musl
+            os: ubuntu-latest
+            use-cross: true
           - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
             use-cross: false
           - target: x86_64-unknown-linux-musl
+            os: ubuntu-latest
             use-cross: false
         #  - os: macos-latest
         #    target: aarch64-apple-darwin
@@ -61,7 +67,7 @@ jobs:
         #    target: x86_64-pc-windows-msvc
         #  - os: windows-latest
         #    target: x86_64-pc-windows-gnu
-    runs-on: ${{ matrix.os || 'ubuntu-latest'}}
+    runs-on: ${{ matrix.platform.os }}
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GH_REPO: ${{ github.repository }}
@@ -70,7 +76,7 @@ jobs:
         shell: bash -xe {0}
     steps:
       - name: Install musl tools
-        if: matrix.target == 'x86_64-unknown-linux-musl'
+        if: matrix.platform.target == 'x86_64-unknown-linux-musl'
         run: |
           sudo apt-get install -y musl-tools --no-install-recommends
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -80,20 +86,20 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          target: ${{ matrix.target }}
+          target: ${{ matrix.platform.target }}
       - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
         with:
-          key: ${{ matrix.target }}
+          key: ${{ matrix.platform.target }}
       - name: Install cross
-        if: ${{ !matrix.os && matrix.use-cross }}
+        if: ${{ matrix.platform.use-cross }}
         uses: taiki-e/install-action@f2b65a3e67b2ba5ed3b4a631b5e460896e975708 # v2.42.37
         with:
           tool: cross
       - run: mkdir dist
-      - run: ${{ (!matrix.os && matrix.use-cross) && 'cross' || 'cargo' }} rustc --locked ${{ github.ref_name == github.event.repository.default_branch && '--release' || '' }} --target=${{ matrix.target }} -- --emit=link=dist/${{ needs.env.outputs.BINARY_NAME }}
+      - run: ${{ matrix.platform.use-cross && 'cross' || 'cargo' }} rustc --locked ${{ github.ref_name == github.event.repository.default_branch && '--release' || '' }} --target=${{ matrix.platform.target }} -- --emit=link=dist/${{ needs.env.outputs.BINARY_NAME }}
       - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
-          name: ${{ matrix.target }}
+          name: ${{ matrix.platform.target }}
           path: |
             dist/${{ needs.env.outputs.BINARY_NAME }}
             dist/${{ needs.env.outputs.BINARY_NAME }}.exe
@@ -104,13 +110,13 @@ jobs:
         working-directory: dist/
         run: |
           if [ -e ${{ needs.env.outputs.BINARY_NAME }}.exe ]; then
-            filename="${{ needs.env.outputs.BINARY_NAME }}-${{ inputs.tag-name }}-${{ matrix.target }}.exe"
+            filename="${{ needs.env.outputs.BINARY_NAME }}-${{ inputs.tag-name }}-${{ matrix.platform.target }}.exe"
             mv ${{ needs.env.outputs.BINARY_NAME }}.exe "$filename"
-            gh release upload ${{ inputs.tag-name }} "$filename"#${{ matrix.target }} --clobber
+            gh release upload ${{ inputs.tag-name }} "$filename"#${{ matrix.platform.target }} --clobber
           else
-            filename="${{ needs.env.outputs.BINARY_NAME }}-${{ inputs.tag-name }}-${{ matrix.target }}"
+            filename="${{ needs.env.outputs.BINARY_NAME }}-${{ inputs.tag-name }}-${{ matrix.platform.target }}"
             mv ${{ needs.env.outputs.BINARY_NAME }} "$filename"
-            gh release upload ${{ inputs.tag-name }} "$filename"#${{ matrix.target }} --clobber
+            gh release upload ${{ inputs.tag-name }} "$filename"#${{ matrix.platform.target }} --clobber
           fi
 
   image:
