@@ -46,6 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        profile: ${{ github.ref_name == github.event.repository.default_branch && fromJson('["dev", "release"]') || fromJson('["dev"]') }}
         platform:
           - target: aarch64-unknown-linux-gnu
             os: ubuntu-latest
@@ -96,17 +97,17 @@ jobs:
         with:
           tool: cross
       - run: mkdir dist
-      - run: ${{ matrix.platform.use-cross && 'cross' || 'cargo' }} rustc --locked ${{ github.ref_name == github.event.repository.default_branch && '--release' || '' }} --target=${{ matrix.platform.target }} -- --emit=link=dist/${{ needs.env.outputs.BINARY_NAME }}
+      - run: ${{ matrix.platform.use-cross && 'cross' || 'cargo' }} rustc --locked ${{ matrix.profile == 'release' && '--release' || '' }} --target=${{ matrix.platform.target }} -- --emit=link=dist/${{ needs.env.outputs.BINARY_NAME }}
       - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
-          name: ${{ matrix.platform.target }}
+          name: ${{ matrix.profile }}-${{ matrix.platform.target }}
           path: |
             dist/${{ needs.env.outputs.BINARY_NAME }}
             dist/${{ needs.env.outputs.BINARY_NAME }}.exe
           if-no-files-found: error
 
       - name: Upload to release
-        if: ${{ inputs.tag-name }}
+        if: ${{ inputs.tag-name && matrix.profile == 'release' }}
         working-directory: dist/
         run: |
           if [ -e ${{ needs.env.outputs.BINARY_NAME }}.exe ]; then
@@ -135,6 +136,7 @@ jobs:
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           path: artifact
+          pattern: release-*-unknown-linux-musl
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -152,7 +154,7 @@ jobs:
         run: |
           build() {
             newcontainer=$(buildah from --platform="$1" scratch)
-            buildah copy --chmod=0755 $newcontainer ./artifact/"$2"/${{ needs.env.outputs.BINARY_NAME }} /${{ needs.env.outputs.BINARY_NAME }}
+            buildah copy --chmod=0755 $newcontainer ./artifact/release-"$2"/${{ needs.env.outputs.BINARY_NAME }} /${{ needs.env.outputs.BINARY_NAME }}
             buildah config --entrypoint='["./${{ needs.env.outputs.BINARY_NAME }}"]' $newcontainer
 
             buildah config --author="Mogyuchi" $(awk '{print "--label=" $0}' <<< "${{ steps.meta.outputs.labels }}") $newcontainer
