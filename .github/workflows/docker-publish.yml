@@ -50,14 +50,16 @@ jobs:
         platform:
           - target: aarch64-unknown-linux-gnu
             os: ubuntu-latest
-            use-cross: true
+            command: cross
           - target: aarch64-unknown-linux-musl
             os: ubuntu-latest
-            use-cross: true
+            command: cross
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
+            command: cargo
           - target: x86_64-unknown-linux-musl
             os: ubuntu-latest
+            command: cargo
         #  - os: macos-latest
         #    target: aarch64-apple-darwin
         #  - os: macos-latest
@@ -90,12 +92,12 @@ jobs:
         with:
           key: ${{ matrix.profile }}-${{ matrix.platform.target }}
       - name: Install cross
-        if: ${{ matrix.platform.use-cross }}
+        if: ${{ matrix.platform.command == 'cross' }}
         uses: taiki-e/install-action@e51c197f827397b418bdb8fe5aa6a3f5af5641d0 # v2.42.42
         with:
           tool: cross
       - run: mkdir dist
-      - run: ${{ matrix.platform.use-cross && 'cross' || 'cargo' }} rustc --locked ${{ matrix.profile == 'release' && '--release' || '' }} --target=${{ matrix.platform.target }} -- --emit=link=dist/${{ needs.env.outputs.BINARY_NAME }}
+      - run: ${{ matrix.platform.command }} rustc --locked ${{ matrix.profile == 'release' && '--release' || '' }} --target=${{ matrix.platform.target }} -- --emit=link=dist/${{ needs.env.outputs.BINARY_NAME }}
       - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: ${{ matrix.profile }}-${{ matrix.platform.target }}
