@@ -35,7 +35,7 @@ jobs:
       actions: write
       contents: read
     steps:
-      - uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+      - uses: actions/cache/restore@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
         id: restore-cache
         if: github.event.client_payload.repoCache != 'disabled'
         with:
@@ -82,7 +82,7 @@ jobs:
         run: gh cache delete ${{ steps.restore-cache.outputs.cache-primary-key }}
         continue-on-error: true
 
-      - uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+      - uses: actions/cache/save@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
         if: github.event.client_payload.repoCache != 'disabled' && github.ref_name == github.event.repository.default_branch
         with:
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
