@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.4.37](https://github.com/4m-mazi/gh-test/compare/v3.4.36...v3.4.37) (2024-10-21)
+
+
+### Dependencies
+
+* lock file maintenance ([#1001](https://github.com/4m-mazi/gh-test/issues/1001)) ([88c32ee](https://github.com/4m-mazi/gh-test/commit/88c32ee1d75c8a97c7a388321a1753b7075889d9))
+* lock file maintenance ([#1010](https://github.com/4m-mazi/gh-test/issues/1010)) ([05b17f0](https://github.com/4m-mazi/gh-test/commit/05b17f0d47e1c75ca43df3cff0e9b543535bb083))
+* lock file maintenance ([#962](https://github.com/4m-mazi/gh-test/issues/962)) ([f0add8d](https://github.com/4m-mazi/gh-test/commit/f0add8d60d4f33696384cd7be0bb2706fb865e89))
+* lock file maintenance ([#973](https://github.com/4m-mazi/gh-test/issues/973)) ([57b8fca](https://github.com/4m-mazi/gh-test/commit/57b8fca71d859fd49fc9571673dd5b0f54e77869))
+* lock file maintenance ([#981](https://github.com/4m-mazi/gh-test/issues/981)) ([5cced2b](https://github.com/4m-mazi/gh-test/commit/5cced2b8e02d8a3355c70a3cb1e31a5a19fec985))
+* lock file maintenance ([#985](https://github.com/4m-mazi/gh-test/issues/985)) ([06a7f64](https://github.com/4m-mazi/gh-test/commit/06a7f64354263219ea49e6b4c98b4ce28327187a))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump @vercel/ncc from 0.38.1 to 0.38.2 ([#982](https://github.com/4m-mazi/gh-test/issues/982)) ([3b780e6](https://github.com/4m-mazi/gh-test/commit/3b780e6648ad4222e809962a4fa0161b5d01957f))
+* **deps:** bump pnpm from 9.10.0 to 9.11.0 ([#979](https://github.com/4m-mazi/gh-test/issues/979)) ([27d26f7](https://github.com/4m-mazi/gh-test/commit/27d26f7d786d1d0541f8ea21b9a8c672cd6fb2c9))
+* **deps:** bump pnpm from 9.11.0 to 9.12.0 ([#992](https://github.com/4m-mazi/gh-test/issues/992)) ([453d472](https://github.com/4m-mazi/gh-test/commit/453d472abea6e5e13d15dfe65bcc7589ce04d10a))
+* **deps:** bump pnpm from 9.12.0 to 9.12.1 ([#996](https://github.com/4m-mazi/gh-test/issues/996)) ([a009d81](https://github.com/4m-mazi/gh-test/commit/a009d811405cfe02d347bc2cebc9300980f527fb))
+* **deps:** bump pnpm from 9.12.1 to 9.12.2 ([#1011](https://github.com/4m-mazi/gh-test/issues/1011)) ([c200531](https://github.com/4m-mazi/gh-test/commit/c200531755cc62ec93a21428fdcc5af7339d9562))
+* **deps:** bump pnpm from 9.9.0 to 9.10.0 ([#959](https://github.com/4m-mazi/gh-test/issues/959)) ([c7ad62c](https://github.com/4m-mazi/gh-test/commit/c7ad62c8086c43ea46bbd05b026b6fa76e43fc49))
+* Update test ([#995](https://github.com/4m-mazi/gh-test/issues/995)) ([e6c2f7a](https://github.com/4m-mazi/gh-test/commit/e6c2f7a4a598d3d388f6e82993acba4c7193c7a5))
+
 ## [3.4.36](https://github.com/4m-mazi/gh-test/compare/v3.4.35...v3.4.36) (2024-09-06)
 
 
