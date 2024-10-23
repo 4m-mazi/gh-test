@@ -66,6 +66,8 @@ jobs:
 
       - run: mkdir _site && cp test _site/index.html
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
       - id: deploy
         name: Deploy
         uses: cloudflare/wrangler-action@v3.9.0
