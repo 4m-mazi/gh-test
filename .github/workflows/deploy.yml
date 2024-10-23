@@ -76,7 +76,9 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy ${{ env.CLOUDFLARE_DIRECTORY }} --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }}
-
+      - run: echo "$output" >> $GITHUB_STEP_SUMMARY
+        env:
+          output: ${{ steps.deploy.outputs.command-output }}
 
       - if: ${{ ! cancelled() && github.event_name == 'pull_request_target' }}
         uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
@@ -94,7 +96,6 @@ jobs:
             echo "<a href='${{ github.event.repository.html_url }}/commit/$1'><code>$(echo "$1" | head -c 7)</code></a>"
           }
           echo "commit_text=$(get_short_sha_with_link $(git rev-parse HEAD)) ( base: $(get_short_sha_with_link ${{ github.event.pull_request.base.sha }}) + head: $(get_short_sha_with_link ${{ github.event.pull_request.head.sha }}) )" >> "$GITHUB_OUTPUT"
-          echo "pr_preview_url=$(echo '${{ steps.deploy.outputs.deployment-url }}' | perl -pe "s|(//).+?(\.)|\$1$(echo '${{ env.BRANCH }}' | perl -pe 's|/|-|g')\$2|")" >> "$GITHUB_OUTPUT"
       - if: steps.fc.conclusion == 'success'
         uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
         with:
@@ -111,7 +112,7 @@ jobs:
             <a href='${{ steps.deploy.outputs.deployment-url }}'>${{ steps.deploy.outputs.deployment-url }}</a>
             </td></tr>
             <tr><td><strong>PR Preview URL:</strong></td><td>
-            <a href='${{ steps.comment-data.outputs.pr_preview_url }}'>${{ steps.comment-data.outputs.pr_preview_url }}</a>
+            <a href='${{ steps.deploy.outputs.deployment-alias-url }}'>${{ steps.deploy.outputs.deployment-alias-url }}</a>
             </td></tr>
             </table>
 
