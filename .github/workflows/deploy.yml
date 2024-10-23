@@ -1,14 +1,19 @@
 name: Cloudflare Pages
 
 env:
-  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-  CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-  CLOUDFLARE_PROJECT_NAME: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+  #CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  #CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+  #CLOUDFLARE_PROJECT_NAME: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
   CLOUDFLARE_DIRECTORY: _site
+
+  # tool versions
+  # renovate: datasource=npm depName=wrangler
+  WRANGLER_VERSION: 3.82.0
 
 on:
   push:
     branches: ["**"]
+  # マージ コミットのコンテキストではなく、pull request のベースのコンテキストで実行されます。
   pull_request_target:
 
 permissions: {}
@@ -40,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ needs.pre-deployment.outputs.environment }}
-      url: ${{ steps.publish.outputs.url }}
+      url: ${{ steps.deploy.outputs.deployment-url }}
 
     permissions:
       contents: read
@@ -61,16 +66,19 @@ jobs:
 
       - run: mkdir _site && cp test _site/index.html
 
-      - id: publish
-        # This workflow does NOT work with v1.5.0
-        uses: cloudflare/pages-action@61eafe73baad0195ab582cb447b2c6e15a0df9ce # v1.4.1
+      - name: Install pnpm
+        uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
+      - id: deploy
+        name: Deploy
+        uses: cloudflare/wrangler-action@v3.9.0
         with:
-          apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ env.CLOUDFLARE_PROJECT_NAME }}
-          directory: ${{ env.CLOUDFLARE_DIRECTORY }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ env.BRANCH }}
+          wranglerVersion: ${{ env.WRANGLER_VERSION }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ${{ env.CLOUDFLARE_DIRECTORY }} --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }}
+      - run: echo "$output" >> $GITHUB_STEP_SUMMARY
+        env:
+          output: ${{ steps.deploy.outputs.command-output }}
 
       - if: ${{ ! cancelled() && github.event_name == 'pull_request_target' }}
         uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
@@ -88,7 +96,6 @@ jobs:
             echo "<a href='${{ github.event.repository.html_url }}/commit/$1'><code>$(echo "$1" | head -c 7)</code></a>"
           }
           echo "commit_text=$(get_short_sha_with_link $(git rev-parse HEAD)) ( base: $(get_short_sha_with_link ${{ github.event.pull_request.base.sha }}) + head: $(get_short_sha_with_link ${{ github.event.pull_request.head.sha }}) )" >> "$GITHUB_OUTPUT"
-          echo "pr_preview_url=$(echo '${{ steps.publish.outputs.url }}' | perl -pe "s|(//).+?(\.)|\$1$(echo '${{ env.BRANCH }}' | perl -pe 's|/|-|g')\$2|")" >> "$GITHUB_OUTPUT"
       - if: steps.fc.conclusion == 'success'
         uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
         with:
@@ -102,15 +109,15 @@ jobs:
             </td></tr>
             <tr><td><strong>Status:</strong></td><td>&nbsp;✅&nbsp; Deploy successful!</td></tr>
             <tr><td><strong>Preview URL:</strong></td><td>
-            <a href='${{ steps.publish.outputs.url }}'>${{ steps.publish.outputs.url }}</a>
+            <a href='${{ steps.deploy.outputs.deployment-url }}'>${{ steps.deploy.outputs.deployment-url }}</a>
             </td></tr>
             <tr><td><strong>PR Preview URL:</strong></td><td>
-            <a href='${{ steps.comment-data.outputs.pr_preview_url }}'>${{ steps.comment-data.outputs.pr_preview_url }}</a>
+            <a href='${{ steps.deploy.outputs.deployment-alias-url }}'>${{ steps.deploy.outputs.deployment-alias-url }}</a>
             </td></tr>
             </table>
 
             [View workflow logs](${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }})
-            [View Cloudflare logs](https://dash.cloudflare.com/?to=/${{ env.CLOUDFLARE_ACCOUNT_ID }}/pages/view/${{ env.CLOUDFLARE_PROJECT_NAME }}/${{ steps.publish.outputs.id }})
+            [View Cloudflare logs](https://dash.cloudflare.com/?to=/${{ vars.CLOUDFLARE_ACCOUNT_ID }}/pages/view/${{ vars.CLOUDFLARE_PROJECT_NAME }}/)
           edit-mode: replace
 
       - uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
@@ -128,5 +135,5 @@ jobs:
             </table>
 
             [View workflow logs](${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }})
-            [View Cloudflare logs](https://dash.cloudflare.com/?to=/${{ env.CLOUDFLARE_ACCOUNT_ID }}/pages/view/${{ env.CLOUDFLARE_PROJECT_NAME }}/${{ steps.publish.outputs.id }})
+            [View Cloudflare logs](https://dash.cloudflare.com/?to=/${{ vars.CLOUDFLARE_ACCOUNT_ID }}/pages/view/${{ vars.CLOUDFLARE_PROJECT_NAME }}/)
           edit-mode: replace
