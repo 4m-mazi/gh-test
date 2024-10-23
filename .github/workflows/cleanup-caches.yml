@@ -18,6 +18,6 @@ jobs:
       actions: write
     steps:
       - name: Cleanup
-        uses: 4m-mazi/souji-action@switch-to-esm
+        uses: 4m-mazi/souji-action@main
         with:
           branch-names: ${{ inputs.branchNames }}
