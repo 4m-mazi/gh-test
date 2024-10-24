@@ -8,7 +8,7 @@ env:
 
   # tool versions
   # renovate: datasource=npm depName=wrangler
-  WRANGLER_VERSION: 3.82.0
+  WRANGLER_VERSION: 3.83.0
 
 on:
   push:
