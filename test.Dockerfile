@@ -1,1 +1,1 @@
-FROM hello-world@sha256:d211f485f2dd1dee407a80973c8f129f00d54604d2c90732e8e320e5038a0348
+FROM scratch
