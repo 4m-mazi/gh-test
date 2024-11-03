@@ -1,5 +1,6 @@
-* text=auto eol=lf
-*.md linguist-detectable
+* text=auto eol=lf whitespace=trailing-space,space-before-tab
+
+*.md text diff=markdown linguist-detectable
 .vscode/*.json linguist-language=JSON-with-Comments
 
 test.json linguist-language=JSON-with-Comments
