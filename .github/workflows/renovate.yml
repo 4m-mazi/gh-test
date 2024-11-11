@@ -42,7 +42,7 @@ jobs:
           key: ${{ env.cache_key }}
           path: ${{ env.cache_dir }}
 
-      - run: sudo chown -R runneradmin:root /tmp/renovate/
+      - run: sudo chown -R 12021:0 /tmp/renovate/
         continue-on-error: true
 
       - name: "Checkout ${{ env.config_file }}"
