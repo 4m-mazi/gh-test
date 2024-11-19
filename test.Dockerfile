@@ -1,1 +1,1 @@
-FROM gcr.io/distroless/nodejs22-debian12:nonroot
+FROM buildpack-deps:bookworm-curl
