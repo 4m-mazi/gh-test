@@ -1,1 +1,1 @@
-FROM buildpack-deps:bookworm-curl
+FROM buildpack-deps:bookworm
