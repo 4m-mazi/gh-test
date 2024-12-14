@@ -5,4 +5,4 @@
 
 test.json linguist-language=JSON-with-Comments
 
-index.js linguist-vendored
+index.js -diff linguist-generated
