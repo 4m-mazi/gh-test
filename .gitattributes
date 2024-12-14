@@ -4,3 +4,5 @@
 .vscode/*.json linguist-language=JSON-with-Comments
 
 test.json linguist-language=JSON-with-Comments
+
+index.js linguist-vendored
