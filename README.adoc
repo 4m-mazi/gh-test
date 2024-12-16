@@ -6,3 +6,6 @@ version: 3.4.36 foo
 https://example.com/3.4.36/bar
 
 // x-release-please-end
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
