@@ -22,7 +22,7 @@ env:
 
 
   # renovate: datasource=github-releases depName=docker/buildx
-  BUILDX_VERSION: v0.19.2
+  BUILDX_VERSION: v0.19.3
 
 jobs:
   env:
