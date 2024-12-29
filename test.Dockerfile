@@ -1,1 +1,1 @@
-FROM buildpack-deps:bookworm@sha256:08d61da2eb4b661e95088f6999704803985f9bd7be23b3c5d7acce26cd2d521b
+FROM buildpack-deps:bookworm@sha256:913a90c9e197dfca04d9ea5baa0272f5adceac2becbfcc86da8ece83063f68e3
