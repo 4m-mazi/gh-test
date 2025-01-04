@@ -112,7 +112,7 @@ jobs:
             <a href='${{ steps.deploy.outputs.deployment-url }}'>${{ steps.deploy.outputs.deployment-url }}</a>
             </td></tr>
             <tr><td><strong>PR Preview URL:</strong></td><td>
-            <a href='${{ steps.deploy.outputs.pages-pages-deployment-alias-url }}'>${{ steps.deploy.outputs.pages-pages-deployment-alias-url }}</a>
+            <a href='${{ steps.deploy.outputs.pages-deployment-alias-url }}'>${{ steps.deploy.outputs.pages-deployment-alias-url }}</a>
             </td></tr>
             </table>
 
