@@ -117,7 +117,7 @@ jobs:
             </table>
 
             [View workflow logs](${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }})
-            [View Cloudflare logs](https://dash.cloudflare.com/?to=/${{ vars.CLOUDFLARE_ACCOUNT_ID }}/pages/view/${{ vars.CLOUDFLARE_PROJECT_NAME }}/)
+            [View Cloudflare logs](https://dash.cloudflare.com/?to=/${{ vars.CLOUDFLARE_ACCOUNT_ID }}/pages/view/${{ vars.CLOUDFLARE_PROJECT_NAME }}/${{ steps.deploy.outputs.pages-deployment-id }})
           edit-mode: replace
 
       - uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
