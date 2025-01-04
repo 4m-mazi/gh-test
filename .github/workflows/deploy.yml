@@ -76,6 +76,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy ${{ env.CLOUDFLARE_DIRECTORY }} --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=${{ env.BRANCH }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
       - run: echo "$output" >> $GITHUB_STEP_SUMMARY
         env:
           output: ${{ steps.deploy.outputs.command-output }}
