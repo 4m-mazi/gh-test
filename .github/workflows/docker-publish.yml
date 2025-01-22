@@ -77,7 +77,7 @@ jobs:
         shell: bash -xe {0}
     steps:
       - name: Install musl tools
-        if: ${{ endsWith('matrix.platform.target', '-unknown-linux-musl') }}
+        if: ${{ endsWith(matrix.platform.target, '-unknown-linux-musl') }}
         run: |
           sudo apt-get install -y musl-tools --no-install-recommends
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
