@@ -16,6 +16,6 @@ jobs:
     permissions:
       actions: write
       contents: read
-    uses: 4m-mazi/souji-action/.github/workflows/_souji.yml@987bf7f5f3933a0392139c559147bba5a89a63d7 # v1.4.10
+    uses: 4m-mazi/souji-action/.github/workflows/_souji.yml@df02f74003831b23deb60cacf168747b0b9ab6f0 # v1.4.11
     with:
       branch-names: ${{ inputs.branchNames }}
