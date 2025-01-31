@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/4m-mazi/gh-test/compare/v3.4.37...v4.0.0) (2025-01-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update test
+
+### Miscellaneous Chores
+
+* Update test ([ef8d985](https://github.com/4m-mazi/gh-test/commit/ef8d985eea7c80f68219981b67e16f4237fb02e6))
+
 ## [3.4.37](https://github.com/4m-mazi/gh-test/compare/v3.4.36...v3.4.37) (2025-01-09)
 
 
