@@ -4,7 +4,6 @@
 *.md text diff=markdown -linguist-documentation
 *.json linguist-detectable
 .vscode/*.json linguist-language=JSON-with-Comments -linguist-detectable
-test.json -linguist-detectable
 package.json -linguist-detectable
 
 index.js -diff linguist-generated
