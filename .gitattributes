@@ -2,8 +2,7 @@
 
 *.yaml linguist-detectable
 *.md text diff=markdown -linguist-documentation
+*.json linguist-detectable
 .vscode/*.json linguist-language=JSON-with-Comments
-
-test.json linguist-language=JSON-with-Comments linguist-detectable
 
 index.js -diff linguist-generated
