@@ -274,7 +274,7 @@ dependencies = [
 
 [[package]]
 name = "rust-ci-test"
-version = "4.0.0"
+version = "4.0.1"
 dependencies = [
  "git2",
 ]
