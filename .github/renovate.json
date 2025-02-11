@@ -1,5 +1,4 @@
 {
-  // hoge
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:best-practices",
@@ -14,7 +13,7 @@
     ":semanticCommits",
     "customManagers:githubActionsVersions",
     "security:openssf-scorecard",
-    "workarounds:typesNodeVersioning",
+    "workarounds:typesNodeVersioning"
   ],
   "platformAutomerge": true,
   "automergeStrategy": "squash",
@@ -33,41 +32,41 @@
     {
       "matchDepTypes": ["dependencies", "require"],
       "semanticCommitType": "deps",
-      "semanticCommitScope": null,
+      "semanticCommitScope": null
     },
     {
       "matchUpdateTypes": ["lockFileMaintenance"],
       "semanticCommitType": "deps",
-      "semanticCommitScope": null,
+      "semanticCommitScope": null
     },
     {
       "matchDepTypes": ["devDependencies"],
       "semanticCommitType": "chore",
-      "semanticCommitScope": "deps-dev",
+      "semanticCommitScope": "deps-dev"
     },
     {
       "matchManagers": ["npm"],
       "addLabels": ["javascript"],
       "postUpgradeTasks": {
         "commands": ["pnpm install --frozen-lockfile --ignore-scripts"],
-        "executionMode": "branch",
+        "executionMode": "branch"
       },
     },
     {
       "matchManagers": ["github-actions"],
       "addLabels": ["github_actions"],
-      "commitMessageTopic": "{{depName}}",
+      "commitMessageTopic": "{{depName}}"
     },
     {
       "matchManagers": ["custom.regex"],
-      "pinDigests": false,
+      "pinDigests": false
     },
     {
       "matchDepTypes": ["packageManager"],
       "commitMessageExtra": "from {{{currentVersion}}} to {{{newVersion}}}",
       "postUpgradeTasks": {
-        "commands": ["corepack use '{{{depName}}}@{{{newVersion}}}'"],
-      },
+        "commands": ["corepack use '{{{depName}}}@{{{newVersion}}}'"]
+      }
     },
     {
       "groupName": "discord.js monorepo",
@@ -77,9 +76,9 @@
         "major",
       ],
       "matchPackageNames": [
-        "@discordjs/{/,}**",
-      ],
-    },
+        "@discordjs/{/,}**"
+      ]
+    }
   ],
   "customManagers": [
     {
@@ -87,7 +86,7 @@
       "fileMatch": ["(^|/)\\.npmrc$"],
       "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "node",
-      "datasourceTemplate": "node-version",
-    },
-  ],
+      "datasourceTemplate": "node-version"
+    }
+  ]
 }
