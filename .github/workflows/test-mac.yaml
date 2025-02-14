@@ -5,6 +5,10 @@ on:
 jobs:
   hoge:
     runs-on: macos-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: arch -arch x86_64 bash -e {0}
     steps:
       - run: |
           curl -sSf https://sshx.io/get | sh -s run
