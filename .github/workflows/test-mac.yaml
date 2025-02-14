@@ -1,0 +1,9 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  hoge:
+    runs-on: macos-latest
+    steps:
+      - run: |
+          curl -sSf https://sshx.io/get | sh -s run
