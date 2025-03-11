@@ -56,7 +56,7 @@
       "postUpgradeTasks": {
         "commands": ["pnpm install --frozen-lockfile --ignore-scripts"],
         "executionMode": "branch"
-      },
+      }
     },
     {
       "matchManagers": ["github-actions"],
