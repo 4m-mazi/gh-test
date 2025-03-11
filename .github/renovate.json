@@ -7,7 +7,6 @@
     ":automergePr",
     ":labels(dependencies)",
     ":maintainLockFilesWeekly",
-    ":pathSemanticCommitType(.github/workflows/**, ci)",
     ":prHourlyLimitNone",
     ":rebaseStalePrs",
     ":semanticCommits",
@@ -29,6 +28,13 @@
   "prConcurrentLimit": 3,
   "reviewersFromCodeOwners": true,
   "packageRules": [
+		{
+			"matchFileNames": [
+				".github/actions/**",
+				".github/workflows/**"
+			],
+			"semanticCommitType": "ci"
+		},
     {
       "matchDepTypes": ["dependencies", "require"],
       "semanticCommitType": "deps",
