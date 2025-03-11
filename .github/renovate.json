@@ -79,7 +79,7 @@
       "matchUpdateTypes": [
         "patch",
         "minor",
-        "major",
+        "major"
       ],
       "matchPackageNames": [
         "@discordjs/{/,}**"
