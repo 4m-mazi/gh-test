@@ -86,6 +86,17 @@
       ]
     }
   ],
+  "customDatasources": {
+    "rust-stable-toml": {
+      "defaultRegistryUrlTemplate": "https://static.rust-lang.org/dist/channel-rust-stable.toml",
+      "format": "plain",
+      "transformTemplates": [
+        "pkg.rust.version",
+        "$match($, /(\\d+\\.\\d+\\.\\d+)/)[0].groups[0]",
+        "{ \"releases\": [{ \"version\": $ }] }"
+      ]
+    }
+  },
   "customManagers": [
     {
       "customType": "regex",
@@ -99,9 +110,11 @@
       "fileFormat": "toml",
       "fileMatch": ["^rust-toolchain\\.toml$"],
       "matchStrings": [
-        "toolchain.{ 'depName': 'rust-lang/rust', 'currentValue': channel }"
+        "toolchain.{ 'currentValue': channel }"
       ],
-      "datasourceTemplate": "github-releases"
+      "depNameTemplate": "rust-lang/rust",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
     }
   ]
 }
