@@ -93,6 +93,15 @@
       "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
+    },
+    {
+      "customType": "jsonata",
+      "fileFormat": "toml",
+      "fileMatch": ["^rust-toolchain\\.toml$"],
+      "matchStrings": [
+        "toolchain.{ 'depName': 'rust-lang/rust', 'currentValue': channel }"
+      ],
+      "datasourceTemplate": "github-releases"
     }
   ]
 }
