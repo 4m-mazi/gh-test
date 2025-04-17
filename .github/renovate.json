@@ -28,13 +28,10 @@
   "prConcurrentLimit": 3,
   "reviewersFromCodeOwners": true,
   "packageRules": [
-		{
-			"matchFileNames": [
-				".github/actions/**",
-				".github/workflows/**"
-			],
-			"semanticCommitType": "ci"
-		},
+    {
+      "matchFileNames": [".github/actions/**", ".github/workflows/**"],
+      "semanticCommitType": "ci"
+    },
     {
       "matchDepTypes": ["dependencies", "require"],
       "semanticCommitType": "deps",
@@ -76,23 +73,16 @@
     },
     {
       "groupName": "discord.js monorepo",
-      "matchUpdateTypes": [
-        "patch",
-        "minor",
-        "major"
-      ],
-      "matchPackageNames": [
-        "@discordjs/{/,}**"
-      ]
+      "matchUpdateTypes": ["patch", "minor", "major"],
+      "matchPackageNames": ["@discordjs/{/,}**"]
     }
   ],
   "customDatasources": {
-    "rust-stable-toml": {
-      "defaultRegistryUrlTemplate": "https://static.rust-lang.org/dist/channel-rust-stable.toml",
+    "rust-nightly": {
+      "defaultRegistryUrlTemplate": "https://static.rust-lang.org/dist/channel-rust-nightly-date.txt",
       "format": "plain",
       "transformTemplates": [
-        "pkg.rust.version",
-        "$match($, /(\\d+\\.\\d+\\.\\d+)/)[0].groups[0]",
+        "\"nightly-\" & $",
         "{ \"releases\": [{ \"version\": $ }] }"
       ]
     }
@@ -110,11 +100,9 @@
       "fileFormat": "toml",
       "fileMatch": ["^rust-toolchain\\.toml$"],
       "matchStrings": [
-        "toolchain.{ 'currentValue': channel }"
-      ],
-      "depNameTemplate": "rust-lang/rust",
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver"
+        "toolchain[$contains(channel, /^\\d+\\.\\d+\\.\\d+$/)].{ \"currentValue\": channel, \"depName\": \"rust-lang/rust\", \"datasource\": \"github-releases\", \"versioning\": \"semver\" }",
+        "toolchain[$contains(channel, /^nightly-/)].{ \"currentValue\": channel, \"depName\": \"rust-nightly\", \"datasource\": \"custom.rust-nightly\" }"
+      ]
     }
   ]
 }
