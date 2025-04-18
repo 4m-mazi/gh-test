@@ -100,8 +100,7 @@
       "fileFormat": "toml",
       "fileMatch": ["^rust-toolchain\\.toml$"],
       "matchStrings": [
-        "toolchain[$contains(channel, /^\\d+\\.\\d+\\.\\d+$/)].{ \"currentValue\": channel, \"depName\": \"rust-lang/rust\", \"datasource\": \"github-releases\", \"versioning\": \"semver\" }",
-        "toolchain[$contains(channel, /^nightly-/)].{ \"currentValue\": channel, \"depName\": \"rust-nightly\", \"datasource\": \"custom.rust-nightly\" }"
+        "toolchain[$contains(channel, /^\\d+\\.\\d+\\.\\d+$/)].{ \"currentValue\": channel, \"depName\": \"rust-lang/rust\", \"datasource\": \"github-releases\", \"versioning\": \"semver\" }"
       ]
     }
   ]
