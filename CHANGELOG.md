@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.0.1](https://github.com/4m-mazi/gh-test/compare/v4.0.0...v4.0.1) (2025-04-18)
+
+
+### Bug Fixes
+
+* Update test ([aded3cf](https://github.com/4m-mazi/gh-test/commit/aded3cf9847c7fc0944284f9788ce960a6069f89))
+
+
+### Dependencies
+
+* lock file maintenance ([#1117](https://github.com/4m-mazi/gh-test/issues/1117)) ([8a97148](https://github.com/4m-mazi/gh-test/commit/8a97148f0bd7b8daae007884e2dae39703a5a842))
+
 ## [4.0.1](https://github.com/4m-mazi/gh-test/compare/v4.0.0...v4.0.1) (2025-02-04)
 
 
