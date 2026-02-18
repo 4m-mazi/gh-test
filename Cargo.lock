@@ -299,7 +299,7 @@ checksum = "74765f6d916ee2faa39bc8e68e4f3ed8949b48cccdac59983d287a7cb71ce9c5"
 
 [[package]]
 name = "rust-ci-test"
-version = "4.2.0"
+version = "4.0.1"
 dependencies = [
  "git2",
 ]

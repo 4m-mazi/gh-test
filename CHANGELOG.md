@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.0.1](https://github.com/4m-mazi/gh-test/compare/v4.0.0...v4.0.1) (2026-02-18)
+
+
+### Bug Fixes
+
+* Update test ([aded3cf](https://github.com/4m-mazi/gh-test/commit/aded3cf9847c7fc0944284f9788ce960a6069f89))
+
+
+### Dependencies
+
+* bump rust-lang/rust from 1.85.0 to 1.86.0 ([#1146](https://github.com/4m-mazi/gh-test/issues/1146)) ([b10084e](https://github.com/4m-mazi/gh-test/commit/b10084e37298cd369473550b66c3e1ffeee63d4e))
+* lock file maintenance ([#1117](https://github.com/4m-mazi/gh-test/issues/1117)) ([8a97148](https://github.com/4m-mazi/gh-test/commit/8a97148f0bd7b8daae007884e2dae39703a5a842))
+
 ## [4.0.1](https://github.com/4m-mazi/gh-test/compare/v4.0.0...v4.0.1) (2025-02-04)
 
 
