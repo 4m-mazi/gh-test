@@ -1,0 +1,24 @@
+name: exp-A reusable
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches: ['exp/direct']
+permissions: {}
+concurrency:
+  group: exp-a
+  queue: max
+env:
+  SLEEP_SECONDS: '300'
+jobs:
+  hold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: ctx
+        run: |
+          echo "event=$GITHUB_EVENT_NAME workflow=$GITHUB_WORKFLOW run_id=$GITHUB_RUN_ID job=$GITHUB_JOB"
+          date -Is
+      - run: sleep "$SLEEP_SECONDS"
+      - name: done
+        run: date -Is

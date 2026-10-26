@@ -1,0 +1,6 @@
+name: exp-A caller 1
+on: workflow_dispatch
+permissions: {}
+jobs:
+  call:
+    uses: ./.github/workflows/exp-a-reusable.yml

@@ -1,0 +1,9 @@
+name: exp-B caller 1
+on: workflow_dispatch
+permissions: {}
+jobs:
+  call:
+    concurrency:
+      group: exp-b
+      queue: max
+    uses: ./.github/workflows/exp-b-reusable.yml
